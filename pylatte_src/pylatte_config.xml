@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+
+<config>
+	<pylatte-server>
+		<port>8000</port>
+	</pylatte-server>
+
+	<latteUrl>
+		<pylatte>
+			<pylatte-name>default</pylatte-name>
+			<pylatte-pyl>index.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>default</pylatte-name>
+			<url-mapping>/</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>index</pylatte-name>
+			<pylatte-pyl>index.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>index</pylatte-name>
+			<url-mapping>/index</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>download</pylatte-name>
+			<pylatte-pyl>download.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>download</pylatte-name>
+			<url-mapping>/download</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>install</pylatte-name>
+			<pylatte-pyl>install.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>install</pylatte-name>
+			<url-mapping>/install</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>tutorial</pylatte-name>
+			<pylatte-pyl>tutorial.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>tutorial</pylatte-name>
+			<url-mapping>/tutorial</url-mapping>
+		</pylatte-mapping>
+		
+		<pylatte>
+			<pylatte-name>documentation</pylatte-name>
+			<pylatte-pyl>documentation.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>documentation</pylatte-name>
+			<url-mapping>/documentation</url-mapping>
+		</pylatte-mapping>
+		
+		<pylatte>
+			<pylatte-name>comment</pylatte-name>
+			<pylatte-pyl>comment.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>comment</pylatte-name>
+			<url-mapping>/comment</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>faq</pylatte-name>
+			<pylatte-pyl>faq.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>faq</pylatte-name>
+			<url-mapping>/faq</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>contactus</pylatte-name>
+			<pylatte-pyl>contactus.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>contactus</pylatte-name>
+			<url-mapping>/contactus</url-mapping>
+		</pylatte-mapping>
+		
+		
+		<pylatte>
+			<pylatte-name>favicon</pylatte-name>
+			<pylatte-pyl>faviconUpload.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>favicon</pylatte-name>
+			<url-mapping>/faviconUpload</url-mapping>
+		</pylatte-mapping>	
+		
+	</latteUrl>
+	
+	<latteFilter>
+	
+		<filter>
+			<filter-name>head</filter-name>
+			<filter-pyl>filter/head.pyl</filter-pyl>
+		</filter>
+		<filter-mapping>
+			<filter-name>head</filter-name>
+			<filter-url>index.pyl</filter-url>
+			<filter-url>download.pyl</filter-url>
+			<filter-url>install.pyl</filter-url>
+			<filter-url>tutorial.pyl</filter-url>
+			<filter-url>documentation.pyl</filter-url>
+			<filter-url>comment.pyl</filter-url>
+			<filter-url>faq.pyl</filter-url>
+			<filter-url>contactus.pyl</filter-url>
+		</filter-mapping>
+		
+	</latteFilter>
+	
+</config>
+
+

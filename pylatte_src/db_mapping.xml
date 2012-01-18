@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<database>
+	<sql db="mysql">
+		<host>localhost</host>
+		<user>root</user>
+		<password>psker@</password>
+		<dbName>pylatte</dbName>
+	</sql>
+	
+	<sqlMap id="contact">
+		<select id="sangkeun">select * from founder</select>
+		<select id="select2">select * from test</select>
+		<insert id="insert">insert into test values ('Myungbak', 60)</insert>
+		<insert id="insert2">insert into test values ($name$, 32)</insert>
+		<update id="update">UPDATE test SET name = 'Jaesuk' where name = 'Taehee'</update>
+		<update id="update2">UPDATE test SET age = $age$ where name = 'heegeun'</update>
+		<delete id="delete">DELETE FROM test where name = 'Sangkeun'</delete>
+		<delete id="delete2">DELETE FROM test where age = $age$</delete>
+	</sqlMap>
+</database>
