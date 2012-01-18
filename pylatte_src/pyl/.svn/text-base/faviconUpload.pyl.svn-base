@@ -1,9 +1,0 @@
-<$
-pyformFile=formFile.formFile(pyFile)
-pyformFile.moveUploadFile("file1","pyl","favicon.ico")
-$>
-
-<script type="text/javascript">
-	alert("upload success!!");
-	history.back();
-</script>
