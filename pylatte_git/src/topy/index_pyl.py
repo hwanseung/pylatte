@@ -1,357 +1,636 @@
 # -*- coding: utf-8 -*- 
 import formFile
 class index:
-	result=""
+	pylToHtmlResult=""
 	sessionDic=dict()
 	def __init__(self,param,pyFile,session,headerInfo,lattedb):
 		self.generate(param,pyFile,session,headerInfo,lattedb)
 
 	def generate(self,param,pyFile,session,headerInfo,lattedb):
+		self.pylToHtmlResult+=str("""<!DOCTYPE html>""")
+		self.pylToHtmlResult+=str("""
+<html>""")
+		self.pylToHtmlResult+=str("""
+	<head>""")
+		self.pylToHtmlResult+=str("""
+	<meta name="viewport" content="width=device-width, initial-scale=1">""")
+		self.pylToHtmlResult+=str("""
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">""")
+		self.pylToHtmlResult+=str("""
+	<title>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" -""")
+		self.pylToHtmlResult+=str(""" Web""")
+		self.pylToHtmlResult+=str(""" framework""")
+		self.pylToHtmlResult+=str(""" based""")
+		self.pylToHtmlResult+=str(""" on""")
+		self.pylToHtmlResult+=str(""" Python3""")
+		self.pylToHtmlResult+=str("""</title>""")
+		self.pylToHtmlResult+=str("""
+	
+	<!-- favicon -->""")
+		self.pylToHtmlResult+=str("""
+	<link rel="shortcut icon" href="../pyl/favicon.ico" type="image/x-icon">""")
+		self.pylToHtmlResult+=str("""
+	<link rel="icon" href="../pyl/favicon.ico" type="image/x-icon">""")
+		self.pylToHtmlResult+=str("""
 
-		self.result+=str("""<!DOCTYPE html>
-		 """)
-		self.result+=str("""<html>
-			 """)
-		self.result+=str("""<head>
-			 """)
-		self.result+=str("""<meta name="viewport" content="width=device-width, initial-scale=1">
-			 """)
-		self.result+=str("""<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			 """)
-		self.result+=str("""<title>Pylatte - Web framework based on Python3 """)
-		self.result+=str("""</title>
+	<!-- Include required JS files -->""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/js/xregexp.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/js/shCore.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	 
+	<!--
+	    At least one brush, here we choose JS. You need to include a brush for every
+	    language you want to highlight
+	-->""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushXml.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushBash.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	 
+	<!-- Include *at least* the core style and default theme -->""")
+		self.pylToHtmlResult+=str("""
+	<link href="../pyl/syntaxhighlighter/css/shCore.css" rel="stylesheet" type="text/css" />""")
+		self.pylToHtmlResult+=str("""
+	<link href="../pyl/syntaxhighlighter/css/shThemeDefault.css" rel="stylesheet" type="text/css" />""")
+		self.pylToHtmlResult+=str("""
+	
+	
+	
+	<link rel="stylesheet"  href="../pyl/css/jquery.mobile-1.0rc2.css"/>""")
+		self.pylToHtmlResult+=str("""
+	<link rel="stylesheet"  href="../pyl/css/jqm-docs.css"/>""")
+		self.pylToHtmlResult+=str("""
+	
+	<script src="../pyl/js/jquery-1.6.4.min.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jqm-docs.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jquery.mobile.themeswitcher.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jquery.mobile-1.0rc2.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	
+	<script type="text/javascript">""")
+		self.pylToHtmlResult+=str("""
+
+	  var""")
+		self.pylToHtmlResult+=str(""" _gaq""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" _gaq""")
+		self.pylToHtmlResult+=str(""" ||""")
+		self.pylToHtmlResult+=str(""" [];""")
+		self.pylToHtmlResult+=str("""
+	  _gaq.push(['_setAccount',""")
+		self.pylToHtmlResult+=str(""" 'UA-26668199-1']);""")
+		self.pylToHtmlResult+=str("""
+	  _gaq.push(['_trackPageview']);""")
+		self.pylToHtmlResult+=str("""
+	
+	  (function()""")
+		self.pylToHtmlResult+=str(""" {""")
+		self.pylToHtmlResult+=str("""
+	    var""")
+		self.pylToHtmlResult+=str(""" ga""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" document.createElement('script');""")
+		self.pylToHtmlResult+=str(""" ga.type""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" 'text/javascript';""")
+		self.pylToHtmlResult+=str(""" ga.async""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" true;""")
+		self.pylToHtmlResult+=str("""
+	    ga.src""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" ('https:'""")
+		self.pylToHtmlResult+=str(""" ==""")
+		self.pylToHtmlResult+=str(""" document.location.protocol""")
+		self.pylToHtmlResult+=str(""" ?""")
+		self.pylToHtmlResult+=str(""" 'https://ssl'""")
+		self.pylToHtmlResult+=str(""" :""")
+		self.pylToHtmlResult+=str(""" 'http://www')""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" '.google-analytics.com/ga.js';""")
+		self.pylToHtmlResult+=str("""
+	    var""")
+		self.pylToHtmlResult+=str(""" s""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" document.getElementsByTagName('script')[0];""")
+		self.pylToHtmlResult+=str(""" s.parentNode.insertBefore(ga,""")
+		self.pylToHtmlResult+=str(""" s);""")
+		self.pylToHtmlResult+=str("""
+	  })();""")
+		self.pylToHtmlResult+=str("""
+	
+	</script>""")
+		self.pylToHtmlResult+=str("""
+	
+	</head>""")
+		self.pylToHtmlResult+=str("""
+
+<body>""")
+		self.pylToHtmlResult+=str("""
+	<div data-role="page" class="type-interior">""")
+		self.pylToHtmlResult+=str("""
+
+		<div data-role="header" data-theme="b">""")
+		self.pylToHtmlResult+=str("""
+		<h1>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" Official""")
+		self.pylToHtmlResult+=str(""" Webpage""")
+		self.pylToHtmlResult+=str("""</h1>""")
+		self.pylToHtmlResult+=str("""
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">""")
+		self.pylToHtmlResult+=str("""Home""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""
+	</div>""")
+		self.pylToHtmlResult+=str("""<!-- /header -->""")
+		self.pylToHtmlResult+=str("""
+
+	<div data-role="content">""")
+		self.pylToHtmlResult+=str("""
+			<div class="content-primary">""")
+		self.pylToHtmlResult+=str("""
+			<h1>""")
+		self.pylToHtmlResult+=str("""Welcome""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str("""</h1>""")
+		self.pylToHtmlResult+=str("""
+			<h2>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" :""")
+		self.pylToHtmlResult+=str("""  A""")
+		self.pylToHtmlResult+=str(""" Web""")
+		self.pylToHtmlResult+=str(""" Framework""")
+		self.pylToHtmlResult+=str(""" Based""")
+		self.pylToHtmlResult+=str(""" on""")
+		self.pylToHtmlResult+=str(""" Python""")
+		self.pylToHtmlResult+=str(""" 3""")
+		self.pylToHtmlResult+=str("""</h2>""")
+		self.pylToHtmlResult+=str("""
+			<p>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" a""")
+		self.pylToHtmlResult+=str(""" web""")
+		self.pylToHtmlResult+=str(""" framework""")
+		self.pylToHtmlResult+=str(""" created""")
+		self.pylToHtmlResult+=str(""" specifically""")
+		self.pylToHtmlResult+=str(""" for""")
+		self.pylToHtmlResult+=str(""" Python""")
+		self.pylToHtmlResult+=str(""" 3.""")
+		self.pylToHtmlResult+=str(""" Developers""")
+		self.pylToHtmlResult+=str(""" can""")
+		self.pylToHtmlResult+=str(""" now""")
+		self.pylToHtmlResult+=str(""" generate""")
+		self.pylToHtmlResult+=str(""" websites""")
+		self.pylToHtmlResult+=str(""" with""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" in""")
+		self.pylToHtmlResult+=str(""" Python""")
+		self.pylToHtmlResult+=str(""" 3.""")
+		self.pylToHtmlResult+=str(""" just""")
+		self.pylToHtmlResult+=str(""" as""")
+		self.pylToHtmlResult+=str(""" they""")
+		self.pylToHtmlResult+=str(""" might""")
+		self.pylToHtmlResult+=str(""" for""")
+		self.pylToHtmlResult+=str(""" Python""")
+		self.pylToHtmlResult+=str(""" 2x-based""")
+		self.pylToHtmlResult+=str(""" frameworks""")
+		self.pylToHtmlResult+=str(""" such""")
+		self.pylToHtmlResult+=str(""" as""")
+		self.pylToHtmlResult+=str(""" Django,""")
+		self.pylToHtmlResult+=str(""" Flask,""")
+		self.pylToHtmlResult+=str(""" or""")
+		self.pylToHtmlResult+=str(""" Bottle.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
 			
-			 """)
-		self.result+=str("""<!-- favicon -->
-			 """)
-		self.result+=str("""<link rel="shortcut icon" href="../pyl/favicon.ico" type="image/x-icon">
-			 """)
-		self.result+=str("""<link rel="icon" href="../pyl/favicon.ico" type="image/x-icon">
-		
-			 """)
-		self.result+=str("""<!-- Include required JS files -->
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/js/xregexp.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/js/shCore.js"> """)
-		self.result+=str("""</script>
-			 
-			 """)
-		self.result+=str("""<!--
-			    At least one brush, here we choose JS. You need to include a brush for every
-			    language you want to highlight
-			-->
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushXml.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushBash.js"> """)
-		self.result+=str("""</script>
-			 
-			 """)
-		self.result+=str("""<!-- Include *at least* the core style and default theme -->
-			 """)
-		self.result+=str("""<link href="../pyl/syntaxhighlighter/css/shCore.css" rel="stylesheet" type="text/css" />
-			 """)
-		self.result+=str("""<link href="../pyl/syntaxhighlighter/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+			<h2>""")
+		self.pylToHtmlResult+=str("""Sample""")
+		self.pylToHtmlResult+=str(""" code""")
+		self.pylToHtmlResult+=str("""</h2>""")
+		self.pylToHtmlResult+=str("""
+			<p>""")
+		self.pylToHtmlResult+=str("""The""")
+		self.pylToHtmlResult+=str(""" following""")
+		self.pylToHtmlResult+=str(""" code""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" a""")
+		self.pylToHtmlResult+=str(""" example""")
+		self.pylToHtmlResult+=str(""" <i>""")
+		self.pylToHtmlResult+=str("""pyl""")
+		self.pylToHtmlResult+=str("""</i>""")
+		self.pylToHtmlResult+=str(""" file.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str(""" 
+			<pre class="brush: xml">""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("pylatte")
+		self.pylToHtmlResult+=str("""
+				pyl""")
+		self.pylToHtmlResult+=str("""
+			</pre>""")
+		self.pylToHtmlResult+=str("""
+			<p>""")
+		self.pylToHtmlResult+=str("""The""")
+		self.pylToHtmlResult+=str(""" pyl""")
+		self.pylToHtmlResult+=str(""" code""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" translated""")
+		self.pylToHtmlResult+=str(""" by""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" HTML""")
+		self.pylToHtmlResult+=str(""" in""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" browser.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+			<pre class="brush: xml">""")
+		self.pylToHtmlResult+=str("""
+				Pylatte""")
+		self.pylToHtmlResult+=str("""
+				HTML""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" python""")
+		self.pylToHtmlResult+=str("""
+			</pre>""")
+		self.pylToHtmlResult+=str("""
 			
+			<h2>""")
+		self.pylToHtmlResult+=str("""Functions""")
+		self.pylToHtmlResult+=str("""</h2>""")
+		self.pylToHtmlResult+=str("""
+			<ul>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""Translation""")
+		self.pylToHtmlResult+=str(""" Engine""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" uses""")
+		self.pylToHtmlResult+=str(""" pyl""")
+		self.pylToHtmlResult+=str(""" file""")
+		self.pylToHtmlResult+=str(""" format.""")
+		self.pylToHtmlResult+=str(""" pyl""")
+		self.pylToHtmlResult+=str(""" consists""")
+		self.pylToHtmlResult+=str(""" of""")
+		self.pylToHtmlResult+=str(""" HTML""")
+		self.pylToHtmlResult+=str(""" and""")
+		self.pylToHtmlResult+=str(""" Python.""")
+		self.pylToHtmlResult+=str(""" pyl""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" fully""")
+		self.pylToHtmlResult+=str(""" translated""")
+		self.pylToHtmlResult+=str(""" by""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" engine""")
+		self.pylToHtmlResult+=str(""" into""")
+		self.pylToHtmlResult+=str(""" HTML.""")
+		self.pylToHtmlResult+=str(""" It""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" unique""")
+		self.pylToHtmlResult+=str(""" feature""")
+		self.pylToHtmlResult+=str(""" of""")
+		self.pylToHtmlResult+=str(""" Pylatte.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""Database""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""To""")
+		self.pylToHtmlResult+=str(""" use""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" database,""")
+		self.pylToHtmlResult+=str(""" a""")
+		self.pylToHtmlResult+=str(""" single""")
+		self.pylToHtmlResult+=str(""" external""")
+		self.pylToHtmlResult+=str(""" library""")
+		self.pylToHtmlResult+=str(""" must""")
+		self.pylToHtmlResult+=str(""" be""")
+		self.pylToHtmlResult+=str(""" installed:""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" MySQLdb""")
+		self.pylToHtmlResult+=str(""" module""")
+		self.pylToHtmlResult+=str(""" for""")
+		self.pylToHtmlResult+=str(""" Python""")
+		self.pylToHtmlResult+=str(""" 3.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""Simple""")
+		self.pylToHtmlResult+=str(""" and""")
+		self.pylToHtmlResult+=str(""" advanced""")
+		self.pylToHtmlResult+=str(""" SQL""")
+		self.pylToHtmlResult+=str(""" via""")
+		self.pylToHtmlResult+=str(""" specific""")
+		self.pylToHtmlResult+=str(""" functions""")
+		self.pylToHtmlResult+=str(""" that""")
+		self.pylToHtmlResult+=str(""" are""")
+		self.pylToHtmlResult+=str(""" similar""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" iBATIS""")
+		self.pylToHtmlResult+=str(""" are""")
+		self.pylToHtmlResult+=str(""" provided.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""Session""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""A""")
+		self.pylToHtmlResult+=str(""" session""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" needed""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" distinguish""")
+		self.pylToHtmlResult+=str(""" each""")
+		self.pylToHtmlResult+=str(""" client.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""Filter""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""If""")
+		self.pylToHtmlResult+=str(""" a""")
+		self.pylToHtmlResult+=str(""" filter""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" set,""")
+		self.pylToHtmlResult+=str(""" select""")
+		self.pylToHtmlResult+=str(""" pages""")
+		self.pylToHtmlResult+=str(""" pass""")
+		self.pylToHtmlResult+=str(""" through""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" filter.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""Form""")
+		self.pylToHtmlResult+=str(""" File""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""It""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" possible""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" upload""")
+		self.pylToHtmlResult+=str(""" a""")
+		self.pylToHtmlResult+=str(""" file""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" server""")
+		self.pylToHtmlResult+=str(""" via""")
+		self.pylToHtmlResult+=str(""" POST.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""URL""")
+		self.pylToHtmlResult+=str(""" Mapping""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""For""")
+		self.pylToHtmlResult+=str(""" security""")
+		self.pylToHtmlResult+=str(""" purposes,""")
+		self.pylToHtmlResult+=str(""" URL""")
+		self.pylToHtmlResult+=str(""" mapping""")
+		self.pylToHtmlResult+=str(""" transfers""")
+		self.pylToHtmlResult+=str(""" virtual""")
+		self.pylToHtmlResult+=str(""" URLs""")
+		self.pylToHtmlResult+=str(""" accessed""")
+		self.pylToHtmlResult+=str(""" by""")
+		self.pylToHtmlResult+=str(""" clients""")
+		self.pylToHtmlResult+=str(""" to""")
+		self.pylToHtmlResult+=str(""" web""")
+		self.pylToHtmlResult+=str(""" pages.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+			</ul>""")
+		self.pylToHtmlResult+=str("""
 			
+			<h2>""")
+		self.pylToHtmlResult+=str("""History""")
+		self.pylToHtmlResult+=str("""</h2>""")
+		self.pylToHtmlResult+=str("""
+			<ul>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""2011.""")
+		self.pylToHtmlResult+=str(""" 05.""")
+		self.pylToHtmlResult+=str(""" 13""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""The""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" project""")
+		self.pylToHtmlResult+=str(""" is""")
+		self.pylToHtmlResult+=str(""" created""")
+		self.pylToHtmlResult+=str(""" in""")
+		self.pylToHtmlResult+=str(""" Busan,""")
+		self.pylToHtmlResult+=str(""" South""")
+		self.pylToHtmlResult+=str(""" Korea.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""2011.""")
+		self.pylToHtmlResult+=str(""" 09.""")
+		self.pylToHtmlResult+=str(""" 02""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""Initial""")
+		self.pylToHtmlResult+=str(""" design""")
+		self.pylToHtmlResult+=str(""" and""")
+		self.pylToHtmlResult+=str(""" development""")
+		self.pylToHtmlResult+=str(""" of""")
+		self.pylToHtmlResult+=str(""" the""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" project.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<li>""")
+		self.pylToHtmlResult+=str("""<h3>""")
+		self.pylToHtmlResult+=str("""2011.""")
+		self.pylToHtmlResult+=str(""" 10.""")
+		self.pylToHtmlResult+=str(""" 31""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" 0.9v""")
+		self.pylToHtmlResult+=str(""" released.""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+			</ul>""")
+		self.pylToHtmlResult+=str("""
 			
-			 """)
-		self.result+=str("""<link rel="stylesheet"  href="../pyl/css/jquery.mobile-1.0rc2.css"/>
-			 """)
-		self.result+=str("""<link rel="stylesheet"  href="../pyl/css/jqm-docs.css"/>
-			
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery-1.6.4.min.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jqm-docs.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery.mobile.themeswitcher.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery.mobile-1.0rc2.js"> """)
-		self.result+=str("""</script>
-			
-			 """)
-		self.result+=str("""<script type="text/javascript">
-		
-			  var _gaq = _gaq || [];
-			  _gaq.push(['_setAccount', 'UA-26668199-1']);
-			  _gaq.push(['_trackPageview']);
-			
-			  (function() {
-			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			  })();
-			
-			 """)
-		self.result+=str("""</script>
-			
-			 """)
-		self.result+=str("""</head>
-		
-		 """)
-		self.result+=str("""<body>
-			 """)
-		self.result+=str("""<div data-role="page" class="type-interior">
-		
-				 """)
-		self.result+=str("""<div data-role="header" data-theme="b">
-				 """)
-		self.result+=str("""<h1>Pylatte Official Webpage """)
-		self.result+=str("""</h1>
-				 """)
-		self.result+=str("""<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home """)
-		self.result+=str("""</a>
-			 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /header -->
-		
-			 """)
-		self.result+=str("""<div data-role="content">
-					 """)
-		self.result+=str("""<div class="content-primary">
-					 """)
-		self.result+=str("""<h1>Welcome to Pylatte """)
-		self.result+=str("""</h1>
-					 """)
-		self.result+=str("""<h2>Pylatte :  A Web Framework Based on Python 3 """)
-		self.result+=str("""</h2>
-					 """)
-		self.result+=str("""<p>Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3. just as they might for Python 2x-based frameworks such as Django, Flask, or Bottle. """)
-		self.result+=str("""</p>
-					
-					 """)
-		self.result+=str("""<h2>Sample code """)
-		self.result+=str("""</h2>
-					 """)
-		self.result+=str("""<p>The following code is a example  """)
-		self.result+=str("""<i>pyl """)
-		self.result+=str("""</i> file. """)
-		self.result+=str("""</p> 
-					 """)
-		self.result+=str("""<pre class="brush: xml">
-						 """)
-		self.result+=str("""<p>Pylatte """)
-		self.result+=str("""</p>
-		 """)
-		pyl = "HTML" + " + " + "python"
-		
-		self.result+=str("""
-						 """)
-		self.result+=str(pyl)
-		self.result+=str("""
-					 """)
-		self.result+=str("""</pre>
-					 """)
-		self.result+=str("""<p>The pyl code is translated by Pylatte to HTML in the browser. """)
-		self.result+=str("""</p>
-					 """)
-		self.result+=str("""<pre class="brush: xml">
-						Pylatte
-						HTML + python
-					 """)
-		self.result+=str("""</pre>
-					
-					 """)
-		self.result+=str("""<h2>Functions """)
-		self.result+=str("""</h2>
-					 """)
-		self.result+=str("""<ul>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>Translation Engine """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>Pylatte uses pyl file format. pyl consists of HTML and Python. pyl is fully translated by the Pylatte engine into HTML. It is unique feature of Pylatte. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>Database """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>To use the database, a single external library must be installed: the MySQLdb module for Python 3. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<p>Simple and advanced SQL via specific functions that are similar to iBATIS are provided. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>Session """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>A session is needed to distinguish each client. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>Filter """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>If a filter is set, select pages pass through the filter. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>Form File """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>It is possible to upload a file to server via POST. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>URL Mapping """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>For security purposes, URL mapping transfers virtual URLs accessed by clients to web pages. """)
-		self.result+=str("""</p>
-					 """)
-		self.result+=str("""</ul>
-					
-					 """)
-		self.result+=str("""<h2>History """)
-		self.result+=str("""</h2>
-					 """)
-		self.result+=str("""<ul>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>2011. 05. 13 """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>The Pylatte project is created in Busan, South Korea. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>2011. 09. 02 """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>Initial design and development of the Pylatte project. """)
-		self.result+=str("""</p>
-						 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<h3>2011. 10. 31 """)
-		self.result+=str("""</h3> """)
-		self.result+=str("""</li>
-						 """)
-		self.result+=str("""<p>Pylatte 0.9v released. """)
-		self.result+=str("""</p>
-					 """)
-		self.result+=str("""</ul>
-					
-					 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!--/content-primary -->
-		
-					 """)
-		self.result+=str("""<div class="content-secondary">
-		
-						 """)
-		self.result+=str("""<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-		
-								 """)
-		self.result+=str("""<h3>More in this section """)
-		self.result+=str("""</h3>
-		
-								 """)
-		self.result+=str("""<ul data-role="listview" data-theme="c" data-dividertheme="d">
-									 """)
-		self.result+=str("""<li data-role="list-divider">Menu """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li data-theme="b"> """)
-		self.result+=str("""<a target="_self" href="../index">About """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../download">Download """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../install">Install """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../tutorial">Tutorial """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../documentation">Documentation """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../comment">Comment """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../faq">F A Q """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../contactus">Contact us """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<img src="../pyl/image/pylatte.png"> """)
-		self.result+=str("""</img>
-								 """)
-		self.result+=str("""</ul>
-						 """)
-		self.result+=str("""</div>
-					 """)
-		self.result+=str("""</div>
-		
-				 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /content -->
-		
-				 """)
-		self.result+=str("""<div data-role="footer" class="footer-docs" data-theme="b">
-						 """)
-		self.result+=str("""<h4>&copy; 2011 The Pylatte Project """)
-		self.result+=str("""</h4>
-				 """)
-		self.result+=str("""</div>
-		
-				 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /page -->
-		
-				 """)
-		self.result+=str("""</body>
-			 """)
-		self.result+=str("""<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
-			 """)
-		self.result+=str("""<script type="text/javascript">
-				SyntaxHighlighter.all()
-		      """)
-		self.result+=str("""</script>
-		 """)
-		self.result+=str("""</html>
-		
-		
-		 """)
+			</div>""")
+		self.pylToHtmlResult+=str("""<!--/content-primary -->""")
+		self.pylToHtmlResult+=str("""
+
+			<div class="content-secondary">""")
+		self.pylToHtmlResult+=str("""
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">""")
+		self.pylToHtmlResult+=str("""
+
+						<h3>""")
+		self.pylToHtmlResult+=str("""More""")
+		self.pylToHtmlResult+=str(""" in""")
+		self.pylToHtmlResult+=str(""" this""")
+		self.pylToHtmlResult+=str(""" section""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">""")
+		self.pylToHtmlResult+=str("""
+							<li data-role="list-divider">""")
+		self.pylToHtmlResult+=str("""Menu""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li data-theme="b">""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../index">""")
+		self.pylToHtmlResult+=str("""About""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../download">""")
+		self.pylToHtmlResult+=str("""Download""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../install">""")
+		self.pylToHtmlResult+=str("""Install""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../tutorial">""")
+		self.pylToHtmlResult+=str("""Tutorial""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../documentation">""")
+		self.pylToHtmlResult+=str("""Documentation""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../comment">""")
+		self.pylToHtmlResult+=str("""Comment""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../faq">""")
+		self.pylToHtmlResult+=str("""F""")
+		self.pylToHtmlResult+=str(""" A""")
+		self.pylToHtmlResult+=str(""" Q""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../contactus">""")
+		self.pylToHtmlResult+=str("""Contact""")
+		self.pylToHtmlResult+=str(""" us""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<img src="../pyl/image/pylatte.png">""")
+		self.pylToHtmlResult+=str("""</img>""")
+		self.pylToHtmlResult+=str("""
+						</ul>""")
+		self.pylToHtmlResult+=str("""
+				</div>""")
+		self.pylToHtmlResult+=str("""
+			</div>""")
+		self.pylToHtmlResult+=str("""
+
+		</div>""")
+		self.pylToHtmlResult+=str("""<!-- /content -->""")
+		self.pylToHtmlResult+=str("""
+
+		<div data-role="footer" class="footer-docs" data-theme="b">""")
+		self.pylToHtmlResult+=str("""
+				<h4>""")
+		self.pylToHtmlResult+=str("""&copy;""")
+		self.pylToHtmlResult+=str(""" 2011""")
+		self.pylToHtmlResult+=str(""" The""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" Project""")
+		self.pylToHtmlResult+=str("""</h4>""")
+		self.pylToHtmlResult+=str("""
+		</div>""")
+		self.pylToHtmlResult+=str("""
+
+		</div>""")
+		self.pylToHtmlResult+=str("""<!-- /page -->""")
+		self.pylToHtmlResult+=str("""
+
+		</body>""")
+		self.pylToHtmlResult+=str("""
+	<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript">""")
+		self.pylToHtmlResult+=str("""
+		SyntaxHighlighter.all()""")
+		self.pylToHtmlResult+=str("""
+     </script>""")
+		self.pylToHtmlResult+=str("""
+</html>""")
 		self.sessionDic=session
 		pass
 	def getHtml(self):
-		return self.result
+		return self.pylToHtmlResult
 		pass
 	def getSession(self):
 		return self.sessionDic

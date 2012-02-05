@@ -1,257 +1,370 @@
 # -*- coding: utf-8 -*- 
 import formFile
 class comment:
-	result=""
+	pylToHtmlResult=""
 	sessionDic=dict()
 	def __init__(self,param,pyFile,session,headerInfo,lattedb):
 		self.generate(param,pyFile,session,headerInfo,lattedb)
 
 	def generate(self,param,pyFile,session,headerInfo,lattedb):
+		self.pylToHtmlResult+=str("""<!DOCTYPE html>""")
+		self.pylToHtmlResult+=str("""
+<html>""")
+		self.pylToHtmlResult+=str("""
+	<head>""")
+		self.pylToHtmlResult+=str("""
+	<meta name="viewport" content="width=device-width, initial-scale=1">""")
+		self.pylToHtmlResult+=str("""
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">""")
+		self.pylToHtmlResult+=str("""
+	<title>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" -""")
+		self.pylToHtmlResult+=str(""" Web""")
+		self.pylToHtmlResult+=str(""" framework""")
+		self.pylToHtmlResult+=str(""" based""")
+		self.pylToHtmlResult+=str(""" on""")
+		self.pylToHtmlResult+=str(""" Python3""")
+		self.pylToHtmlResult+=str("""</title>""")
+		self.pylToHtmlResult+=str("""
+	
+	<!-- favicon -->""")
+		self.pylToHtmlResult+=str("""
+	<link rel="shortcut icon" href="../pyl/favicon.ico" type="image/x-icon">""")
+		self.pylToHtmlResult+=str("""
+	<link rel="icon" href="../pyl/favicon.ico" type="image/x-icon">""")
+		self.pylToHtmlResult+=str("""
 
-		self.result+=str("""<!DOCTYPE html>
-		 """)
-		self.result+=str("""<html>
-			 """)
-		self.result+=str("""<head>
-			 """)
-		self.result+=str("""<meta name="viewport" content="width=device-width, initial-scale=1">
-			 """)
-		self.result+=str("""<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			 """)
-		self.result+=str("""<title>Pylatte - Web framework based on Python3 """)
-		self.result+=str("""</title>
-			
-			 """)
-		self.result+=str("""<!-- favicon -->
-			 """)
-		self.result+=str("""<link rel="shortcut icon" href="../pyl/favicon.ico" type="image/x-icon">
-			 """)
-		self.result+=str("""<link rel="icon" href="../pyl/favicon.ico" type="image/x-icon">
-		
-			 """)
-		self.result+=str("""<!-- Include required JS files -->
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/js/xregexp.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/js/shCore.js"> """)
-		self.result+=str("""</script>
-			 
-			 """)
-		self.result+=str("""<!--
-			    At least one brush, here we choose JS. You need to include a brush for every
-			    language you want to highlight
-			-->
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushXml.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushBash.js"> """)
-		self.result+=str("""</script>
-			 
-			 """)
-		self.result+=str("""<!-- Include *at least* the core style and default theme -->
-			 """)
-		self.result+=str("""<link href="../pyl/syntaxhighlighter/css/shCore.css" rel="stylesheet" type="text/css" />
-			 """)
-		self.result+=str("""<link href="../pyl/syntaxhighlighter/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
-			
-			
-			
-			 """)
-		self.result+=str("""<link rel="stylesheet"  href="../pyl/css/jquery.mobile-1.0rc2.css"/>
-			 """)
-		self.result+=str("""<link rel="stylesheet"  href="../pyl/css/jqm-docs.css"/>
-			
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery-1.6.4.min.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jqm-docs.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery.mobile.themeswitcher.js"> """)
-		self.result+=str("""</script>
-			 """)
-		self.result+=str("""<script src="../pyl/js/jquery.mobile-1.0rc2.js"> """)
-		self.result+=str("""</script>
-			
-			 """)
-		self.result+=str("""<script type="text/javascript">
-		
-			  var _gaq = _gaq || [];
-			  _gaq.push(['_setAccount', 'UA-26668199-1']);
-			  _gaq.push(['_trackPageview']);
-			
-			  (function() {
-			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			  })();
-			
-			 """)
-		self.result+=str("""</script>
-			
-			 """)
-		self.result+=str("""</head>
-		
-		 """)
-		self.result+=str("""<body>
-			 """)
-		self.result+=str("""<!-- Facobook comment box configuraion -->
-			 """)
-		self.result+=str("""<div id="fb-root"> """)
-		self.result+=str("""</div>
-			 """)
-		self.result+=str("""<script>(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) {return;}
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=214489358620861";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
-			 """)
-		self.result+=str("""</script>
-			
-			 """)
-		self.result+=str("""<div data-role="page" class="type-interior">
-		
-				 """)
-		self.result+=str("""<div data-role="header" data-theme="b">
-				 """)
-		self.result+=str("""<h1>Pylatte Official Webpage """)
-		self.result+=str("""</h1>
-				 """)
-		self.result+=str("""<a href="../../" target="_self" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home """)
-		self.result+=str("""</a>
-			 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /header -->
-		
-			 """)
-		self.result+=str("""<div data-role="content">
-					 """)
-		self.result+=str("""<div class="content-primary">
-					 """)
-		self.result+=str("""<h1>Comment """)
-		self.result+=str("""</h1>
-							
-					 """)
-		self.result+=str("""<!-- Facebook commnet box API -->
-					 """)
-		self.result+=str("""<div id="comment" class="fb-comments" data-href="pylatte.org" data-num-posts="10" data-width=""> """)
-		self.result+=str("""</div>
-					 """)
-		self.result+=str("""<script type="text/javascript">
-						var width = window.screen.availWidth;
-						if (width>680)
-						{
-						    width = width * 0.6;
-						}
-						else 
-						{
-							width = width * 0.9;
-						}
-						$('#comment').attr('data-width', width);
-					 """)
-		self.result+=str("""</script>
+	<!-- Include required JS files -->""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/js/xregexp.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/js/shCore.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	 
+	<!--
+	    At least one brush, here we choose JS. You need to include a brush for every
+	    language you want to highlight
+	-->""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushXml.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script type="text/javascript" src="../pyl/syntaxhighlighter/lang/shBrushBash.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	 
+	<!-- Include *at least* the core style and default theme -->""")
+		self.pylToHtmlResult+=str("""
+	<link href="../pyl/syntaxhighlighter/css/shCore.css" rel="stylesheet" type="text/css" />""")
+		self.pylToHtmlResult+=str("""
+	<link href="../pyl/syntaxhighlighter/css/shThemeDefault.css" rel="stylesheet" type="text/css" />""")
+		self.pylToHtmlResult+=str("""
+	
+	
+	
+	<link rel="stylesheet"  href="../pyl/css/jquery.mobile-1.0rc2.css"/>""")
+		self.pylToHtmlResult+=str("""
+	<link rel="stylesheet"  href="../pyl/css/jqm-docs.css"/>""")
+		self.pylToHtmlResult+=str("""
+	
+	<script src="../pyl/js/jquery-1.6.4.min.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jqm-docs.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jquery.mobile.themeswitcher.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	<script src="../pyl/js/jquery.mobile-1.0rc2.js">""")
+		self.pylToHtmlResult+=str("""</script>""")
+		self.pylToHtmlResult+=str("""
+	
+	<script type="text/javascript">""")
+		self.pylToHtmlResult+=str("""
+
+	  var""")
+		self.pylToHtmlResult+=str(""" _gaq""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" _gaq""")
+		self.pylToHtmlResult+=str(""" ||""")
+		self.pylToHtmlResult+=str(""" [];""")
+		self.pylToHtmlResult+=str("""
+	  _gaq.push(['_setAccount',""")
+		self.pylToHtmlResult+=str(""" 'UA-26668199-1']);""")
+		self.pylToHtmlResult+=str("""
+	  _gaq.push(['_trackPageview']);""")
+		self.pylToHtmlResult+=str("""
+	
+	  (function()""")
+		self.pylToHtmlResult+=str(""" {""")
+		self.pylToHtmlResult+=str("""
+	    var""")
+		self.pylToHtmlResult+=str(""" ga""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" document.createElement('script');""")
+		self.pylToHtmlResult+=str(""" ga.type""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" 'text/javascript';""")
+		self.pylToHtmlResult+=str(""" ga.async""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" true;""")
+		self.pylToHtmlResult+=str("""
+	    ga.src""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" ('https:'""")
+		self.pylToHtmlResult+=str(""" ==""")
+		self.pylToHtmlResult+=str(""" document.location.protocol""")
+		self.pylToHtmlResult+=str(""" ?""")
+		self.pylToHtmlResult+=str(""" 'https://ssl'""")
+		self.pylToHtmlResult+=str(""" :""")
+		self.pylToHtmlResult+=str(""" 'http://www')""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" '.google-analytics.com/ga.js';""")
+		self.pylToHtmlResult+=str("""
+	    var""")
+		self.pylToHtmlResult+=str(""" s""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" document.getElementsByTagName('script')[0];""")
+		self.pylToHtmlResult+=str(""" s.parentNode.insertBefore(ga,""")
+		self.pylToHtmlResult+=str(""" s);""")
+		self.pylToHtmlResult+=str("""
+	  })();""")
+		self.pylToHtmlResult+=str("""
+	
+	</script>""")
+		self.pylToHtmlResult+=str("""
+	
+	</head>""")
+		self.pylToHtmlResult+=str("""
+
+<body>""")
+		self.pylToHtmlResult+=str("""
+	<!-- Facobook comment box configuraion -->""")
+		self.pylToHtmlResult+=str("""
+	<div id="fb-root">""")
+		self.pylToHtmlResult+=str("""</div>""")
+		self.pylToHtmlResult+=str("""
+	<script>""")
+		self.pylToHtmlResult+=str("""(function(d,""")
+		self.pylToHtmlResult+=str(""" s,""")
+		self.pylToHtmlResult+=str(""" id)""")
+		self.pylToHtmlResult+=str(""" {""")
+		self.pylToHtmlResult+=str("""
+	  var""")
+		self.pylToHtmlResult+=str(""" js,""")
+		self.pylToHtmlResult+=str(""" fjs""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" d.getElementsByTagName(s)[0];""")
+		self.pylToHtmlResult+=str("""
+	  if""")
+		self.pylToHtmlResult+=str(""" (d.getElementById(id))""")
+		self.pylToHtmlResult+=str(""" {return;}""")
+		self.pylToHtmlResult+=str("""
+	  js""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" d.createElement(s);""")
+		self.pylToHtmlResult+=str(""" js.id""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" id;""")
+		self.pylToHtmlResult+=str("""
+	  js.src""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" &quot;//connect.facebook.net/en_US/all.js#xfbml=1&appId=214489358620861&quot;;""")
+		self.pylToHtmlResult+=str("""
+	  fjs.parentNode.insertBefore(js,""")
+		self.pylToHtmlResult+=str(""" fjs);""")
+		self.pylToHtmlResult+=str("""
+	}(document,""")
+		self.pylToHtmlResult+=str(""" 'script',""")
+		self.pylToHtmlResult+=str(""" 'facebook-jssdk'));""")
+		self.pylToHtmlResult+=str("""
+	</script>""")
+		self.pylToHtmlResult+=str("""
+	
+	<div data-role="page" class="type-interior">""")
+		self.pylToHtmlResult+=str("""
+
+		<div data-role="header" data-theme="b">""")
+		self.pylToHtmlResult+=str("""
+		<h1>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str(""" Official""")
+		self.pylToHtmlResult+=str(""" Webpage""")
+		self.pylToHtmlResult+=str("""</h1>""")
+		self.pylToHtmlResult+=str("""
+		<a href="../../" target="_self" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">""")
+		self.pylToHtmlResult+=str("""Home""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""
+	</div>""")
+		self.pylToHtmlResult+=str("""<!-- /header -->""")
+		self.pylToHtmlResult+=str("""
+
+	<div data-role="content">""")
+		self.pylToHtmlResult+=str("""
+			<div class="content-primary">""")
+		self.pylToHtmlResult+=str("""
+			<h1>""")
+		self.pylToHtmlResult+=str("""Comment""")
+		self.pylToHtmlResult+=str("""</h1>""")
+		self.pylToHtmlResult+=str("""
 					
-					 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!--/content-primary -->
-		
-					 """)
-		self.result+=str("""<div class="content-secondary">
-		
-						 """)
-		self.result+=str("""<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-		
-								 """)
-		self.result+=str("""<h3>More in this section """)
-		self.result+=str("""</h3>
-		
-								 """)
-		self.result+=str("""<ul data-role="listview" data-theme="c" data-dividertheme="d">
-									 """)
-		self.result+=str("""<li data-role="list-divider">Menu """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../index">About """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../download">Download """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../install">Install """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../tutorial">Tutorial """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../documentation">Documentation """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li data-theme="b"> """)
-		self.result+=str("""<a target="_self" href="../comment">Comment """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../faq">F A Q """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<li> """)
-		self.result+=str("""<a target="_self" href="../contactus">Contact us """)
-		self.result+=str("""</a> """)
-		self.result+=str("""</li>
-									 """)
-		self.result+=str("""<img src="../pyl/image/pylatte.png"> """)
-		self.result+=str("""</img>
-								 """)
-		self.result+=str("""</ul>
-						 """)
-		self.result+=str("""</div>
-					 """)
-		self.result+=str("""</div>
-		
-				 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /content -->
-		
-				 """)
-		self.result+=str("""<div data-role="footer" class="footer-docs" data-theme="b">
-						 """)
-		self.result+=str("""<h4>&copy; 2011 The Pylatte Project """)
-		self.result+=str("""</h4>
-				 """)
-		self.result+=str("""</div>
-		
-				 """)
-		self.result+=str("""</div> """)
-		self.result+=str("""<!-- /page -->
-		
-			 """)
-		self.result+=str("""</body>
-		 """)
-		self.result+=str("""</html>
-		
-		
-		 """)
+			<!-- Facebook commnet box API -->""")
+		self.pylToHtmlResult+=str("""
+			<div id="comment" class="fb-comments" data-href="pylatte.org" data-num-posts="10" data-width="">""")
+		self.pylToHtmlResult+=str("""</div>""")
+		self.pylToHtmlResult+=str("""
+			<script type="text/javascript">""")
+		self.pylToHtmlResult+=str("""
+				var width = window.screen.availWidth;
+				if (width>""")
+		self.pylToHtmlResult+=str("""680)""")
+		self.pylToHtmlResult+=str("""
+				{""")
+		self.pylToHtmlResult+=str("""
+				    width""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" width""")
+		self.pylToHtmlResult+=str(""" *""")
+		self.pylToHtmlResult+=str(""" 0.6;""")
+		self.pylToHtmlResult+=str("""
+				}""")
+		self.pylToHtmlResult+=str("""
+				else""")
+		self.pylToHtmlResult+=str(""" 
+				{""")
+		self.pylToHtmlResult+=str("""
+					width""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" width""")
+		self.pylToHtmlResult+=str(""" *""")
+		self.pylToHtmlResult+=str(""" 0.9;""")
+		self.pylToHtmlResult+=str("""
+				}""")
+		self.pylToHtmlResult+=str("""
+				$('#comment').attr('data-width',""")
+		self.pylToHtmlResult+=str(""" width);""")
+		self.pylToHtmlResult+=str("""
+			</script>""")
+		self.pylToHtmlResult+=str("""
+			
+			</div>""")
+		self.pylToHtmlResult+=str("""<!--/content-primary -->""")
+		self.pylToHtmlResult+=str("""
+
+			<div class="content-secondary">""")
+		self.pylToHtmlResult+=str("""
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">""")
+		self.pylToHtmlResult+=str("""
+
+						<h3>""")
+		self.pylToHtmlResult+=str("""More""")
+		self.pylToHtmlResult+=str(""" in""")
+		self.pylToHtmlResult+=str(""" this""")
+		self.pylToHtmlResult+=str(""" section""")
+		self.pylToHtmlResult+=str("""</h3>""")
+		self.pylToHtmlResult+=str("""
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">""")
+		self.pylToHtmlResult+=str("""
+							<li data-role="list-divider">""")
+		self.pylToHtmlResult+=str("""Menu""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../index">""")
+		self.pylToHtmlResult+=str("""About""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../download">""")
+		self.pylToHtmlResult+=str("""Download""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../install">""")
+		self.pylToHtmlResult+=str("""Install""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../tutorial">""")
+		self.pylToHtmlResult+=str("""Tutorial""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../documentation">""")
+		self.pylToHtmlResult+=str("""Documentation""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li data-theme="b">""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../comment">""")
+		self.pylToHtmlResult+=str("""Comment""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../faq">""")
+		self.pylToHtmlResult+=str("""F""")
+		self.pylToHtmlResult+=str(""" A""")
+		self.pylToHtmlResult+=str(""" Q""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../contactus">""")
+		self.pylToHtmlResult+=str("""Contact""")
+		self.pylToHtmlResult+=str(""" us""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<img src="../pyl/image/pylatte.png">""")
+		self.pylToHtmlResult+=str("""</img>""")
+		self.pylToHtmlResult+=str("""
+						</ul>""")
+		self.pylToHtmlResult+=str("""
+				</div>""")
+		self.pylToHtmlResult+=str("""
+			</div>""")
+		self.pylToHtmlResult+=str("""
+
+		</div>""")
+		self.pylToHtmlResult+=str("""<!-- /content -->""")
+		self.pylToHtmlResult+=str("""
+
+		<div data-role="footer" class="footer-docs" data-theme="b">""")
+		self.pylToHtmlResult+=str("""
+				<h4>""")
+		self.pylToHtmlResult+=str("""&copy;""")
+		self.pylToHtmlResult+=str(""" 2011""")
+		self.pylToHtmlResult+=str(""" The""")
+		self.pylToHtmlResult+=str(""" Pylatte""")
+		self.pylToHtmlResult+=str(""" Project""")
+		self.pylToHtmlResult+=str("""</h4>""")
+		self.pylToHtmlResult+=str("""
+		</div>""")
+		self.pylToHtmlResult+=str("""
+
+		</div>""")
+		self.pylToHtmlResult+=str("""<!-- /page -->""")
+		self.pylToHtmlResult+=str("""
+
+	</body>""")
+		self.pylToHtmlResult+=str("""
+</html>""")
 		self.sessionDic=session
 		pass
 	def getHtml(self):
-		return self.result
+		return self.pylToHtmlResult
 		pass
 	def getSession(self):
 		return self.sessionDic

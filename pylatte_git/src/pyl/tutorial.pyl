@@ -18,10 +18,10 @@
 				<p>Caution : If you use <b>print()</b> function, it will be printed on web server console.</p>
 			
 				<pre class="brush: xml">
-				<\$
-				hi="hello pylatte"
-				$>
-				<h1><\$=hi$></h1>
+				&lt;$
+				hi=&quot;hello pylatte&quot;
+				$&gt;
+				<h1>&lt;$=hi$&gt;</h1>
 				</pre>
 				<p>In python language, indentation is absolutely important. So we strongly recommend to use python code under <b>&lt;$</b>, and type <b>$&gt;</b> on new line after python code. Refer to the following code.</p>
 				<p>Type the code in hellopy.pyl and save it again. After running pylatte web server, you can see <b>hello pylatte</b>.
@@ -81,11 +81,11 @@
 				<p>There are two kinds of method to deal with GET & POST parameter.</p>
 				<p>When you request some parameter values using GET method or POST method, you can get the parameter values as following.</p>
 				<pre class="brush: xml">
-					<\$=param$>
+					&lt;$=param$&gt;
 				</pre>
 				<p>The variable <b>param</b> has all requested values as dictionary type like <i>{"id":pylatte, "password":python}</i>. Definately, you can get specific value such as following.</p> 
 				<pre class="brush: xml">
-					<\$=param["id"]$>
+					&lt;$=param[&quot;id&quot;]$&gt;
 				</pre>
 				<p>Pylatte does not support the other methods like PUT, DELETE.</p>
 				
@@ -93,8 +93,8 @@
 				<p>Pylatte supports sesson management allocating session datas for each accessor.</p>
 				<p>This session data type is dictionary. The way to use is similar with GET & POST above. Refer to following code.</p>
 				<pre class="brush: xml">
-					session["name"] = "pylatte"
-					session["age"] = 1
+					session[&quot;name&quot;] = &quot;pylatte&quot;
+					session[&quot;age&quot;] = 1
 				</pre>	
 				<p>Pylatte manages session data through session module. Usually, it is required to use in membership page to deal with each member's session data. </p>
 
@@ -109,10 +109,10 @@
 				</pre>
 				<p>Now you can upload a file as post parameters in pageToProcessPost(This is a mapped page name by mapping module at <i>pylatte_config.xml</i>) page. Refer to following code.</p>
 				<pre class="brush: xml">
-					<\$
+					&lt;$
 					pyformFile=formFile.formFile(pyFile)
-					pyformFile.moveUploadFile("filepy","download","pylatte.jpg")
-					$>
+					pyformFile.moveUploadFile(&quot;filepy&quot;,&quot;download&quot;,&quot;pylatte.jpg&quot;)
+					$&gt;
 				</pre>
 				<p>you can receive the file information to variable with using <b>formFile.formFile(pyFile)</b>. And execute moveUploadFile mothod from the variable to complete upload file to server. Parameters of moveUploadFile are name, folder name, and file name in order.</p> 
 				<p>In addition, pyFile[<i>name</i>]</p> has a little information about the file as dictionary type.
@@ -133,14 +133,14 @@
 				<p><b>&lt;@latteDatabase&gt;</b> has to be written on the code specifically before using database. After that, execute SQL what you need through <b>latteDB.query()</b> method. And then, use <b>latteDB.store_result()</b> method which return result of processing the SQL.</p>
 				<p>The result include not only result of SQL but also some methods. To see how to use a database, check example code below.</p>
 				<pre class="brush: xml">
-					<$="<@latteDatabase>"$>
-					<\$					
-					latteDB.query("select * from test")
+					&lt;$
+					latteDatabase()					
+					latteDB.query(&quot;select * from test&quot;)
 					result=latteDB.store_result()
-					$>
-					<div id="dbdiv">
-					<\$=result.fetch_row()$>
-					</div>
+					$&gt;
+					&lt;div id="dbdiv"&gt;
+					&lt;$=result.fetch_row()$&gt;
+					&lt;/div&gt;
 				</pre>
 				<p>This code returns tuple type result by fetch_row()</p>
 				<p><b>fetch_row()</b> method takes some additional parameters. </p>
@@ -162,19 +162,19 @@
 				<p>This is xml code in <i>db_mapping.xml file</i>. &lt;sqlMap&gt; tag needs attribute 'id'. And its child nodes (e.g. select, insert, update, delete ...) also need attribute 'id'. These 'id' are used to call SQL which is values of the childe nodes. Let's see how to deal with database using these SQLs.</p>
 				<pre class="brush: xml">
 					<@latteDatabaseExt>
-					<\$
+					&lt;$
 					db = DBMappingParser.pyLatteDBMappingParser()
-					parameter = {"age":1, "name":"pylatte"}
+					parameter = {&quot;age&quot;:1, &quot;name&quot;:&quot;pylatte&quot;}
 					
-					result1 = db.queryForList("user.select1")	
-					result2 = db.queryForList("user.select2", parameter)
-					$>
+					result1 = db.queryForList(&quot;user.select1&quot;)	
+					result2 = db.queryForList(&quot;user.select2&quot;, parameter)
+					$&gt;
 				</pre>
 				<p>First of all, declare on variable and call DBMappingParser.pyLatteDBMappingParser() to save database object to the variable.</p>
 				<p>Secondly, define dictionary type parameter. This will be replaced matched value in SQL.</p>
 				<p>At last, call queryForList() method via the variable declared on first step.</p>
 				<p>queryForList() method takes two parameters.</p>
-				<p>First one indicates specific SQL in db_mapping.xml by id. For example, 'user.select1' indicates a value in specific tag which has id 'select1' in &lt;sqlMap&gt; tag having id 'user'. So 'user.select1' get replaced to "SELECT * FROM test"</p>
+				<p>First one indicates specific SQL in db_mapping.xml by id. For example, 'user.select1' indicates a value in specific tag which has id 'select1' in &lt;sqlMap&gt; tag having id 'user'. So 'user.select1' get replaced to &quot;SELECT * FROM test&quot;</p>
 				<p>Second parameter is optional. When SQL indicated by first parameter includes variable $keys$, this is mandatory. As you see above example code, second parameter is dictionary type. In the parameter, the each values automatically gets replaced with each matched $keys$ in SQL. So select2 will be traslated from <b>SELECT * FROM test WHERE age = $age$</b> to <b>SELECT * FROM test WHERE age = 1</b></p>
 				<p>queryForList() method returns tuple type as a result.</p>
 				
