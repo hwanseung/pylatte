@@ -58,6 +58,7 @@ else:
 $>
 	<p>Session : <$=session['name']$></p>
 <$
+	pass
 $>		
 	<h3>HeaderInfo['path']</h3>
 	<p><$=headerInfo['path']$></p>

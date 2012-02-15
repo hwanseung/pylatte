@@ -1,4 +1,5 @@
 import ply.lex as lex
+import re#정규표현식 모듈
 import math
 
 # List of token names.   This is always required
@@ -19,7 +20,6 @@ def t_PYL_OUTPUT(t):
 def t_PYL(t):
     r'\s*\<\$[^<>]*?\$\>' 
     t.value = (t.value)
-    print("#"+t.value+"#")
     return t
 
 def t_HTML(t):
@@ -60,6 +60,9 @@ class pylToPy:
     pystring=""
     page=""
     pyl_path=""
+    
+    blank=0;
+    
     def __init__(self,pyl_path,filterStr):
         # 파일 읽기
         self.pyl_path=pyl_path
@@ -133,13 +136,14 @@ class pylToPy:
         pass
         
     def processPyl(self, type,value,lineno,lexpos):
-        
-        #print("***\n"+t.value[3:-3]+"\n***")
+        #remove whitespace front PYL CODE
+        value=value[value.rfind("<"):]
+        print("***\n"+value+"\n***")
+
         content=value[3:-3];
         
         #print("+++"+t.value[-2:]+"##")
-        if value[0:3]=="<$\n" and value[-2:]=="$>":
-            #print("$$"+content+"$$")
+        if value[0:3]=="<$\n" and value[-3:]=="\n$>":
             try:
                 firstNPos=content.index("\n")
                 #print("Value", firstNPos, secondNPos)
@@ -151,6 +155,7 @@ class pylToPy:
                 print("&&"+firstLineCotent+"&&")
                 localTapCount=0
                 localSpaceCount=0
+                space="\n\t\t"
                 for i in firstLineCotent:
                     if i == '\n':
                         localTapCount=0
@@ -162,31 +167,60 @@ class pylToPy:
                     else:
                         print("end" + i)
                         print("count", localTapCount, localSpaceCount)
-                        count=localTapCount+(math.ceil(localSpaceCount/4))
-                        space="\n"
-                        space+="\t"
-                        content=str(content).replace("\n",space)
-                        print("%%%\n"+content+"\n%%%")
+                        
+                        forList =re.findall(r"for.+:",content);
+                        whileList =re.findall(r"while.+:",content);
+                        ifList =re.findall(r"if.+:",content);
+                        elifList =re.findall(r"elif.+:",content);
+                        elseList =re.findall(r"else:",content);
+                        passList =re.findall(r"pass",content);
+
+                        localLoopCount=(len(forList)+len(whileList)+len(ifList)+len(elifList)+len(elseList)-len(passList));
+                        
+                        count=localTapCount+(math.ceil(localSpaceCount/4))+localLoopCount
+                        self.blank=count;
+                        for i in range(count-1):
+                            space+="\t"
                         break
+                
+                print("!!!"+str(content.find("\n")))
+                if(content.find("\n")!=-1):
+                    print(content[:content.find("\n")])
+                content="\n"+content  
+                content=content.replace("\n",space)
+                content+="\n"
+                print("@@@\n"+content+"\n@@@")
         else:
             print("this is not pylcode")
         
-        return '\t\tself.pylToHtmlResult+=str("pylatte")\n'
+        return content
         pass
     
     def processPylOut(self, type,value,lineno,lexpos):
         value=value.replace('<$=', "")
         value=value.replace('$>', "")
-        return '\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
+        space=""
+        for i in range(self.blank):
+            space+="\t"
+        
+        return space+'\t\tself.pylToHtmlResult+=str('+value+')\n'
         pass
     
     def processHTML(self, type,value,lineno,lexpos):
-        return '\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
+        space=""
+        for i in range(self.blank):
+            space+="\t"
+        
+        return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     
     def processNotPyl(self, type,value,lineno,lexpos):
         value=value.replace('\"', "&quot;")
-        return '\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
+        space=""
+        for i in range(self.blank):
+            space+="\t"
+        
+        return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     
     

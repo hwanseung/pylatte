@@ -139,8 +139,11 @@ class contactus:
 		self.pylToHtmlResult+=str("""
 	
 	</head>""")
-		self.pylToHtmlResult+=str("pylatte")
-		self.pylToHtmlResult+=str("pylatte")
+
+		latteDatabaseExt()
+
+		contact = DBMappingParser.pyLatteDBMappingParser()
+		result = contact.queryForList("contact.sangkeun")
 		self.pylToHtmlResult+=str("""
 
 <body>""")
@@ -244,21 +247,21 @@ class contactus:
 					<li>""")
 		self.pylToHtmlResult+=str("""<a""")
 		self.pylToHtmlResult+=str(""" href=""")
-		self.pylToHtmlResult+=str("""result[0]['website']""")
+		self.pylToHtmlResult+=str(result[0]['website'])
 		self.pylToHtmlResult+=str(""" target=&quot;_black&quot;>""")
 		self.pylToHtmlResult+=str("""
 						<h3>""")
-		self.pylToHtmlResult+=str("""result[0]['name']""")
+		self.pylToHtmlResult+=str(result[0]['name'])
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
 		self.pylToHtmlResult+=str("""<strong>""")
-		self.pylToHtmlResult+=str("""result[0]['position']""")
+		self.pylToHtmlResult+=str(result[0]['position'])
 		self.pylToHtmlResult+=str("""</strong>""")
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
-		self.pylToHtmlResult+=str("""result[0]['description']""")
+		self.pylToHtmlResult+=str(result[0]['description'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 					</a>""")
@@ -267,21 +270,21 @@ class contactus:
 					<li>""")
 		self.pylToHtmlResult+=str("""<a""")
 		self.pylToHtmlResult+=str(""" href=""")
-		self.pylToHtmlResult+=str("""result[1]['website']""")
+		self.pylToHtmlResult+=str(result[1]['website'])
 		self.pylToHtmlResult+=str(""" target=&quot;_black&quot;>""")
 		self.pylToHtmlResult+=str("""
 						<h3>""")
-		self.pylToHtmlResult+=str("""result[1]['name']""")
+		self.pylToHtmlResult+=str(result[1]['name'])
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
 		self.pylToHtmlResult+=str("""<strong>""")
-		self.pylToHtmlResult+=str("""result[1]['position']""")
+		self.pylToHtmlResult+=str(result[1]['position'])
 		self.pylToHtmlResult+=str("""</strong>""")
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
-		self.pylToHtmlResult+=str("""result[1]['description']""")
+		self.pylToHtmlResult+=str(result[1]['description'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 					</a>""")
@@ -290,21 +293,21 @@ class contactus:
 					<li>""")
 		self.pylToHtmlResult+=str("""<a""")
 		self.pylToHtmlResult+=str(""" href=""")
-		self.pylToHtmlResult+=str("""result[2]['website']""")
+		self.pylToHtmlResult+=str(result[2]['website'])
 		self.pylToHtmlResult+=str(""" target=&quot;_black&quot;>""")
 		self.pylToHtmlResult+=str("""
 						<h3>""")
-		self.pylToHtmlResult+=str("""result[2]['name']""")
+		self.pylToHtmlResult+=str(result[2]['name'])
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
 		self.pylToHtmlResult+=str("""<strong>""")
-		self.pylToHtmlResult+=str("""result[2]['position']""")
+		self.pylToHtmlResult+=str(result[2]['position'])
 		self.pylToHtmlResult+=str("""</strong>""")
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 						<p>""")
-		self.pylToHtmlResult+=str("""result[2]['description']""")
+		self.pylToHtmlResult+=str(result[2]['description'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 					</a>""")

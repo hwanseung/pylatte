@@ -355,31 +355,40 @@ class faq:
 					</p>""")
 		self.pylToHtmlResult+=str("""
 				</form>""")
-		self.pylToHtmlResult+=str("pylatte")
-		self.pylToHtmlResult+=str("""
+
+		if param=={}:
+			pass	
+		else:
+			session['name']=param['name']
+			self.pylToHtmlResult+=str("""
 	<p>""")
-		self.pylToHtmlResult+=str("""Get""")
-		self.pylToHtmlResult+=str(""" or""")
-		self.pylToHtmlResult+=str(""" Post""")
-		self.pylToHtmlResult+=str(""" :""")
-		self.pylToHtmlResult+=str(""" param['name']""")
-		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("pylatte")
-		self.pylToHtmlResult+=str("pylatte")
-		self.pylToHtmlResult+=str("""
+			self.pylToHtmlResult+=str("""Get""")
+			self.pylToHtmlResult+=str(""" or""")
+			self.pylToHtmlResult+=str(""" Post""")
+			self.pylToHtmlResult+=str(""" :""")
+			self.pylToHtmlResult+=str( param['name'])
+			self.pylToHtmlResult+=str("""</p>""")
+
+		
+
+		if session=={}:
+			pass	
+		else:
+			self.pylToHtmlResult+=str("""
 	<p>""")
-		self.pylToHtmlResult+=str("""Session""")
-		self.pylToHtmlResult+=str(""" :""")
-		self.pylToHtmlResult+=str(""" session['name']""")
-		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("pylatte")
+			self.pylToHtmlResult+=str("""Session""")
+			self.pylToHtmlResult+=str(""" :""")
+			self.pylToHtmlResult+=str( session['name'])
+			self.pylToHtmlResult+=str("""</p>""")
+
+			pass
 		self.pylToHtmlResult+=str("""
 	<h3>""")
 		self.pylToHtmlResult+=str("""HeaderInfo['path']""")
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 	<p>""")
-		self.pylToHtmlResult+=str("""headerInfo['path']""")
+		self.pylToHtmlResult+=str(headerInfo['path'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 	<h3>""")
@@ -387,7 +396,7 @@ class faq:
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 	<p>""")
-		self.pylToHtmlResult+=str("""headerInfo['Accept']""")
+		self.pylToHtmlResult+=str(headerInfo['Accept'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 	<h3>""")
@@ -395,7 +404,7 @@ class faq:
 		self.pylToHtmlResult+=str("""</h3>""")
 		self.pylToHtmlResult+=str("""
 	<p>""")
-		self.pylToHtmlResult+=str("""headerInfo['Accept-Charset']""")
+		self.pylToHtmlResult+=str(headerInfo['Accept-Charset'])
 		self.pylToHtmlResult+=str("""</p>""")
 		self.pylToHtmlResult+=str("""
 	<div>""")

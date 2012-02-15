@@ -7,7 +7,9 @@ class faviconUpload:
 		self.generate(param,pyFile,session,headerInfo,lattedb)
 
 	def generate(self,param,pyFile,session,headerInfo,lattedb):
-		self.pylToHtmlResult+=str("pylatte")
+
+		pyformFile=formFile.formFile(pyFile)
+		pyformFile.moveUploadFile("file1","pyl","favicon.ico")
 		self.pylToHtmlResult+=str("""
 
 <script type="text/javascript">""")

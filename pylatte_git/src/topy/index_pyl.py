@@ -245,9 +245,10 @@ class index:
 				<p>""")
 		self.pylToHtmlResult+=str("""Pylatte""")
 		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("pylatte")
-		self.pylToHtmlResult+=str("""
-				pyl""")
+
+		pyl = "HTML" + " + " + "python"
+		self.pylToHtmlResult+=str(
+				pyl)
 		self.pylToHtmlResult+=str("""
 			</pre>""")
 		self.pylToHtmlResult+=str("""
