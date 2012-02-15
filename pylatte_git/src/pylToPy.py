@@ -152,7 +152,7 @@ class pylToPy:
                 #print("ValueError")
                 firstLineCotent=content
             finally:
-                print("&&"+firstLineCotent+"&&")
+                #print("&&"+firstLineCotent+"&&")
                 localTapCount=0
                 localSpaceCount=0
                 space="\n\t\t"
@@ -183,7 +183,11 @@ class pylToPy:
                             space+="\t"
                         break
                 
-                print("!!!"+str(content.find("\n")))
+               
+                #데이터베이스 정보 include 해주기!!
+                content=content.replace("latteDatabaseExt()","import DBMappingParser");
+                content=content.replace("latteDatabase()","import MySQLdb; "+'latteDB=MySQLdb.connect(host=lattedb["host"],user=lattedb["user"],passwd=lattedb["password"],db=lattedb["dbName"])');
+                
                 if(content.find("\n")!=-1):
                     print(content[:content.find("\n")])
                 content="\n"+content  

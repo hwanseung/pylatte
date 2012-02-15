@@ -140,7 +140,7 @@ class contactus:
 	
 	</head>""")
 
-		latteDatabaseExt()
+		import DBMappingParser
 
 		contact = DBMappingParser.pyLatteDBMappingParser()
 		result = contact.queryForList("contact.sangkeun")
