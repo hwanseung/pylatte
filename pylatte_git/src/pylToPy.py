@@ -123,8 +123,8 @@ class pylToPy:
         pypage.append('\t\t'+'pass\n') 
         # 파이썬 코드 만들어보기
         
-        print(type(pypage))
-        print(type(self.pystring))
+        ##print(type(pypage))
+        ##print(type(self.pystring))
         pystring = ""
         for p in pypage:
             if p=='\n':
@@ -138,7 +138,7 @@ class pylToPy:
     def processPyl(self, type,value,lineno,lexpos):
         #remove whitespace front PYL CODE
         value=value[value.rfind("<"):]
-        print("***\n"+value+"\n***")
+        #print("***\n"+value+"\n***")
 
         content=value[3:-3];
         
@@ -165,8 +165,8 @@ class pylToPy:
                     elif i == ' ':
                         localSpaceCount+=1;
                     else:
-                        print("end" + i)
-                        print("count", localTapCount, localSpaceCount)
+                        #print("end" + i)
+                        #print("count", localTapCount, localSpaceCount)
                         
                         forList =re.findall(r"for.+:",content);
                         whileList =re.findall(r"while.+:",content);
@@ -188,12 +188,13 @@ class pylToPy:
                 content=content.replace("latteDatabaseExt()","import DBMappingParser");
                 content=content.replace("latteDatabase()","import MySQLdb; "+'latteDB=MySQLdb.connect(host=lattedb["host"],user=lattedb["user"],passwd=lattedb["password"],db=lattedb["dbName"])');
                 
-                if(content.find("\n")!=-1):
-                    print(content[:content.find("\n")])
+                #if(content.find("\n")!=-1):
+                #    print(content[:content.find("\n")])
+
                 content="\n"+content  
                 content=content.replace("\n",space)
                 content+="\n"
-                print("@@@\n"+content+"\n@@@")
+                ##print("@@@\n"+content+"\n@@@")
         else:
             print("this is not pylcode")
         
