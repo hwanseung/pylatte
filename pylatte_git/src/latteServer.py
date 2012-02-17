@@ -22,7 +22,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
     server_version="pylatte HttpServer 1.0v"
     
     isPyl=False
-    
+    dynamicHtml=""
     pyFile=None;
     
     def __init__(self, request, client_address, server):
@@ -103,9 +103,10 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             sessionData = sessionutil.dictToSessionData(sessionutil,finalSessionDic)
             
             sessionutil.setSessionData(sessionutil,sessionKey, sessionData)
-            wf = open("temp.html","w")
-            wf.write(htmlcode)
-            wf.close()
+            ##wf = open("temp.html","w")
+            ##wf.write(htmlcode)
+            ##wf.close()
+            self.dynamicHtml = htmlcode;
             self.isPyl=True
 
         except KeyError:# If there is nothing to process dynamically, look for static thing
@@ -118,21 +119,27 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             pass
         
         
-        #if session value is same
-        try:
-            if latteSession=="" and sessionKey!=None:
-                try:
-                    f = self.send_head("PYLATTESESSIONID="+sessionKey+"; "+headerInfo.getHeaderInfo()["Cookie"])
-                except TypeError:
-                    f = self.send_head("PYLATTESESSIONID="+sessionKey)
-            else:
-                f = self.send_head(None)#send sessionid to header
-        except IndexError:
+        if(self.isPyl == True):
+            #if session value is same
+            try:
+                if latteSession=="" and sessionKey!=None:
+                    try:
+                        self.send_head("PYLATTESESSIONID="+sessionKey+"; "+headerInfo.getHeaderInfo()["Cookie"])
+                    except TypeError:
+                        self.send_head("PYLATTESESSIONID="+sessionKey)
+                else:
+                    self.send_head(None)#send sessionid to header
+            except IndexError:
+                self.send_head(None)
+                
+            self.wfile.write(bytes(self.dynamicHtml, 'UTF-8'))
+        else:
             f = self.send_head(None)
             
-        if f:
-            self.copyfile(f, self.wfile)
-            f.close()
+            if f:
+                self.copyfile(f, self.wfile)
+                f.close()
+
         pass
        
     def do_POST(self):
@@ -211,34 +218,42 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             sessionData = sessionutil.dictToSessionData(sessionutil,finalSessionDic)
             
             sessionutil.setSessionData(sessionutil,sessionKey, sessionData)
-            wf = open("temp.html","w")
-            wf.write(htmlcode)
-            wf.close()
+            ##wf = open("temp.html","w")
+            ##wf.write(htmlcode)
+            ##wf.close()
+            self.dynamicHtml = htmlcode;
             self.isPyl=True
-        
-            
-        except IndexError:# If there is nothing to process dynamically, look for static thing
+
+        except KeyError:# If there is nothing to process dynamically, look for static thing
+            print('Not Found pyl')
             self.isPyl=False
+            sessionKey=None
             pass
         except TypeError:
             print('Error - Result of processing SQL is None. NoneType object is not subscriptable.')
             pass
         
-        #if session value is same
-        try:
-            if latteSession=="" and sessionKey!=None:
-                try:
-                    f = self.send_head("PYLATTESESSIONID="+sessionKey+"; "+headerInfo.getHeaderInfo()["Cookie"])
-                except TypeError:
-                    f = self.send_head("PYLATTESESSIONID="+sessionKey)
-            else:
-                f = self.send_head(None)#send sessionid to header
-        except IndexError:
+        
+        if(self.isPyl == True):
+            #if session value is same
+            try:
+                if latteSession=="" and sessionKey!=None:
+                    try:
+                        self.send_head("PYLATTESESSIONID="+sessionKey+"; "+headerInfo.getHeaderInfo()["Cookie"])
+                    except TypeError:
+                        self.send_head("PYLATTESESSIONID="+sessionKey)
+                else:
+                    self.send_head(None)#send sessionid to header
+            except IndexError:
+                self.send_head(None)
+                
+            self.wfile.write(bytes(self.dynamicHtml, 'UTF-8'))
+        else:
             f = self.send_head(None)
             
-        if f:
-            self.copyfile(f, self.wfile)
-            f.close()
+            if f:
+                self.copyfile(f, self.wfile)
+                f.close()
         pass
         
             
@@ -257,45 +272,50 @@ class latteServer(http.server.CGIHTTPRequestHandler):
         None, in which case the caller has nothing further to do.
         """
         
+        
         if self.isPyl==True:
-            path = "temp.html"
+            self.send_response(200)
+            self.send_header("Content-Length", len(self.dynamicHtml) )
+            self.send_header("Last-Modified", self.date_time_string(200000))
+            self.send_header("Content-type", "text/html" + "; charset=utf-8")
+            if sessionData!=None:#if sessionKey exist, the key are used
+                self.send_header("Set-Cookie", sessionData)
+            self.end_headers()
+            return
         else:
             path = self.translate_path(self.path)
             print(path)
-        
-        f = None
-        if os.path.isdir(path):
-            if not self.path.endswith('/'):
-                # redirect browser - doing basically what apache does
-                self.send_response(301)
-                self.send_header("Location", self.path + "/")
-                self.end_headers()
-                return None
-            for index in "index.html", "index.htm":
-                index = os.path.join(path, index)
-                if os.path.exists(index):
-                    path = index
-                    break
-            else:
-                return self.list_directory(path)
-        ctype = self.guess_type(path)
-        try:
-            f = open(path, 'rb')
-        except IOError:
-            self.send_error(404, "File not found")
-            return None
-        self.send_response(200)
-        if self.isPyl==True:
-            self.send_header("Content-type", ctype + "; charset=utf-8")
-        else:
-            self.send_header("Content-type", ctype)
-        fs = os.fstat(f.fileno())
-        self.send_header("Content-Length", str(fs[6]))
-        self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
-        if sessionData!=None:#if sessionKey exist, the key are used
-            self.send_header("Set-Cookie", sessionData)
             
-        self.end_headers()
+            f = None
+            if os.path.isdir(path):
+                if not self.path.endswith('/'):
+                    # redirect browser - doing basically what apache does
+                    self.send_response(301)
+                    self.send_header("Location", self.path + "/")
+                    self.end_headers()
+                    return None
+                for index in "index.html", "index.htm":
+                    index = os.path.join(path, index)
+                    if os.path.exists(index):
+                        path = index
+                        break
+                else:
+                    return self.list_directory(path)
+            ctype = self.guess_type(path)
+            try:
+                f = open(path, 'rb')
+            except IOError:
+                self.send_error(404, "File not found")
+                return None
+            self.send_response(200)
+            if self.isPyl==True:
+                self.send_header("Content-type", ctype + "; charset=utf-8")
+            else:
+                self.send_header("Content-type", ctype)
+            fs = os.fstat(f.fileno())
+            self.send_header("Content-Length", str(fs[6]))
+            self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+            self.end_headers()
         return f
     
     
