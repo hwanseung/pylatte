@@ -114,9 +114,9 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             self.isPyl=False
             sessionKey=None
             pass
-        except TypeError:
-            print('Error - Result of processing SQL is None. NoneType object is not subscriptable.')
-            pass
+        #except TypeError:
+        #    print('Error - Result of processing SQL is None. NoneType object is not subscriptable.')
+        #    pass
         
         
         if(self.isPyl == True):

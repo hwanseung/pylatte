@@ -1,5 +1,6 @@
 from xml.dom.minidom import parse
 import MySQLdb
+import pymongo
 
 class pyLatteDBMappingParser:
 
@@ -42,21 +43,33 @@ class pyLatteDBMappingParser:
             tags = self.doc.getElementsByTagName("sql")
             
             for item in tags:
-                info = dict()
-                for item1 in item.childNodes:
-                    if(item1.nodeName=="host"):
-                        #print(item1.firstChild.nodeValue)
-                        info["host"]=item1.firstChild.nodeValue
-                    if(item1.nodeName=="user"):
-                        #print(item1.firstChild.nodeValue)
-                        info["user"]=item1.firstChild.nodeValue
-                    if(item1.nodeName=="password"):
-                        #print(item1.firstChild.nodeValue);
-                        info["password"]=item1.firstChild.nodeValue
-                    if(item1.nodeName=="dbName"):
-                        #print(item1.firstChild.nodeValue);
-                        info["dbName"]=item1.firstChild.nodeValue
-                self.latteDB=MySQLdb.connect(host=info["host"],user=info["user"],passwd=info["password"],db=info["dbName"])
+                if str.lower(item.getAttribute('db')) == 'mysql':
+                    info = dict()
+                    for item1 in item.childNodes:
+                        if(item1.nodeName=="host"):
+                            #print(item1.firstChild.nodeValue)
+                            info["host"]=item1.firstChild.nodeValue
+                        if(item1.nodeName=="user"):
+                            #print(item1.firstChild.nodeValue)
+                            info["user"]=item1.firstChild.nodeValue
+                        if(item1.nodeName=="password"):
+                            #print(item1.firstChild.nodeValue);
+                            info["password"]=item1.firstChild.nodeValue
+                        if(item1.nodeName=="dbName"):
+                            #print(item1.firstChild.nodeValue);
+                            info["dbName"]=item1.firstChild.nodeValue
+                    self.latteDB=MySQLdb.connect(host=info["host"],user=info["user"],passwd=info["password"],db=info["dbName"])
+                elif str.lower(item.getAttribute('db')) == 'mongodb':
+                    info = dict()
+                    for item1 in item.childNodes:
+                        if(item1.nodeName=="host"):
+                            #print(item1.firstChild.nodeValue)
+                            info["host"]=item1.firstChild.nodeValue
+                        if(item1.nodeName=="port"):
+                            #print(item1.firstChild.nodeValue)
+                            info["port"]=item1.firstChild.nodeValue
+                    self.latteDB=pymongo.Connection(info["host"], int(info["port"]))
+                    
         except AttributeError:
             print('Error - XML Parsing failed')
             
@@ -64,7 +77,7 @@ class pyLatteDBMappingParser:
         """Execute SQL with replacing variables in SQL"""
         
         try:
-            print(node.firstChild.nodeValue)              
+            #print(node.firstChild.nodeValue)              
             if(value):    # if 'value' is not None, '$value$' have to be replaced 
                 splitedSQL = str(node.firstChild.nodeValue).rsplit('$')
                 completedSQL = ""
@@ -117,4 +130,9 @@ class pyLatteDBMappingParser:
             raise Exception
         except Exception:
             print('There is no matched node or ID on the XML document')
-            
+
+    def makeToUseSimpleDB(self):
+        
+        return self.latteDB
+        pass
+        

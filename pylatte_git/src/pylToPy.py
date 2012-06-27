@@ -186,7 +186,7 @@ class pylToPy:
                
                 #데이터베이스 정보 include 해주기!!
                 content=content.replace("latteDatabaseExt()","import DBMappingParser");
-                content=content.replace("latteDatabase()","import MySQLdb; "+'latteDB=MySQLdb.connect(host=lattedb["host"],user=lattedb["user"],passwd=lattedb["password"],db=lattedb["dbName"])');
+                content=content.replace("latteDatabase()","import DBMappingParser;"+" pyLatteDBMappingParser=latteDB=DBMappingParser.pyLatteDBMappingParser(); latteDB=pyLatteDBMappingParser.makeToUseSimpleDB()");
                 
                 #if(content.find("\n")!=-1):
                 #    print(content[:content.find("\n")])

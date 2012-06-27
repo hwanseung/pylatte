@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
 
 <database>
+	
 	<sql db="mysql">
 		<host>localhost</host>
 		<user>root</user>
-		<password>psker@</password>
+		<password>pylatte</password>
 		<dbName>pylatte</dbName>
 	</sql>
+	
+	<!--
+	<sql db="mongodb">
+		<host>localhost</host>
+		<port>27017</port>
+	</sql>
+	-->
 	
 	<sqlMap id="contact">
 		<select id="sangkeun">select * from founder</select>
