@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-import formFile
+import Pylatte.WebServer.formFile as formFile
 class contactus:
 	pylToHtmlResult=""
 	sessionDic=dict()
@@ -140,7 +140,7 @@ class contactus:
 	
 	</head>""")
 
-		import DBMappingParser
+		import Pylatte.WebServer.DBMappingParser as pyLatteDBMappingParser
 
 		contact = DBMappingParser.pyLatteDBMappingParser()
 		result = contact.queryForList("contact.sangkeun")

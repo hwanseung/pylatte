@@ -79,7 +79,7 @@ class pylToPy:
         
     def translationPy(self):
         pypage = ["# -*- coding: utf-8 -*- \n"]
-        pypage.append('import formFile\n')
+        pypage.append('import Pylatte.WebServer.formFile as formFile\n')
         
         pypage.append('class ' +self.pyl_path.split('.')[0]+':\n')
         pypage.append('\t'+'pylToHtmlResult=""\n')
@@ -185,8 +185,8 @@ class pylToPy:
                 
                
                 #데이터베이스 정보 include 해주기!!
-                content=content.replace("latteDatabaseExt()","import DBMappingParser");
-                content=content.replace("latteDatabase()","import DBMappingParser;"+" pyLatteDBMappingParser=latteDB=DBMappingParser.pyLatteDBMappingParser(); latteDB=pyLatteDBMappingParser.makeToUseSimpleDB()");
+                content=content.replace("latteDatabaseExt()","import Pylatte.WebServer.DBMappingParser as pyLatteDBMappingParser");
+                content=content.replace("latteDatabase()","import Pylatte.WebServer.DBMappingParser as pyLatteDBMappingParser;"+" pyLatteDBMappingParser=latteDB=DBMappingParser.pyLatteDBMappingParser(); latteDB=pyLatteDBMappingParser.makeToUseSimpleDB()");
                 
                 #if(content.find("\n")!=-1):
                 #    print(content[:content.find("\n")])
