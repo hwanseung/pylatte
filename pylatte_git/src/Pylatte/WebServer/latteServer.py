@@ -7,11 +7,10 @@ import sys;
 sys.path.append('./topy')    #Path to save uploaded files.
 import os
 import http.server
-import methodGetGetParam     #To use GET parameter
-import methodGetPostParam    #To use POST parameter
-import requestHeaderInfo     #To use request Header information in pyl files.
-
-import sessionUtil
+import Pylatte.WebServer.methodGetGetParam as methodGetGetParam     #To use GET parameter
+import Pylatte.WebServer.methodGetPostParam as methodGetPostParam   #To use POST parameter
+import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
+import Pylatte.WebServer.sessionUtil as sessionUtil
 
 
 class latteServer(http.server.CGIHTTPRequestHandler):
@@ -114,9 +113,9 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             self.isPyl=False
             sessionKey=None
             pass
-        #except TypeError:
-        #    print('Error - Result of processing SQL is None. NoneType object is not subscriptable.')
-        #    pass
+        except TypeError:
+            print('Error - Result of processing SQL is None. NoneType object is not subscriptable.')
+            pass
         
         
         if(self.isPyl == True):

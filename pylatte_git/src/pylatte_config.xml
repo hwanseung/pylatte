@@ -87,7 +87,7 @@
 			<pylatte-name>contactus</pylatte-name>
 			<url-mapping>/contactus</url-mapping>
 		</pylatte-mapping>
-		
+		<!--
 		<pylatte>
 			<pylatte-name>contactus_mongodb</pylatte-name>
 			<pylatte-pyl>contactus_mongo.pyl</pylatte-pyl>
@@ -96,7 +96,7 @@
 			<pylatte-name>contactus_mongodb</pylatte-name>
 			<url-mapping>/contactus_mongodb</url-mapping>
 		</pylatte-mapping>
-		
+		-->
 		<pylatte>
 			<pylatte-name>favicon</pylatte-name>
 			<pylatte-pyl>faviconUpload.pyl</pylatte-pyl>
