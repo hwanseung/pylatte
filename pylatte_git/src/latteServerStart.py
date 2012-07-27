@@ -1,24 +1,11 @@
-import latteSocketServer
-import latteServer
+import Pylatte.WebServer.latteSocketServer as latteSocketServer
+import Pylatte.WebServer.latteServer as latteServer
 
 import threading
-
-def parseServerPort():
-    """
-    Bring a server port number from pylatte_config.xml
-    """
-    from xml.dom.minidom import parse
-    doc=parse("pylatte_config.xml")
-    tags = doc.getElementsByTagName("pylatte-server")
-    for item in tags:
-        for item1 in item.childNodes:
-            if(item1.nodeName=="port"):
-                return int(item1.firstChild.nodeValue)
-                
-    pass 
+import Pylatte.WebServer.configParser as configParser
 
 print("**start latteServer**\n")
-PORT = parseServerPort()
+PORT = configParser.parseServerPort()
 Handler = latteServer.latteServer
 httpd = latteSocketServer.latteSockeServer(("", PORT), Handler)
 

@@ -5,8 +5,9 @@ Created on 2011. 7. 19.
 '''
 import socket
 import socketserver
-import configParser
-import pylToPy
+import Pylatte.WebServer.configParser as configParser
+import Pylatte.WebServer.pylToPy as pylToPy
+
 
 class latteSockeServer(socketserver.TCPServer):
     
