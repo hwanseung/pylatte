@@ -7,10 +7,11 @@ import sys;
 sys.path.append('./topy')    #Path to save uploaded files.
 import os
 import http.server
-import Pylatte.WebServer.methodGetGetParam as methodGetGetParam     #To use GET parameter
-import Pylatte.WebServer.methodGetPostParam as methodGetPostParam   #To use POST parameter
-import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
-import Pylatte.WebServer.sessionUtil as sessionUtil
+import methodGetGetParam     #To use GET parameter
+import methodGetPostParam    #To use POST parameter
+import requestHeaderInfo     #To use request Header information in pyl files.
+
+import sessionUtil
 
 
 class latteServer(http.server.CGIHTTPRequestHandler):
