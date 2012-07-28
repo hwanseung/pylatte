@@ -245,10 +245,26 @@ class index:
 				<p>""")
 		self.pylToHtmlResult+=str("""Pylatte""")
 		self.pylToHtmlResult+=str("""</p>""")
-
-		pyl = "HTML" + " + " + "python"
-		self.pylToHtmlResult+=str(
-				pyl)
+		self.pylToHtmlResult+=str("""
+				&lt;$""")
+		self.pylToHtmlResult+=str("""
+				pyl""")
+		self.pylToHtmlResult+=str(""" =""")
+		self.pylToHtmlResult+=str(""" &quot;HTML&quot;""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" &quot;""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" &quot;""")
+		self.pylToHtmlResult+=str(""" +""")
+		self.pylToHtmlResult+=str(""" &quot;python&quot;""")
+		self.pylToHtmlResult+=str("""
+				$&gt;""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
+		self.pylToHtmlResult+=str("""
+				&lt;$=pyl$&gt;""")
+		self.pylToHtmlResult+=str("""
+				</p>""")
 		self.pylToHtmlResult+=str("""
 			</pre>""")
 		self.pylToHtmlResult+=str("""
@@ -269,11 +285,17 @@ class index:
 		self.pylToHtmlResult+=str("""
 			<pre class="brush: xml">""")
 		self.pylToHtmlResult+=str("""
-				Pylatte""")
+				<p>""")
+		self.pylToHtmlResult+=str("""Pylatte""")
+		self.pylToHtmlResult+=str("""</p>""")
+		self.pylToHtmlResult+=str("""
+				<p>""")
 		self.pylToHtmlResult+=str("""
 				HTML""")
 		self.pylToHtmlResult+=str(""" +""")
 		self.pylToHtmlResult+=str(""" python""")
+		self.pylToHtmlResult+=str("""
+				</p>""")
 		self.pylToHtmlResult+=str("""
 			</pre>""")
 		self.pylToHtmlResult+=str("""

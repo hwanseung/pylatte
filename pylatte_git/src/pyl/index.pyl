@@ -17,15 +17,19 @@
 			<p>The following code is a example <i>pyl</i> file.</p> 
 			<pre class="brush: xml">
 				<p>Pylatte</p>
-<$
-pyl = "HTML" + " + " + "python"
-$>
-				<$=pyl$>
+				&lt;$
+				pyl = "HTML" + " + " + "python"
+				$&gt;
+				<p>
+				&lt;$=pyl$&gt;
+				</p>
 			</pre>
 			<p>The pyl code is translated by Pylatte to HTML in the browser.</p>
 			<pre class="brush: xml">
-				Pylatte
+				<p>Pylatte</p>
+				<p>
 				HTML + python
+				</p>
 			</pre>
 			
 			<h2>Functions</h2>

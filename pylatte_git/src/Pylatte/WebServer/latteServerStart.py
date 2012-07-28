@@ -1,14 +1,14 @@
+import threading
 import Pylatte.WebServer.latteSocketServer as latteSocketServer
 import Pylatte.WebServer.latteServer as latteServer
-
-import threading
 import Pylatte.WebServer.configParser as configParser
+
 
 print("**start latteServer**\n")
 PORT = configParser.parseServerPort()
 Handler = latteServer.latteServer
 httpd = latteSocketServer.latteSockeServer(("", PORT), Handler)
-
+    
 def worker():
     """
     Start a server
@@ -17,11 +17,10 @@ def worker():
     httpd.serve_forever()
     pass;
 
-def my_service():
+def latte_service():
     """
     Checking a command from interective prompt.
     """
-    
     while True:
         commend_input = input("if you want to Shutdown Server, You have to type 'quit'")
         if commend_input == "quit":
@@ -30,14 +29,11 @@ def my_service():
             httpd.shutdown()
             
             break
-
     pass;
-        
-h = threading.Thread(name='httpd', target=worker)
-t = threading.Thread(name='timer', target=my_service)
 
-h.start()
-t.start()
-
-
-
+def start():
+    h = threading.Thread(name='httpd', target=worker())
+    t = threading.Thread(name='timer', target=latte_service())
+    h.start()
+    t.start()    
+    pass;

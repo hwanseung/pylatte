@@ -140,7 +140,7 @@ class contactus:
 	
 	</head>""")
 
-		import Pylatte.WebServer.DBMappingParser as pyLatteDBMappingParser
+		import Pylatte.Database.DBMappingParser as pyLatteDBMappingParser
 
 		contact = DBMappingParser.pyLatteDBMappingParser()
 		result = contact.queryForList("contact.sangkeun")
