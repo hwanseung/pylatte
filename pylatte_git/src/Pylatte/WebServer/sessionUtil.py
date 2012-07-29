@@ -1,9 +1,5 @@
 
 class session:
-    
-    ''' Pylatte session method @Heegeun Park  '''
-    
-    # Check whether the session is valid or not @Heegeun Park
     # After limit (default = 900 sec), the session becomes unvalid.
     def checkAvailableSession(self, key, limit=900):
         
@@ -35,6 +31,11 @@ class session:
     # Save file using generated key string @Heegeun Park
     # It is possible to write in a selected file.
     def setSessionData(self, key, content=None):
+        
+        import os
+        if os.path.isdir("session") == False:
+            os.mkdir("session")
+        
         f = open('session/' + key, mode='w', encoding='utf-8')
         if content != None:
             f.write(content)
@@ -43,7 +44,10 @@ class session:
     
     # Get session data using the session key.  @Hwanseung Lee
     def getSessionData(self,key):
-        
+        import os
+        if os.path.isdir("session") == False:
+            os.mkdir("session")
+            
         f = open('session/' + key, mode='r', encoding='utf-8')
         content=f.read();
         print (content)

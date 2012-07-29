@@ -231,6 +231,10 @@ class pylToPy:
     
     def outPy(self):
         # .py 로 저장하는데 저장할 때 원본 .pyl 파일명을 따름
+        import os
+        if os.path.isdir("topy") == False:
+            os.mkdir("topy")
+        
         with open("topy/"+self.pyl_path.split('.')[0]+"_pyl.py", mode='w', encoding='utf-8') as result_file:
             result_file.write(self.pystring)
 
