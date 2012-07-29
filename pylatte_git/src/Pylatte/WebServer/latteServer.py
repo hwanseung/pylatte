@@ -131,7 +131,6 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             except IndexError:
                 self.send_head(None)
                 
-            print(self.dynamicHtml)
             self.wfile.write(bytes(self.dynamicHtml, 'UTF-8'))
         else:
             f = self.send_head(None)
