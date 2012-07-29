@@ -14,18 +14,30 @@
 			<h2>Downloading Pylatte</h2>
 				<ul>
 					<li><h3>Released Code</h3></li>
-					<p>Latest stable release : <a href = "http://code.google.com/p/pylatte/downloads/list" target="_blank">ver 0.9.0</a></p>
-					<p>This is Released code for user who would like to develop website using pylatte.
+					<p>Latest stable release : <a href = "http://code.google.com/p/pylatte/downloads/list" target="_blank">here</a></p>
+					<p>This is a released version for people who would like to develop website using pylatte. This includes sample sample pages to help people develop website.
 			
 					<li><h3>Development code</h3></li>
-					<p>Latest development code : <a href = "http://code.google.com/p/pylatte/" target="_blank">ver 0.9.0</a></p>
+					<p>Latest development code : <a href = "http://code.google.com/p/pylatte/" target="_blank">here</a></p>
 					<o>This is Development code for developer who would like to join Pylatte development with us. Anyone who is interested in development of Pylatte is welcome. Join us now.
 				</ul>
+			<h2>Essential Modules</h2>
+				<ul>
+					<li><h3>PLY (Python Lex-Yacc)</h3></li>
+					<p>Latest stable release : <a href = "http://www.dabeaz.com/ply" target="_blank">ver 3.4</a></p>
+					<p>This module is essential to execute Pylatte.</p>
+				</ul>
+				
 			<h2>Extra Modules</h2>
 				<ul>
 					<li><h3>Mysqldb for python3</h3></li>
 					<p>Latest stable release : <a href = "https://github.com/davispuh/MySQL-for-Python-3" target="_blank">ver 3.6.2</a></p>
-					<p>Some people who are very kind alreay made mysqldb module for python3. This module is absoluately essential to use Pylatte with Mysql. If you need to use DB on your website based on Pylatte, you must download.</p>
+					<p>Some people who are very kind alreay made mysqldb module for python3. This module is absoluately essential to use Pylatte with Mysql. If you need to use mysql on your website based on Pylatte, you must download.</p>
+				</ul>
+				<ul>
+					<li><h3>pyMongo</h3></li>
+					<p>Latest stable release : <a href = "https://github.com/mongodb/mongo-python-driver" target="_blank">here</a></p>
+					<p>The PyMongo distribution contains tools for interacting with MongoDB database from Python. This module is absoluately essential to use Pylatte with MongoDB. If you need to use MongoDB on your website based on Pylatte, you must download.</p>
 				</ul>
 
 			</div><!--/content-primary -->

@@ -71,7 +71,38 @@
 					>>import MySQLdb 
 				</pre>
 				<p>If import is successful without any error message, congratulation! it is complete.</p>
+			<h2>MongoDB modules for python3</h2>
+				<p>It is required to install MongoDB module for python3. It makes using database with MongoDB on python3.x possible.</p>
 				
+				<h3>Install MongoDB</h3>
+				<pre class="brush: bash">
+					$sudo apt-get install mongodb
+				</pre>
+				
+				<h3>Install Mongodb for Python3</h3>
+				<p>Download here : <a href="https://github.com/mongodb/mongo-python-driver">https://github.com/mongodb/mongo-python-driver</a></p>
+				<pre class="brush: bash">
+					$tar -xzvf mongo-python-driver-py3k.tar.gz
+					$cd mongo-python-driver-py3k
+				</pre>
+			
+				<p>After configuration, execute following command at path mongo-python-driver-py3k is installed.</p>
+				<pre class="brush: bash">
+					$sudo python3 setup.py build
+					$sudo python3 setup.py install
+				</pre>
+				
+				<h3>Check if the installation is complete or not</h3>	
+				<p>Execute python3.x interpreter</p>			
+				<pre class="brush: bash">
+					$python3
+				</pre>
+				<p>Then, import pymongo</p>
+				<pre class="brush: bash">
+					>>import pymongo
+				</pre>
+				<p>If import is successful without any error message, congratulation! it is complete.</p>
+			</div>
 			</div><!--/content-primary -->
 
 			<div class="content-secondary">
