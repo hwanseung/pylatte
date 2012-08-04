@@ -1,3 +1,8 @@
+'''
+Created on 2011. 6. 4.
+
+@author: HwanSeung Lee(rucifer1217@gmail.com)
+'''
 import threading
 import Pylatte.WebServer.latteSocketServer as latteSocketServer
 import Pylatte.WebServer.latteServer as latteServer

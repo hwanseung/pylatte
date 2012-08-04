@@ -1,3 +1,8 @@
+'''
+Created on 2011. 8. 4.
+
+@author: HwanSeung Lee(rucifer1217@gmail.com)
+'''
 from xml.dom.minidom import parse
 
 class pyLatteConfigPaser():

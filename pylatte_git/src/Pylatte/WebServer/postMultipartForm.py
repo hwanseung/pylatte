@@ -1,7 +1,7 @@
 '''
 Created on 2011. 7. 24.
 
-@author: rucifer
+@author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
 class postMultipartForm:
     """

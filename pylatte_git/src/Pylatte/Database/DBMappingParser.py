@@ -1,3 +1,9 @@
+'''
+Created on 2011. 9. 1.
+
+@author: Sangkeun Park(pskalyber@gmail.com)
+'''
+
 from xml.dom.minidom import parse
 import MySQLdb
 import pymongo

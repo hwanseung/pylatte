@@ -1,3 +1,9 @@
+'''
+Created on 2011. 6. 4.
+
+@author: Heegeun Park(sirini@gmail.com)
+@modifier : HwanSeung Lee(rucifer1217@gmail.com)
+'''
 
 class session:
     # After limit (default = 900 sec), the session becomes unvalid.

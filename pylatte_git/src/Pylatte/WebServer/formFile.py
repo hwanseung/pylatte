@@ -1,7 +1,7 @@
 '''
 Created on 2011. 10. 7.
 
-@author: pylatte
+@author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
 
 import shutil

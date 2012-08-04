@@ -1,7 +1,7 @@
 '''
 Created on 2011. 7. 16.
-dd
-@author: rucifer
+
+@author: Hwanseung Lee(rucifer1217@gmail.com)
 '''
 import sys;
 sys.path.append('./topy')    #Path to save uploaded files.

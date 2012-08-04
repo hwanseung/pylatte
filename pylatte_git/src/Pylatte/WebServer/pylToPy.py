@@ -1,3 +1,9 @@
+'''
+Created on 2011. 12. 9.
+
+@author: HwanSeung Lee(rucifer1217@gmail.com)
+'''
+
 import ply.lex as lex
 import re#정규표현식 모듈
 import math

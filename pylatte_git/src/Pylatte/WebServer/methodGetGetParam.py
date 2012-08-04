@@ -1,7 +1,7 @@
 '''
 Created on 2011. 7. 24.
 
-@author: rucifer
+@author: Hwanseung Lee(rucifer1217@gmail.com)
 '''
 
 class methodGetGetParam:
