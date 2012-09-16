@@ -92,7 +92,8 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             sessionDic = sessionutil.sessionDataTodict(sessionutil,sessionData)
             
             #print(urlTest_pyl)
-            pyl = __import__(urlTest_pyl)
+            folders = ['./topy']
+            pyl = __import__(urlTest_pyl,fromlist=[folders])
             print("Got started to process dynamic Page")
             module=getattr(pyl, moduleName)(param.getParam(),self.pyFile,sessionDic,headerInfo.getHeaderInfo(),self.databaseInfo)
             #print("processing DynamicPage End")
@@ -173,7 +174,8 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             
             
             #print(urlTest_pyl)
-            pyl = __import__(urlTest_pyl)#import py files which is generated from pyl files.
+            folders = ['./topy']
+            pyl = __import__(urlTest_pyl,fromlist=[folders])#import py files which is generated from pyl files.
             
             #Checking a cookie value to know whether session exists or not.
             print("Cookie:"+headerInfo.getHeaderInfo()["Cookie"])
