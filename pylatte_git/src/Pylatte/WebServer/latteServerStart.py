@@ -37,8 +37,8 @@ def latte_service():
     pass;
 
 def start():
-    t = threading.Thread(name='timer', target=latte_service())
     h = threading.Thread(name='httpd', target=worker())
+    t = threading.Thread(name='timer', target=latte_service())
     h.start()
     t.start()    
     pass;
