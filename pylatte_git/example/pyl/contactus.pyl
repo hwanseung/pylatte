@@ -2,7 +2,7 @@
 latteDatabaseExt()
 $>
 <$
-contact = DBMappingParser.pyLatteDBMappingParser()
+contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
 result = contact.queryForList("contact.sangkeun")
 $>
 
