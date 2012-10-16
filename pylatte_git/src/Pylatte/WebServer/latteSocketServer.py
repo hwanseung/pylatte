@@ -44,7 +44,8 @@ class latteSockeServer(socketserver.TCPServer):
         print("end to pylToPy\n")
         
         print("""                        
-                         ,,                               
+                                                      
+                     ,,                               
                    `7MM           mm     mm           
                      MM           MM     MM           
 `7MMpdMAo.`7M'   `MF'MM   ,6"Yb.mmMMmm mmMMmm .gP"Ya  
@@ -53,7 +54,8 @@ class latteSockeServer(socketserver.TCPServer):
   MM   ,AP    VVV    MM  8M   MM  MM     MM  YM.    , 
   MMbmmd'     ,V   .JMML.`Moo9^Yo.`Mbmo  `Mbmo`Mbmmd' 
   MM         ,V                                       
-.JMML.    OOb" """)
+.JMML.    OOb"                                        
+""")
         
         th = service.service()
         th.init(self)
