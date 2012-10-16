@@ -43,14 +43,13 @@ class latteSockeServer(socketserver.TCPServer):
             p.outPy()
         print("end to pylToPy\n")
         
-        print("""                        
-                                                      
+        print("""                            
                      ,,                               
                    `7MM           mm     mm           
                      MM           MM     MM           
 `7MMpdMAo.`7M'   `MF'MM   ,6"Yb.mmMMmm mmMMmm .gP"Ya  
   MM   `Wb  VA   ,V  MM  8)   MM  MM     MM  ,M'   Yb 
-  MM    M8   VA ,V   MM   ,pm9MM  MM     MM  8M"""""" 
+  MM    M8   VA ,V   MM   ,pm9MM  MM     MM  8M\"\"\"\"\"\" 
   MM   ,AP    VVV    MM  8M   MM  MM     MM  YM.    , 
   MMbmmd'     ,V   .JMML.`Moo9^Yo.`Mbmo  `Mbmo`Mbmmd' 
   MM         ,V                                       
