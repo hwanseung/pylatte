@@ -44,7 +44,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
         latteSession=""
         headerInfo=requestHeaderInfo.requestHeaderInfo(self)
         
-        print(self.path)
+        print("request url :" +self.path)
 
         #get GET parameters value.
         param=methodGetGetParam.methodGetGetParam(self.path)
@@ -139,7 +139,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             if f:
                 self.copyfile(f, self.wfile)
                 f.close()
-
+        print("\n")
         pass
        
     def do_POST(self):
@@ -255,6 +255,8 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             if f:
                 self.copyfile(f, self.wfile)
                 f.close()
+                
+        print("\n")
         pass
         
             
@@ -285,7 +287,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             return
         else:
             path = self.translate_path(self.path)
-            print(path)
+            print("static file response: "+path)
             
             f = None
             if os.path.isdir(path):
