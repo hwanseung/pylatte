@@ -11,14 +11,14 @@ import Pylatte.WebServer.methodGetGetParam as methodGetGetParam      #To use GET
 import Pylatte.WebServer.methodGetPostParam as methodGetPostParam   #To use POST parameter
 import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
 import Pylatte.WebServer.sessionUtil as sessionUtil
-
+import imp
 
 class latteServer(http.server.CGIHTTPRequestHandler):
     
     excuteDic=tuple()
     urlMappingDic=tuple()
     databaseInfo=tuple()
-    server_version="pylatte HttpServer 1.0v"
+    server_version="pylatte Server v0.9.8.1"
     
     isPyl=False
     dynamicHtml=""
@@ -94,6 +94,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             #print(urlTest_pyl)
             folders = ['./topy']
             pyl = __import__(urlTest_pyl,fromlist=[folders])
+            imp.reload(pyl)
             print("Got started to process dynamic Page")
             module=getattr(pyl, moduleName)(param.getParam(),self.pyFile,sessionDic,headerInfo.getHeaderInfo(),self.databaseInfo)
             #print("processing DynamicPage End")
@@ -176,7 +177,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             #print(urlTest_pyl)
             folders = ['./topy']
             pyl = __import__(urlTest_pyl,fromlist=[folders])#import py files which is generated from pyl files.
-            
+            imp.reload(pyl)
             #Checking a cookie value to know whether session exists or not.
             print("Cookie:"+headerInfo.getHeaderInfo()["Cookie"])
             

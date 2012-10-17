@@ -23,7 +23,30 @@
 			<p>Current version is python3.2. so it is up to you if you install python3 or python3.2. After installing, check out whether it is installed or not.</p>
 	
 			<h2>Pylatte</h2>
+				<p>first, you must download pylatte.</p>
+				<h3>install Pylatte</h3>
+				<p>you can download install file at <a href="http://code.google.com/p/pylatte/downloads/list">http://code.google.com/p/pylatte/downloads/list</a> and unzip the file and install.</p>
+				<pre class="brush: bash">
+					$sudo python3 setup.py install
+				</pre>
+				<h3>Check if the installation is complete or not</h3>	
+				<p>Execute python3.x interpreter</p>			
+				<pre class="brush: bash">
+					$python3
+				</pre>
+				<p>Then, import Pylatte</p>
+				<pre class="brush: bash">
+					>>import Pylatte
+				</pre>
+				<p>If import is successful without any error message, congratulation! it is complete.</p>
 			
+			<h2>PLY(Python Lex-Yacc)</h2>
+				<p>It is required to execute pylatte. It makes converting PYL Code to Python code</p>
+				<p>you can download install file at <a href="http://www.dabeaz.com/ply/index.html">http://www.dabeaz.com/ply/index.html</a> and unzip the file and install.</p>
+				<h3>Install PYL</h3>
+				<pre class="brush: bash">
+					$sudo python3 setup.py install
+				</pre>
 			<h2>MySQL modules for python3</h2>
 				<p>It is required to install MySQL module for python3. It makes using database with MySQL on python3.x possible.</p>
 				
@@ -71,6 +94,8 @@
 					>>import MySQLdb 
 				</pre>
 				<p>If import is successful without any error message, congratulation! it is complete.</p>
+				
+				
 			<h2>MongoDB modules for python3</h2>
 				<p>It is required to install MongoDB module for python3. It makes using database with MongoDB on python3.x possible.</p>
 				
@@ -102,7 +127,6 @@
 					>>import pymongo
 				</pre>
 				<p>If import is successful without any error message, congratulation! it is complete.</p>
-			</div>
 			</div><!--/content-primary -->
 
 			<div class="content-secondary">

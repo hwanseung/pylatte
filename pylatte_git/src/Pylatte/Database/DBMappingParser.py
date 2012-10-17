@@ -5,8 +5,6 @@ Created on 2011. 9. 1.
 '''
 
 from xml.dom.minidom import parse
-import MySQLdb
-import pymongo
 
 class pyLatteDBMappingParser:
 
@@ -64,6 +62,7 @@ class pyLatteDBMappingParser:
                         if(item1.nodeName=="dbName"):
                             #print(item1.firstChild.nodeValue);
                             info["dbName"]=item1.firstChild.nodeValue
+                    import MySQLdb
                     self.latteDB=MySQLdb.connect(host=info["host"],user=info["user"],passwd=info["password"],db=info["dbName"])
                 elif str.lower(item.getAttribute('db')) == 'mongodb':
                     info = dict()
@@ -74,6 +73,7 @@ class pyLatteDBMappingParser:
                         if(item1.nodeName=="port"):
                             #print(item1.firstChild.nodeValue)
                             info["port"]=item1.firstChild.nodeValue
+                    import pymongo
                     self.latteDB=pymongo.Connection(info["host"], int(info["port"]))
                     
         except AttributeError:

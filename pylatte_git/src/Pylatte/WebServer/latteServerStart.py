@@ -20,11 +20,14 @@ def worker():
     """
     print ("serving at port", PORT)
     httpd.serve_forever()
+    
     pass;
 
 
 def start():
     h = threading.Thread(name='httpd', target=worker())
+    h.start()
+    
+    
 
-    h.start()    
     pass;

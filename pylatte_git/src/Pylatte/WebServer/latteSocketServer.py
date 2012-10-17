@@ -9,13 +9,36 @@ import Pylatte.WebServer.configParser as configParser
 import Pylatte.WebServer.pylToPy as pylToPy
 import Pylatte.WebServer.service as service
 
+pylatte_AsciiArt="""
+=============================================================                            
+                     ,,                               
+                   `7MM           mm     mm           
+                     MM           MM     MM           
+`7MMpdMAo.`7M'   `MF'MM   ,6"Yb.mmMMmm mmMMmm .gP"Ya  
+  MM   `Wb  VA   ,V  MM  8)   MM  MM     MM  ,M'   Yb 
+  MM    M8   VA ,V   MM   ,pm9MM  MM     MM  8M\"\"\"\"\"\" 
+  MM   ,AP    VVV    MM  8M   MM  MM     MM  YM.    , 
+  MMbmmd'     ,V   .JMML.`Moo9^Yo.`Mbmo  `Mbmo`Mbmmd' 
+  MM         ,V                                       
+.JMML.    OOb"                                        
+============================================================="""
+
 
 class latteSockeServer(socketserver.TCPServer):
     def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
         socketserver.TCPServer.__init__(self, server_address, RequestHandlerClass, bind_and_activate=bind_and_activate)
         
-        self.sessionFileRemove()
+        self.restart_server()
         
+        th = service.service()
+        th.init(self,RequestHandlerClass.server_version)
+        th.start()
+        
+        pass
+    
+    def restart_server(self):
+        self.sessionFileRemove()
+        self.topyFileRemove()
         print("start to parser Config")
         parser=configParser.pyLatteConfigPaser()
         
@@ -42,24 +65,7 @@ class latteSockeServer(socketserver.TCPServer):
             p=pylToPy.pylToPy(item,filterStr)
             p.outPy()
         print("end to pylToPy\n")
-        
-        print("""                            
-                     ,,                               
-                   `7MM           mm     mm           
-                     MM           MM     MM           
-`7MMpdMAo.`7M'   `MF'MM   ,6"Yb.mmMMmm mmMMmm .gP"Ya  
-  MM   `Wb  VA   ,V  MM  8)   MM  MM     MM  ,M'   Yb 
-  MM    M8   VA ,V   MM   ,pm9MM  MM     MM  8M\"\"\"\"\"\" 
-  MM   ,AP    VVV    MM  8M   MM  MM     MM  YM.    , 
-  MMbmmd'     ,V   .JMML.`Moo9^Yo.`Mbmo  `Mbmo`Mbmmd' 
-  MM         ,V                                       
-.JMML.    OOb"                                        
-""")
-        
-        th = service.service()
-        th.init(self)
-        th.start()
-        
+        print(pylatte_AsciiArt)
         pass
     
     def server_bind(self):
@@ -71,9 +77,9 @@ class latteSockeServer(socketserver.TCPServer):
     def shutdown(self):
         socketserver.TCPServer.shutdown(self)
         self.sessionFileRemove()
+        self.topyFileRemove()
         self.socket.close()
-        del self.socket
-        
+        del self.socket        
         pass
     
     def sessionFileRemove(self):
@@ -87,6 +93,24 @@ class latteSockeServer(socketserver.TCPServer):
                     os.remove(os.path.join(dirpath, each_file))
         
         print("session File Remove\n")
+        pass
+    
+    def topyFileRemove(self):
+        import os
+        
+        # Delete the files first.
+        
+        for dirpath, dirnames, filenames in os.walk(os.getcwd()+"/topy"):
+            for each_file in filenames:
+                if os.path.exists(os.path.join(dirpath, each_file)):
+                    os.remove(os.path.join(dirpath, each_file))
+                    
+        for dirpath, dirnames, filenames in os.walk(os.getcwd()+"/topy/__pycache__"):
+            for each_file in filenames:
+                if os.path.exists(os.path.join(dirpath, each_file)):
+                    os.remove(os.path.join(dirpath, each_file))
+        
+        print("topy File Remove\n")
         pass
     
             
