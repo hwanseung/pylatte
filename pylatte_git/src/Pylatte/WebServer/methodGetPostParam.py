@@ -7,6 +7,7 @@ class methodGetPostParam:
     dic = dict()
 
     def __init__(self, post):
+        self.dic=dict()
         from urllib.parse import unquote
         post=post.replace("+", " ")
         post=unquote(post, 'utf-8', 'replace')
@@ -17,7 +18,7 @@ class methodGetPostParam:
             for param in params:
                 item = param.split('=')
                 self.dic[item[0]]=item[1]
-            
+            print("param:")
             print(self.dic)
         
         except IndexError:

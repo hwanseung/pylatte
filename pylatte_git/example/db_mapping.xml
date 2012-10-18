@@ -17,13 +17,14 @@
 	-->
 	
 	<sqlMap id="contact">
-		<select id="sangkeun">select * from founder</select>
-		<select id="select2">select * from test</select>
-		<insert id="insert">insert into test values ('Myungbak', 60)</insert>
-		<insert id="insert2">insert into test values ($name$, 32)</insert>
-		<update id="update">UPDATE test SET name = 'Jaesuk' where name = 'Taehee'</update>
-		<update id="update2">UPDATE test SET age = $age$ where name = 'heegeun'</update>
-		<delete id="delete">DELETE FROM test where name = 'Sangkeun'</delete>
-		<delete id="delete2">DELETE FROM test where age = $age$</delete>
+		<select id="founder">select * from founder</select>
+		<select id="founder1">select * from founder1</select>
+	</sqlMap>
+	
+	<sqlMap id="demo">
+		<select id="select">SELECT * FROM demo</select>
+		<insert id="insert">insert into demo (name) values ($name$);</insert>
+		<update id="update">UPDATE demo SET name = $name$ WHERE uid = $uid$</update>
+		<delete id="delete">DELETE FROM demo WHERE uid = $uid$</delete>
 	</sqlMap>
 </database>

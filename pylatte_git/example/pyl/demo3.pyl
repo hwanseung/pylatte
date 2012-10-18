@@ -1,0 +1,84 @@
+<body>
+	
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="b">
+		<h1>Pylatte Official Webpage</h1>
+		<a href="../../" target="_self" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			<div class="content-primary">
+			<h1>Demo3</h1>
+			<h2>SQL Test</h2>
+<$
+latteDatabaseExt()
+$>
+<$
+contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
+result = contact.queryForList("demo.select")
+$>
+<form id="fileForm" data-ajax="false" class="ui-body ui-body-a ui-corner-all" method="post" action="/sql">
+<fieldset data-role="controlgroup">
+	<legend>select * from test</legend>
+					
+<$
+for item in result:
+$>
+<input type='radio' name='uid' id='radio-choice-<$=item["uid"]$>' value='<$=item["uid"]$>' />
+<label for='radio-choice-<$=item["uid"]$>'><$=item["uid"]$> : <$=item["name"]$></label>
+<$
+	pass
+$>
+</fieldset>
+
+<div data-role="fieldcontain">
+    <label for="name">name:</label>
+    <input type="text" name="name" id="name" value=""  />
+</div>
+<label for="select-choice-min" class="select">Shipping method:</label>
+<select name="method" id="select-choice-min" data-mini="true">
+   <option value="insert">insert</option>
+   <option value="update">update</option>
+   <option value="delete">delete</option>
+</select> 
+<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
+</from>
+			
+			</div><!--/content-primary -->
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+							<li data-role="list-divider">Menu</li>
+							<li><a target="_self" href="../index">About</a></li>
+							<li><a target="_self" href="../download">Download</a></li>
+							<li><a target="_self" href="../install">Install</a></li>
+							<li><a target="_self" href="../tutorial">Tutorial</a></li>
+							<li><a target="_self" href="../documentation">Documentation</a></li>
+							<li><a target="_self" href="../faq">F A Q</a></li>
+							<li><a target="_self" href="../contactus">Contact us</a></li>
+							<li><a target="_self" href="../demo1">Demo1</a></li>
+							<li><a target="_self" href="../demo2">Demo2</a></li>
+							<li data-theme="b"><a target="_self" href="../demo3">Demo3</a></li>
+							<img src="../pyl/image/pylatte.png"></img>
+						</ul>
+				</div>
+			</div>
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="b">
+				<h4>&copy; 2011 The Pylatte Project</h4>
+		</div>
+
+		</div><!-- /page -->
+
+	</body>
+</html>
+
+

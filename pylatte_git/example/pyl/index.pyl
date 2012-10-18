@@ -18,7 +18,7 @@
 			<pre class="brush: xml">
 				<p>Pylatte</p>
 				&lt;$
-				pyl = "HTML" + " + " + "python"
+				pyl = \"HTML\" + \" + \" + \"python\"
 				$&gt;
 				<p>
 				&lt;$=pyl$&gt;
@@ -74,9 +74,11 @@
 							<li><a target="_self" href="../install">Install</a></li>
 							<li><a target="_self" href="../tutorial">Tutorial</a></li>
 							<li><a target="_self" href="../documentation">Documentation</a></li>
-							<li><a target="_self" href="../comment">Comment</a></li>
 							<li><a target="_self" href="../faq">F A Q</a></li>
 							<li><a target="_self" href="../contactus">Contact us</a></li>
+							<li><a target="_self" href="../demo1">Demo1</a></li>
+							<li><a target="_self" href="../demo2">Demo2</a></li>
+							<li><a target="_self" href="../demo3">Demo3</a></li>
 							<img src="../pyl/image/pylatte.png"></img>
 						</ul>
 				</div>

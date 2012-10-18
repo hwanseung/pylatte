@@ -8,6 +8,7 @@ class methodGetGetParam:
     dic = dict()
 
     def __init__(self,path):
+        self.dic=dict()
         from urllib.parse import unquote
         path=path.replace("+", " ")
         path=unquote(path, 'utf-8', 'replace')

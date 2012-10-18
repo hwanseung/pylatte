@@ -18,7 +18,7 @@ class latteServer(http.server.CGIHTTPRequestHandler):
     excuteDic=tuple()
     urlMappingDic=tuple()
     databaseInfo=tuple()
-    server_version="pylatte Server v0.9.8.1"
+    server_version="pylatte Server v0.9.8.1.5"
     
     isPyl=False
     dynamicHtml=""

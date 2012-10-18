@@ -1,0 +1,34 @@
+<$
+latteDatabaseExt()
+$>
+<$
+test = pyLatteDBMappingParser.pyLatteDBMappingParser()
+
+$>
+
+<$
+if param=={} :
+	pass
+elif param['method']=="insert":
+	value = dict();
+	value["name"]= param['name'];
+	test.queryForList("demo.insert",value)
+	pass
+elif param['method']=="update":
+	value = dict();
+	value["uid"]= param['uid'];
+	value["name"]= param['name'];
+	test.queryForList("demo.update",value)
+	pass
+elif param['method']=="delete":
+	value = dict();
+	value["uid"]= param['uid'];
+	test.queryForList("demo.delete",value)
+	pass
+$>
+
+
+<script type="text/javascript">
+	alert("sql suecess!!");
+	location.href='/demo3';
+</script>

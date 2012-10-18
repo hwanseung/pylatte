@@ -34,44 +34,6 @@
 					<li>Not frequently asked yet.</li>		
 				</ul>
 				
-				<h2>GET/POST Test</h2>
-				<form name="form" method="post" action="../faq">
-					<p>
-						<input type="text" name="name">
-						<input type="submit" value="CLICK">
-					</p>
-				</form>
-				
-<$
-if param=={}:
-	pass	
-else:
-	session['name']=param['name']
-$>
-	<p>Get or Post : <$=param['name']$></p>
-<$
-$>
-<$
-if session=={}:
-	pass	
-else:
-$>
-	<p>Session : <$=session['name']$></p>
-<$
-	pass
-$>		
-	<h3>HeaderInfo['path']</h3>
-	<p><$=headerInfo['path']$></p>
-	<h3>HeaderInfo['Accept']</h3>
-	<p><$=headerInfo['Accept']$></p>
-	<h3>HeaderInfo['Accept-Charset']</h3>
-	<p><$=headerInfo['Accept-Charset']$></p>
-	<div>
-		<form id="fileForm" data-ajax="false" class="ui-body ui-body-a ui-corner-all" method="post" enctype="multipart/form-data" action="http://127.0.0.1:8000/faviconUpload">
-			<input type="file" name="file1"/>
-			<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
-		</form>
-	</div>
 				</div><!--/content-primary -->
 	
 				<div class="content-secondary">
@@ -87,9 +49,9 @@ $>
 								<li><a target="_self" href="../install">Install</a></li>
 								<li><a target="_self" href="../tutorial">Tutorial</a></li>
 								<li><a target="_self" href="../documentation">Documentation</a></li>
-								<li><a target="_self" href="../comment">Comment</a></li>
 								<li data-theme="b"><a target="_self" href="../faq">F A Q</a></li>
 								<li><a target="_self" href="../contactus">Contact us</a></li>
+								<li><a target="_self" href="../demo1">Demo1</a></li>
 								<img src="../pyl/image/pylatte.png"></img>
 							</ul>
 					</div>

@@ -56,7 +56,7 @@ class session:
             
         f = open('session/' + key, mode='r', encoding='utf-8')
         content=f.read();
-        print (content)
+        print ("session content : "+content)
         
         return content    
         

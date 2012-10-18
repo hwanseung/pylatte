@@ -1,9 +1,9 @@
 <$
 pyformFile=formFile.formFile(pyFile)
-pyformFile.moveUploadFile("file1","pyl","favicon.ico")
+pyformFile.moveUploadFile("file1","image","log.png")
 $>
 
 <script type="text/javascript">
 	alert("upload success!!");
-	history.back();
+	location.href='/demo2';
 </script>

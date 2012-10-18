@@ -182,8 +182,8 @@
 			<h2>Server Information</h2>
 				<p>It is possible to get HTTP header information that you required to Pylatte web server. It is also saved as dictionary type. Refer to following code to see how to use it in pyl.</p>
 				<pre class="brush: xml">
-					<\$=headerInfo["User-Agent"]$>
-					<\$=headerInfo["Accept-Encoding"]$>
+					&lt;$=headerInfo["User-Agent"]$&gt;
+					&lt;$=headerInfo["Accept-Encoding"]$&gt;
 				</pre>
 				<p>There are planty of header information. Pylatte support most common header information.</p>
 			</div><!--/content-primary -->
@@ -201,9 +201,11 @@
 							<li><a target="_self" href="../install">Install</a></li>
 							<li data-theme="b"><a target="_self" href="../tutorial">Tutorial</a></li>
 							<li><a target="_self" href="../documentation">Documentation</a></li>
-							<li><a target="_self" href="../comment">Comment</a></li>
 							<li><a target="_self" href="../faq">F A Q</a></li>
 							<li><a target="_self" href="../contactus">Contact us</a></li>
+							<li><a target="_self" href="../demo1">Demo1</a></li>
+							<li><a target="_self" href="../demo2">Demo2</a></li>
+							<li><a target="_self" href="../demo3">Demo3</a></li>
 							<img src="../pyl/image/pylatte.png"></img>
 						</ul>
 				</div>

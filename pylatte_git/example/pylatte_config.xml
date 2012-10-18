@@ -61,14 +61,7 @@
 			<url-mapping>/documentation</url-mapping>
 		</pylatte-mapping>
 		
-		<pylatte>
-			<pylatte-name>comment</pylatte-name>
-			<pylatte-pyl>comment.pyl</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>comment</pylatte-name>
-			<url-mapping>/comment</url-mapping>
-		</pylatte-mapping>	
+		
 		
 		<pylatte>
 			<pylatte-name>faq</pylatte-name>
@@ -106,6 +99,40 @@
 			<url-mapping>/faviconUpload</url-mapping>
 		</pylatte-mapping>	
 		
+		<pylatte>
+			<pylatte-name>demo1</pylatte-name>
+			<pylatte-pyl>demo1.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>demo1</pylatte-name>
+			<url-mapping>/demo1</url-mapping>
+		</pylatte-mapping>	
+		<pylatte>
+			<pylatte-name>demo2</pylatte-name>
+			<pylatte-pyl>demo2.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>demo2</pylatte-name>
+			<url-mapping>/demo2</url-mapping>
+		</pylatte-mapping>	
+		<pylatte>
+			<pylatte-name>demo3</pylatte-name>
+			<pylatte-pyl>demo3.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>demo3</pylatte-name>
+			<url-mapping>/demo3</url-mapping>
+		</pylatte-mapping>	
+		
+		<pylatte>
+			<pylatte-name>sql</pylatte-name>
+			<pylatte-pyl>sql.pyl</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>sql</pylatte-name>
+			<url-mapping>/sql</url-mapping>
+		</pylatte-mapping>	
+		
 	</latteUrl>
 	
 	<latteFilter>
@@ -124,6 +151,9 @@
 			<filter-url>comment.pyl</filter-url>
 			<filter-url>faq.pyl</filter-url>
 			<filter-url>contactus.pyl</filter-url>
+			<filter-url>demo1.pyl</filter-url>
+			<filter-url>demo2.pyl</filter-url>
+			<filter-url>demo3.pyl</filter-url>
 		</filter-mapping>
 		
 	</latteFilter>

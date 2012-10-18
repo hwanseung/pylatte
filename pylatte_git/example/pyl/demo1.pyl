@@ -1,0 +1,103 @@
+
+<body>
+	
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="b">
+		<h1>Pylatte Official Webpage</h1>
+		<a href="../../" target="_self" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			<div class="content-primary">
+			<h1>Demo1</h1>
+			<h2>GET/POST Test</h2>
+			<h3>GET request 테스트</h3>
+			<p>get 요청은 url뒤에 ?name=변수를 붙여서 확인하도록 함.</p>
+			<h3>POST request 테스트</h3>
+			<form name="form" method="post" action="../demo1">
+				<p>
+					<input type="text" name="name">
+					<input type="submit" value="CLICK">
+				</p>
+			</form>
+			<p>Get or Post :
+<$
+if param=={} :
+	pass
+$>
+<$
+elif "name" in param:
+$>
+	<$=param['name']$></p>
+<$
+	pass
+$>
+</p>
+			<h2>Session Test</h2>
+			<form name="form" method="post" action="../demo1">
+				<p>
+					<input type="text" name="sessionValue">
+					<input type="submit" value="CLICK">
+				</p>
+			</form>
+			<p>Sessio Value :
+<$
+if param=={} :
+	pass
+$>
+<$
+elif "sessionValue" in param:
+	session['sessionValue']=param['sessionValue']
+	pass
+$>
+<$
+if "sessionValue" in session:
+$>
+	<$=session['sessionValue']$></p>
+<$
+	pass
+$>
+</p>
+			<h3>HeaderInfo['path']</h3>
+			<p><$=headerInfo['path']$></p>
+			<h3>HeaderInfo['Accept']</h3>
+			<p><$=headerInfo['Accept']$></p>
+			
+			</div><!--/content-primary -->
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+							<li data-role="list-divider">Menu</li>
+							<li><a target="_self" href="../index">About</a></li>
+							<li><a target="_self" href="../download">Download</a></li>
+							<li><a target="_self" href="../install">Install</a></li>
+							<li><a target="_self" href="../tutorial">Tutorial</a></li>
+							<li><a target="_self" href="../documentation">Documentation</a></li>
+							<li><a target="_self" href="../faq">F A Q</a></li>
+							<li><a target="_self" href="../contactus">Contact us</a></li>
+							<li data-theme="b"><a target="_self" href="../demo1">Demo1</a></li>
+							<li><a target="_self" href="../demo2">Demo2</a></li>
+							<li><a target="_self" href="../demo3">Demo3</a></li>
+							<img src="../pyl/image/pylatte.png"></img>
+						</ul>
+				</div>
+			</div>
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="b">
+				<h4>&copy; 2011 The Pylatte Project</h4>
+		</div>
+
+		</div><!-- /page -->
+
+	</body>
+</html>
+
+

@@ -175,20 +175,34 @@ class pylToPy:
                         #print("count", localTapCount, localSpaceCount)
                         
                         forList =re.findall(r"for.+:",content);
+                        print("for len :" +str(len(forList)))
                         whileList =re.findall(r"while.+:",content);
+                        print("while len :" +str(len(whileList)))
                         ifList =re.findall(r"if.+:",content);
+                        print("if len :" +str(len(ifList)))
                         elifList =re.findall(r"elif.+:",content);
+                        print("elif len :" +str(len(elifList)))
                         elseList =re.findall(r"else:",content);
+                        print("else len :" +str(len(elseList)))
                         passList =re.findall(r"pass",content);
-
-                        localLoopCount=(len(forList)+len(whileList)+len(ifList)+len(elifList)+len(elseList)-len(passList));
+                        print("pass len :" +str(len(passList)))
+                            
+                        if not len(elifList)==0: #elif와 if의 중복 검출
+                            print("elif와 if중복 검출로 인한 중s 제거")
+                            localLoopCount=(len(forList)+len(whileList)+(len(ifList)-len(elifList))+len(elifList)+len(elseList)-len(passList));
+                            pass
+                        else:
+                            localLoopCount=(len(forList)+len(whileList)+len(ifList)+len(elifList)+len(elseList)-len(passList));
                         
                         count=localTapCount+(math.ceil(localSpaceCount/4))+localLoopCount
                         self.blank=count;
+                        print("count="+str(count))
+                        print(content)
                         for i in range(count-1):
                             space+="\t"
+                        print(" ")
                         break
-                
+                            
                
                 #데이터베이스 정보 include 해주기!!
                 content=content.replace("latteDatabaseExt()","import Pylatte.Database.DBMappingParser as pyLatteDBMappingParser");
@@ -226,11 +240,13 @@ class pylToPy:
         pass
     
     def processNotPyl(self, type,value,lineno,lexpos):
-        value=value.replace('\"', "&quot;")
+        if not type=="NOHTML":
+            value=value.replace('\"', "&quot;")
         space=""
         for i in range(self.blank):
             space+="\t"
         
+        print("notpyl : "+type+" : "+value)
         return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     

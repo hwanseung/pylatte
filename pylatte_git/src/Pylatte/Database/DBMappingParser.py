@@ -85,9 +85,12 @@ class pyLatteDBMappingParser:
         try:
             #print(node.firstChild.nodeValue)              
             if(value):    # if 'value' is not None, '$value$' have to be replaced 
+                print("SQL :"+str(node.firstChild.nodeValue))
+                print("param : "+str(value))
                 splitedSQL = str(node.firstChild.nodeValue).rsplit('$')
                 completedSQL = ""
                 valuesCount = (len(splitedSQL)-1) / 2
+                print("valuesCount " +str(valuesCount));
                 for i in splitedSQL:
                     for v in value.keys():
                         if i==v:    # if one phrase is matched to one variable in dictionary data, that will be replaced each other.
@@ -96,11 +99,10 @@ class pyLatteDBMappingParser:
                             i=value[i]
                             valuesCount = valuesCount -1
                     completedSQL += str(i)
-                
                 if (valuesCount > 0):
                     print('Error - Some $value$ are not replaced. ')
                     raise Exception
-                print(completedSQL) 
+                print("completedSQL :"+completedSQL) 
                 self.latteDB.query(completedSQL)
             else:        # if 'value' is None, execute the query node directly.
                 self.latteDB.query(node.firstChild.nodeValue)
