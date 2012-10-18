@@ -1,6 +1,6 @@
 <$
 pyformFile=formFile.formFile(pyFile)
-pyformFile.moveUploadFile("file1","image","log.png")
+pyformFile.moveUploadFile("file1","image","log.jpeg")
 $>
 
 <script type="text/javascript">
