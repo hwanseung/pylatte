@@ -36,7 +36,7 @@ class service(threading.Thread):
                 print ("quit       : pylatte server shutdown")
                 pass
             elif commend_input == "info":
-                print ("pylatte is python Web Framework - Insert Python code in HTML(called PYL) and execute webserver")
+                print ("pylatte is python Web Framework - Insert Python code in HTML(called PYL)")
                 print ("website : http://www.pylatte.org/")
                 print ("mail : pylatte@pylatte.org")
                 print ("License: GPL")

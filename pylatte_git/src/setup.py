@@ -7,17 +7,17 @@ from distutils.core import setup, Extension
 
 classifierList=['Pylatte',
                 'Pylatte:Database:DBMappingParser',
-                'Pylatte:WebServer:configParser',
-                'Pylatte:WebServer:formFile',
-                'Pylatte:WebServer:latteServer',
-                'Pylatte:WebServer:latteServerStart',
-           'Pylatte:WebServer:latteSockeServer',
-           'Pylatte:WebServer:methodGetGetParam',
-           'Pylatte:WebServer:methodGetPostParam',
-           'Pylatte:WebServer:postMultipartForm',
-           'Pylatte:WebServer:pylToPy',
-           'Pylatte:WebServer:requestHeaderInfo',
-           'Pylatte:WebServer:sessionUtil']
+                'Pylatte:Web:configParser',
+                'Pylatte:Web:formFile',
+                'Pylatte:Web:latteServer',
+                'Pylatte:Web:latteServerStart',
+           'Pylatte:Web:latteSockeServer',
+           'Pylatte:Web:methodGetGetParam',
+           'Pylatte:Web:methodGetPostParam',
+           'Pylatte:Web:postMultipartForm',
+           'Pylatte:Web:pylToPy',
+           'Pylatte:Web:requestHeaderInfo',
+           'Pylatte:Web:sessionUtil']
 
 setup(name='Pylatte',
       author='HwanSeung lee',
@@ -25,6 +25,6 @@ setup(name='Pylatte',
       url='pylatte.org',
       version='0.9.8.1.5',
       classifiers = classifierList,
-      packages=['Pylatte','Pylatte.Database','Pylatte.WebServer'],
+      packages=['Pylatte','Pylatte.Database','Pylatte.Web'],
       description='python Web Framework - pylatte'
 )

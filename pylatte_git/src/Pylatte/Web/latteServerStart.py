@@ -3,8 +3,8 @@ Created on 2011. 6. 4.
 
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
-import Pylatte.WebServer.latteServer_wsgi as latteServer_wsgi
-import Pylatte.WebServer.configParser as configParser
+import Pylatte.Web.latteServer_wsgi as latteServer_wsgi
+import Pylatte.Web.configParser as configParser
 from wsgiref.simple_server import make_server
 
 PORT = configParser.parseServerPort()

@@ -6,8 +6,8 @@ Created on 2011. 7. 16.
 import re
 from cgi import parse_qs, escape
 
-import Pylatte.WebServer.configParser as configParser
-import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
+import Pylatte.Web.configParser as configParser
+import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
 
 def index(environ, start_response):
     """This function will be mounted on "/" and display a link

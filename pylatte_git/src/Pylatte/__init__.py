@@ -1,1 +1,1 @@
-__all__ = ["Database","WebServer"]
+__all__ = ["Database","Web"]

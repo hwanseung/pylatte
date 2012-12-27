@@ -7,10 +7,10 @@ import sys;
 sys.path.append('./topy')    #Path to save uploaded files.
 import os
 import http.server
-import Pylatte.WebServer.methodGetGetParam as methodGetGetParam      #To use GET parameter
-import Pylatte.WebServer.methodGetPostParam as methodGetPostParam   #To use POST parameter
-import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
-import Pylatte.WebServer.sessionUtil as sessionUtil
+import Pylatte.Web.methodGetGetParam as methodGetGetParam      #To use GET parameter
+import Pylatte.Web.methodGetPostParam as methodGetPostParam   #To use POST parameter
+import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
+import Pylatte.Web.sessionUtil as sessionUtil
 import imp
 import re
 from cgi import escape

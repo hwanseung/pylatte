@@ -7,9 +7,9 @@ this Class is not used any more.
 '''
 import socket
 import socketserver
-import Pylatte.WebServer.configParser as configParser
-import Pylatte.WebServer.pylToPy as pylToPy
-import Pylatte.WebServer.service as service
+import Pylatte.Web.configParser as configParser
+import Pylatte.Web.pylToPy as pylToPy
+import Pylatte.Web.service as service
 
 pylatte_AsciiArt="""
 =============================================================                            
