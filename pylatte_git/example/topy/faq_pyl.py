@@ -147,9 +147,9 @@ class faq:
 		self.pylToHtmlResult+=str(""" submitForm()""")
 		self.pylToHtmlResult+=str(""" {""")
 		self.pylToHtmlResult+=str("""
-			alert(&quot;232&quot;);""")
+			alert("232");""")
 		self.pylToHtmlResult+=str("""
-		 	$(&quot;#fileForm&quot;).submit();""")
+		 	$("#fileForm").submit();""")
 		self.pylToHtmlResult+=str("""
 		}""")
 		self.pylToHtmlResult+=str("""
@@ -339,88 +339,6 @@ class faq:
 				</ul>""")
 		self.pylToHtmlResult+=str("""
 				
-				<h2>""")
-		self.pylToHtmlResult+=str("""GET/POST""")
-		self.pylToHtmlResult+=str(""" Test""")
-		self.pylToHtmlResult+=str("""</h2>""")
-		self.pylToHtmlResult+=str("""
-				<form name="form" method="post" action="../faq">""")
-		self.pylToHtmlResult+=str("""
-					<p>""")
-		self.pylToHtmlResult+=str("""
-						<input type="text" name="name">""")
-		self.pylToHtmlResult+=str("""
-						<input type="submit" value="CLICK">""")
-		self.pylToHtmlResult+=str("""
-					</p>""")
-		self.pylToHtmlResult+=str("""
-				</form>""")
-
-		if param=={}:
-			pass	
-		else:
-			session['name']=param['name']
-			self.pylToHtmlResult+=str("""
-	<p>""")
-			self.pylToHtmlResult+=str("""Get""")
-			self.pylToHtmlResult+=str(""" or""")
-			self.pylToHtmlResult+=str(""" Post""")
-			self.pylToHtmlResult+=str(""" :""")
-			self.pylToHtmlResult+=str( param['name'])
-			self.pylToHtmlResult+=str("""</p>""")
-
-		
-
-		if session=={}:
-			pass	
-		else:
-			self.pylToHtmlResult+=str("""
-	<p>""")
-			self.pylToHtmlResult+=str("""Session""")
-			self.pylToHtmlResult+=str(""" :""")
-			self.pylToHtmlResult+=str( session['name'])
-			self.pylToHtmlResult+=str("""</p>""")
-
-			pass
-		self.pylToHtmlResult+=str("""
-	<h3>""")
-		self.pylToHtmlResult+=str("""HeaderInfo['path']""")
-		self.pylToHtmlResult+=str("""</h3>""")
-		self.pylToHtmlResult+=str("""
-	<p>""")
-		self.pylToHtmlResult+=str(headerInfo['path'])
-		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("""
-	<h3>""")
-		self.pylToHtmlResult+=str("""HeaderInfo['Accept']""")
-		self.pylToHtmlResult+=str("""</h3>""")
-		self.pylToHtmlResult+=str("""
-	<p>""")
-		self.pylToHtmlResult+=str(headerInfo['Accept'])
-		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("""
-	<h3>""")
-		self.pylToHtmlResult+=str("""HeaderInfo['Accept-Charset']""")
-		self.pylToHtmlResult+=str("""</h3>""")
-		self.pylToHtmlResult+=str("""
-	<p>""")
-		self.pylToHtmlResult+=str(headerInfo['Accept-Charset'])
-		self.pylToHtmlResult+=str("""</p>""")
-		self.pylToHtmlResult+=str("""
-	<div>""")
-		self.pylToHtmlResult+=str("""
-		<form id="fileForm" data-ajax="false" class="ui-body ui-body-a ui-corner-all" method="post" enctype="multipart/form-data" action="http://127.0.0.1:8000/faviconUpload">""")
-		self.pylToHtmlResult+=str("""
-			<input type="file" name="file1"/>""")
-		self.pylToHtmlResult+=str("""
-			<button type="submit" data-theme="b" name="submit" value="submit-value">""")
-		self.pylToHtmlResult+=str("""Submit""")
-		self.pylToHtmlResult+=str("""</button>""")
-		self.pylToHtmlResult+=str("""
-		</form>""")
-		self.pylToHtmlResult+=str("""
-	</div>""")
-		self.pylToHtmlResult+=str("""
 				</div>""")
 		self.pylToHtmlResult+=str("""<!--/content-primary -->""")
 		self.pylToHtmlResult+=str("""
@@ -475,12 +393,6 @@ class faq:
 		self.pylToHtmlResult+=str("""</a>""")
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""
-								<li>""")
-		self.pylToHtmlResult+=str("""<a target="_self" href="../comment">""")
-		self.pylToHtmlResult+=str("""Comment""")
-		self.pylToHtmlResult+=str("""</a>""")
-		self.pylToHtmlResult+=str("""</li>""")
-		self.pylToHtmlResult+=str("""
 								<li data-theme="b">""")
 		self.pylToHtmlResult+=str("""<a target="_self" href="../faq">""")
 		self.pylToHtmlResult+=str("""F""")
@@ -493,6 +405,24 @@ class faq:
 		self.pylToHtmlResult+=str("""<a target="_self" href="../contactus">""")
 		self.pylToHtmlResult+=str("""Contact""")
 		self.pylToHtmlResult+=str(""" us""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+								<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo1">""")
+		self.pylToHtmlResult+=str("""Demo1""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+								<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo2">""")
+		self.pylToHtmlResult+=str("""Demo2""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+								<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo3">""")
+		self.pylToHtmlResult+=str("""Demo3""")
 		self.pylToHtmlResult+=str("""</a>""")
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""

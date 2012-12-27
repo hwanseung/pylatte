@@ -143,7 +143,7 @@ class contactus:
 		import Pylatte.Database.DBMappingParser as pyLatteDBMappingParser
 
 		contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
-		result = contact.queryForList("contact.sangkeun")
+		result = contact.queryForList("contact.founder")
 		self.pylToHtmlResult+=str("""
 
 <body>""")
@@ -370,12 +370,6 @@ class contactus:
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""
 						<li>""")
-		self.pylToHtmlResult+=str("""<a target="_self" href="../comment">""")
-		self.pylToHtmlResult+=str("""Comment""")
-		self.pylToHtmlResult+=str("""</a>""")
-		self.pylToHtmlResult+=str("""</li>""")
-		self.pylToHtmlResult+=str("""
-						<li>""")
 		self.pylToHtmlResult+=str("""<a target="_self" href="../faq">""")
 		self.pylToHtmlResult+=str("""F""")
 		self.pylToHtmlResult+=str(""" A""")
@@ -387,6 +381,24 @@ class contactus:
 		self.pylToHtmlResult+=str("""<a target="_self" href="../contactus">""")
 		self.pylToHtmlResult+=str("""Contact""")
 		self.pylToHtmlResult+=str(""" us""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+						<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo1">""")
+		self.pylToHtmlResult+=str("""Demo1""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+						<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo2">""")
+		self.pylToHtmlResult+=str("""Demo2""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+						<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo3">""")
+		self.pylToHtmlResult+=str("""Demo3""")
 		self.pylToHtmlResult+=str("""</a>""")
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""

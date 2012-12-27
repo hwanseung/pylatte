@@ -2,6 +2,9 @@
 Created on 2011. 7. 24.
 
 @author: Hwanseung Lee(rucifer1217@gmail.com)
+
+
+this Class is not used in pylatte any more.
 '''
 
 class methodGetGetParam:

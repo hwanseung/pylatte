@@ -3,31 +3,15 @@ Created on 2011. 6. 4.
 
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
-import threading
-import Pylatte.WebServer.latteSocketServer as latteSocketServer
-import Pylatte.WebServer.latteServer as latteServer
+import Pylatte.WebServer.latteServer_wsgi as latteServer_wsgi
 import Pylatte.WebServer.configParser as configParser
+from wsgiref.simple_server import make_server
 
-
-print("**start latteServer**\n")
 PORT = configParser.parseServerPort()
-Handler = latteServer.latteServer
-httpd = latteSocketServer.latteSockeServer(("", PORT), Handler)
-    
-def worker():
-    """
-    Start a server
-    """
-    print ("serving at port", PORT)
-    httpd.serve_forever()
-    
-    pass;
-
 
 def start():
-    h = threading.Thread(name='httpd', target=worker())
-    h.start()
+    application = latteServer_wsgi.ExceptionMiddleware(latteServer_wsgi.application)
+    srv = make_server('localhost', PORT, application)
+    srv.serve_forever()
     
-    
-
     pass;

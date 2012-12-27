@@ -921,8 +921,8 @@ class tutorial:
 		self.pylToHtmlResult+=str(""" type""")
 		self.pylToHtmlResult+=str(""" like""")
 		self.pylToHtmlResult+=str(""" <i>""")
-		self.pylToHtmlResult+=str("""{&quot;id&quot;:pylatte,""")
-		self.pylToHtmlResult+=str(""" &quot;password&quot;:python}""")
+		self.pylToHtmlResult+=str("""{"id":pylatte,""")
+		self.pylToHtmlResult+=str(""" "password":python}""")
 		self.pylToHtmlResult+=str("""</i>""")
 		self.pylToHtmlResult+=str(""".""")
 		self.pylToHtmlResult+=str(""" Definately,""")
@@ -1068,7 +1068,7 @@ class tutorial:
 		self.pylToHtmlResult+=str(""" attribute""")
 		self.pylToHtmlResult+=str(""" :""")
 		self.pylToHtmlResult+=str(""" <b>""")
-		self.pylToHtmlResult+=str("""enctype=&quot;multipart/form-data""")
+		self.pylToHtmlResult+=str("""enctype="multipart/form-data""")
 		self.pylToHtmlResult+=str("""</b>""")
 		self.pylToHtmlResult+=str(""" into""")
 		self.pylToHtmlResult+=str(""" the""")
@@ -1367,7 +1367,7 @@ class tutorial:
 					$&gt;""")
 		self.pylToHtmlResult+=str("""
 					&lt;div""")
-		self.pylToHtmlResult+=str(""" id=&quot;dbdiv&quot;&gt;""")
+		self.pylToHtmlResult+=str(""" id="dbdiv"&gt;""")
 		self.pylToHtmlResult+=str("""
 					&lt;$=result.fetch_row()$&gt;""")
 		self.pylToHtmlResult+=str("""
@@ -1936,9 +1936,9 @@ class tutorial:
 		self.pylToHtmlResult+=str("""
 				<pre class="brush: xml">""")
 		self.pylToHtmlResult+=str("""
-					<\$=headerInfo["User-Agent"]$>""")
+					&lt;$=headerInfo["User-Agent"]$&gt;""")
 		self.pylToHtmlResult+=str("""
-					<\$=headerInfo["Accept-Encoding"]$>""")
+					&lt;$=headerInfo["Accept-Encoding"]$&gt;""")
 		self.pylToHtmlResult+=str("""
 				</pre>""")
 		self.pylToHtmlResult+=str("""
@@ -2012,12 +2012,6 @@ class tutorial:
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""
 							<li>""")
-		self.pylToHtmlResult+=str("""<a target="_self" href="../comment">""")
-		self.pylToHtmlResult+=str("""Comment""")
-		self.pylToHtmlResult+=str("""</a>""")
-		self.pylToHtmlResult+=str("""</li>""")
-		self.pylToHtmlResult+=str("""
-							<li>""")
 		self.pylToHtmlResult+=str("""<a target="_self" href="../faq">""")
 		self.pylToHtmlResult+=str("""F""")
 		self.pylToHtmlResult+=str(""" A""")
@@ -2029,6 +2023,24 @@ class tutorial:
 		self.pylToHtmlResult+=str("""<a target="_self" href="../contactus">""")
 		self.pylToHtmlResult+=str("""Contact""")
 		self.pylToHtmlResult+=str(""" us""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo1">""")
+		self.pylToHtmlResult+=str("""Demo1""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo2">""")
+		self.pylToHtmlResult+=str("""Demo2""")
+		self.pylToHtmlResult+=str("""</a>""")
+		self.pylToHtmlResult+=str("""</li>""")
+		self.pylToHtmlResult+=str("""
+							<li>""")
+		self.pylToHtmlResult+=str("""<a target="_self" href="../demo3">""")
+		self.pylToHtmlResult+=str("""Demo3""")
 		self.pylToHtmlResult+=str("""</a>""")
 		self.pylToHtmlResult+=str("""</li>""")
 		self.pylToHtmlResult+=str("""

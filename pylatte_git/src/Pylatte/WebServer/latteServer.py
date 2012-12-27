@@ -12,6 +12,8 @@ import Pylatte.WebServer.methodGetPostParam as methodGetPostParam   #To use POST
 import Pylatte.WebServer.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
 import Pylatte.WebServer.sessionUtil as sessionUtil
 import imp
+import re
+from cgi import escape
 
 class latteServer(http.server.CGIHTTPRequestHandler):
     
@@ -321,9 +323,9 @@ class latteServer(http.server.CGIHTTPRequestHandler):
             self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
             self.end_headers()
         return f
-    
-    
-            
+    pass
+
+
 if __name__ == '__main__':
     str1 = "PYLATTESESSIONID=pylsession_2894c5183c66a4e92b21e3c6720fcf02; __utma=96992031.1636130766.1320671238.1320671238.1320671238.1; __utmb=96992031.4.10.1320671238; __utmc=96992031; __utmz=96992031.1320671238.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)"
     #str1 = "__utma=96992031.1901537661.1320667483.1320667483.1320667483.1; __utmb=96992031.7.10.1320667483; __utmc=96992031; __utmz=96992031.1320667483.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)"
@@ -338,6 +340,3 @@ if __name__ == '__main__':
     
     if latteSession=="":
         print("no")
-    
-  
-    

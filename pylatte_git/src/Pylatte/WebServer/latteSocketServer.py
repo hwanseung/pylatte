@@ -2,6 +2,8 @@
 Created on 2011. 7. 19.
 
 @author: Hwanseung Lee(rucifer1217@gmail.com)
+
+this Class is not used any more.
 '''
 import socket
 import socketserver

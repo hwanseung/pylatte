@@ -9,15 +9,15 @@ class faviconUpload:
 	def generate(self,param,pyFile,session,headerInfo,lattedb):
 
 		pyformFile=formFile.formFile(pyFile)
-		pyformFile.moveUploadFile("file1","pyl","favicon.ico")
+		pyformFile.moveUploadFile("file1","image","log.jpeg")
 		self.pylToHtmlResult+=str("""
 
 <script type="text/javascript">""")
 		self.pylToHtmlResult+=str("""
-	alert(&quot;upload""")
-		self.pylToHtmlResult+=str(""" success!!&quot;);""")
+	alert("upload""")
+		self.pylToHtmlResult+=str(""" success!!");""")
 		self.pylToHtmlResult+=str("""
-	history.back();""")
+	location.href='/demo2';""")
 		self.pylToHtmlResult+=str("""
 </script>""")
 		self.sessionDic=session
