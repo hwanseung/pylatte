@@ -32,6 +32,8 @@ class requestHeaderInfo:
         print("REMOTE_ADDR :"+environ.get('REMOTE_ADDR'))
         print("REMOTE_HOST :"+environ.get('REMOTE_HOST'))
         
+       
+        
         #keys = environ.keys()
         #print(keys)
         
@@ -56,6 +58,11 @@ class requestHeaderInfo:
 
         self.h_info["REMOTE_ADDR"]=environ.get('REMOTE_ADDR', "")
         self.h_info["REMOTE_HOST"]=environ.get('REMOTE_HOST', "")
+        
+        if environ.__contains__("HTTP_COOKIE"):
+            self.h_info["HTTP_COOKIE"] = environ.get('HTTP_COOKIE',"")
+        else:
+            self.h_info["HTTP_COOKIE"] = ""
            
         pass
     def getHeaderInfo(self):

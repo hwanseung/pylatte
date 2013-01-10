@@ -4,6 +4,7 @@ Created on 2011. 8. 4.
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
 from xml.dom.minidom import parse
+import os
 
 class pyLatteConfigPaser():
     
@@ -11,13 +12,16 @@ class pyLatteConfigPaser():
     mappingUrl=dict();
     urlMap=dict();
     
-    databaseInfo=tuple();
-    
     filterPyl=dict();
     filterUrl=dict();
     filterMap=dict();
     
+    #설정을 읽어올때의 설정파일의 수정시간을 저장한 변수
+    lastConfigFileModifyTime=None
+    
     def __init__(self):
+        print("start to parser Config")
+        self.lastConfigFileModifyTime = os.path.getmtime("pylatte_config.xml")
         self.doc=parse("pylatte_config.xml")
         
         #Mapping information
@@ -31,7 +35,7 @@ class pyLatteConfigPaser():
         self.parseFilterUrl()		#Bring the path to be filtered pyl files from a xml file
         self.makeFilterMap()		#Make dictionay data pairs
         print(self.filterMap)
-        
+        print("end to parser Config\n")
         pass
     
     def parseUrlMapingExcute(self):
@@ -93,10 +97,12 @@ class pyLatteConfigPaser():
     
     def getUrlMap(self):
         return self.urlMap
-    def getDataBaseInfo(self):
-        return self.databaseInfo
     def getFilterMap(self):
         return self.filterMap
+    def getLastConfigFileModifyTime(self):
+        return self.lastConfigFileModifyTime
+    def getConfigFileModifyTime(self):
+        return os.path.getmtime("pylatte_config.xml")
     pass
 
 def parseServerPort():
@@ -110,8 +116,8 @@ def parseServerPort():
         for item1 in item.childNodes:
             if(item1.nodeName=="port"):
                 return int(item1.firstChild.nodeValue)
-                    
-pass
+    
+    pass
 
 
 if __name__ == '__main__':
