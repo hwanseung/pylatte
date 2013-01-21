@@ -13,47 +13,11 @@ import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Head
 import Pylatte.Web.sessionUtil as sessionUtil
 import Pylatte.Web.pylToPy as pylToPy
 
-def index(environ, start_response):
-    """This function will be mounted on "/" and display a link
-    to the hello world page."""
-    start_response('200 OK', [('Content-Type', 'text/html')])
-    return [b'''Hello World Application
-               This is the Hello World application:
-
-`continue <hello/>`_
-
-''']
-
-def hello(environ, start_response):
-    """Like the example above, but it uses the name specified in the
-URL."""
-    # get the name from the url if it was specified there.
-    args = environ['myapp.url_args']
-    if args:
-        subject = escape(args[0])
-    else:
-        subject = 'World'
-    start_response('200 OK', [('Content-Type', 'text/html')])
-    result = '''Hello %(subject)s
-    Hello %(subject)s!
-
-''' % {'subject': subject}
-
-    return [bytes(result,'utf-8')]
-
 def not_found(environ, start_response):
     """Called if no URL matches."""
     start_response('404 NOT FOUND', [('Content-Type', 'text/plain')])
-    return [b'Not Found']
+    return ['Not Found']
 
-# map urls to functions
-urls = [
-    (r'^$', index),
-    (r'hello/?$', hello),
-    (r'hello/(.+)$', hello)
-]
-
-urlMap=None
 def application(environ, start_response):
     
     headerInfo = requestHeaderInfo.requestHeaderInfo(environ).getHeaderInfo()
@@ -70,9 +34,17 @@ def application(environ, start_response):
         pylPath=environ["urlMap"][path]
     except KeyError:
         """미리 xml로 명시한 동적 요청이 아닐 경우 여기로 들어오기 되어 있음.
+        여기서 정적파일을 찾은 후 없으면  404 not found.
         """
-        start_response('404 NOT FOUND', [('Content-Type', 'text/plain')])
-        return [b'Not Found']
+        try:
+            path = path.replace("..","")
+            in_file = open(os.getcwd()+path,"rb")
+            staticFile = in_file.read()
+            in_file.close()
+        except IOError:
+            return not_found(environ, start_response)
+        start_response('200 OK', [])
+        return [staticFile]
         pass
         
     moduleName=pylPath.split('.')[0]

@@ -45,5 +45,5 @@ class ConfigSetMiddleware(object):
         
         appiter = self.app(environ, start_response)
         for item in appiter:
-            print(str(item))
+            #print(str(item))
             yield item
