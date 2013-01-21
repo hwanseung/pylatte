@@ -4,6 +4,7 @@ Created on 2012. 10. 17.
 @author: pylatte
 '''
 import threading
+import logging
 
 class service(threading.Thread):
     httpd = ""
@@ -19,32 +20,32 @@ class service(threading.Thread):
         while True:
             commend_input = input(">>")
             if commend_input == "quit":
-                print ("pylatte server going down~!")
+                logging.debug ("pylatte server going down~!")
                 
                 self.httpd.shutdown()
                 
                 break
                 pass
             elif commend_input == "version":
-                print ("version : "+self.version)
+                logging.debug ("version : "+self.version)
                 pass
     
             elif commend_input == "help":
-                print ("help       : view command list")
-                print ("version    : view server version")
-                print ("restart    : pylatte server restart")
-                print ("quit       : pylatte server shutdown")
+                logging.debug ("help       : view command list")
+                logging.debug ("version    : view server version")
+                logging.debug ("restart    : pylatte server restart")
+                logging.debug ("quit       : pylatte server shutdown")
                 pass
             elif commend_input == "info":
-                print ("pylatte is python Web Framework - Insert Python code in HTML(called PYL)")
-                print ("website : http://www.pylatte.org/")
-                print ("mail : pylatte@pylatte.org")
-                print ("License: GPL")
+                logging.debug ("pylatte is python Web Framework - Insert Python code in HTML(called PYL)")
+                logging.debug ("website : http://www.pylatte.org/")
+                logging.debug ("mail : pylatte@pylatte.org")
+                logging.debug ("License: GPL")
                 pass
             elif commend_input == "restart":
                 self.httpd.restart_server()
             else:
-                print ("'"+commend_input +"'command is not found. ")
+                logging.debug ("'"+commend_input +"'command is not found. ")
                 pass
             
         pass;

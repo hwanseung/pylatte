@@ -3,6 +3,8 @@ Created on 2011. 9. 24.
 
 @author: Hwanseung Lee(rucifer1217@gmail.com)
 '''
+import logging
+
 class methodGetPostParam:
     dic = dict()
 
@@ -18,11 +20,11 @@ class methodGetPostParam:
             for param in params:
                 item = param.split('=')
                 self.dic[item[0]]=item[1]
-            print("param:")
-            print(self.dic)
+            logging.debug("param:")
+            logging.debug(self.dic)
         
         except IndexError:
-            print("파라미터 없음.")
+            logging.debug("파라미터 없음.")
         
         self.getParam()
         pass
@@ -35,7 +37,7 @@ if __name__ == '__main__':
     str= "What%20is%20the+name+of+python3-based+web+framework%3F";
     str=str.replace("+", " ")
     
-    print(unquote(str, 'utf-8', 'replace'))
+    logging.debug(unquote(str, 'utf-8', 'replace'))
     
     #p=methodGetPostParam("urlTest.pyl1?method=1&to=1");
-    #print(p.getParam())
+    #logging.debug(p.getParam())

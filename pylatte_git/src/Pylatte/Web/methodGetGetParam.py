@@ -6,6 +6,7 @@ Created on 2011. 7. 24.
 
 this Class is not used in pylatte any more.
 '''
+import logging
 
 class methodGetGetParam:
     dic = dict()
@@ -22,10 +23,10 @@ class methodGetGetParam:
                 item = param.split('=')
                 self.dic[item[0]]=item[1]
             
-            print(self.dic)
+            logging.debug(self.dic)
         
         except IndexError:
-            #print("parameter is none")
+            #logging.debug("parameter is none")
             pass
         
         self.getParam()
@@ -36,4 +37,4 @@ class methodGetGetParam:
 
 if __name__ == '__main__':
     p=methodGetGetParam("urlTest.pyl1?method=1&to=1");
-    print(p.getParam())
+    logging.debug(p.getParam())

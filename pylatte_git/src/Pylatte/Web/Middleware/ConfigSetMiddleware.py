@@ -31,8 +31,8 @@ class ConfigSetMiddleware(object):
         print(pylatte_AsciiArt)
     def __call__(self, environ, start_response):
        
-        print(self.parser.getLastConfigFileModifyTime())
-        print(self.parser.getConfigFileModifyTime())
+        ##print(self.parser.getLastConfigFileModifyTime())
+        ##print(self.parser.getConfigFileModifyTime())
         
         
         if self.parser.getLastConfigFileModifyTime() != self.parser.getConfigFileModifyTime():

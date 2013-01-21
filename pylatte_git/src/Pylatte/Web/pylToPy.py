@@ -7,6 +7,7 @@ Created on 2011. 12. 9.
 import ply.lex as lex
 import re#정규표현식 모듈
 import math
+import logging
 
 # List of token names.   This is always required
 tokens = (
@@ -59,7 +60,7 @@ t_ignore  = '\t'
 
 # Error handling rule
 def t_error(t):
-    print ("Illegal character '%s'" % t.value[0:40])
+    logging.debug ("Illegal character '%s'" % t.value[0:40])
     t.lexer.skip(1)
 
 class pylToPy:
@@ -118,7 +119,7 @@ class pylToPy:
                     processResult=self.processNotPyl(tok.type, tok.value, tok.lineno, tok.lexpos)
             pypage.append(processResult)
              
-        #print("end!!")   
+        #logging.debug("end!!")   
         pypage.append('\t\t'+'self.sessionDic=session\n')
         pypage.append('\t\t'+'pass\n')
         pypage.append('\t'+'def getHtml(self):\n')
@@ -129,8 +130,8 @@ class pylToPy:
         pypage.append('\t\t'+'pass\n') 
         # 파이썬 코드 만들어보기
         
-        ##print(type(pypage))
-        ##print(type(self.pystring))
+        ##logging.debug(type(pypage))
+        ##logging.debug(type(self.pystring))
         pystring = ""
         for p in pypage:
             if p=='\n':
@@ -144,21 +145,21 @@ class pylToPy:
     def processPyl(self, type,value,lineno,lexpos):
         #remove whitespace front PYL CODE
         value=value[value.rfind("<"):]
-        #print("***\n"+value+"\n***")
+        #logging.debug("***\n"+value+"\n***")
 
         content=value[3:-3];
         
-        #print("+++"+t.value[-2:]+"##")
+        #logging.debug("+++"+t.value[-2:]+"##")
         if value[0:3]=="<$\n" and value[-3:]=="\n$>":
             try:
                 firstNPos=content.index("\n")
-                #print("Value", firstNPos, secondNPos)
+                #logging.debug("Value", firstNPos, secondNPos)
                 firstLineCotent=content[:firstNPos]
             except ValueError:
-                #print("ValueError")
+                #logging.debug("ValueError")
                 firstLineCotent=content
             finally:
-                #print("&&"+firstLineCotent+"&&")
+                #logging.debug("&&"+firstLineCotent+"&&")
                 localTapCount=0
                 localSpaceCount=0
                 space="\n\t\t"
@@ -171,24 +172,24 @@ class pylToPy:
                     elif i == ' ':
                         localSpaceCount+=1;
                     else:
-                        #print("end" + i)
-                        #print("count", localTapCount, localSpaceCount)
+                        #logging.debug("end" + i)
+                        #logging.debug("count", localTapCount, localSpaceCount)
                         
                         forList =re.findall(r"for.+:",content);
-                        print("for len :" +str(len(forList)))
+                        logging.debug("for len :" +str(len(forList)))
                         whileList =re.findall(r"while.+:",content);
-                        print("while len :" +str(len(whileList)))
+                        logging.debug("while len :" +str(len(whileList)))
                         ifList =re.findall(r"if.+:",content);
-                        print("if len :" +str(len(ifList)))
+                        logging.debug("if len :" +str(len(ifList)))
                         elifList =re.findall(r"elif.+:",content);
-                        print("elif len :" +str(len(elifList)))
+                        logging.debug("elif len :" +str(len(elifList)))
                         elseList =re.findall(r"else:",content);
-                        print("else len :" +str(len(elseList)))
+                        logging.debug("else len :" +str(len(elseList)))
                         passList =re.findall(r"pass",content);
-                        print("pass len :" +str(len(passList)))
+                        logging.debug("pass len :" +str(len(passList)))
                             
                         if not len(elifList)==0: #elif와 if의 중복 검출
-                            print("elif와 if중복 검출로 인한 중s 제거")
+                            logging.debug("elif와 if중복 검출로 인한 중s 제거")
                             localLoopCount=(len(forList)+len(whileList)+(len(ifList)-len(elifList))+len(elifList)+len(elseList)-len(passList));
                             pass
                         else:
@@ -196,11 +197,11 @@ class pylToPy:
                         
                         count=localTapCount+(math.ceil(localSpaceCount/4))+localLoopCount
                         self.blank=count;
-                        print("count="+str(count))
-                        print(content)
+                        logging.debug("count="+str(count))
+                        logging.debug(content)
                         for i in range(count-1):
                             space+="\t"
-                        print(" ")
+                        logging.debug(" ")
                         break
                             
                
@@ -209,14 +210,14 @@ class pylToPy:
                 content=content.replace("latteDatabase()","import Pylatte.Database.DBMappingParser as pyLatteDBMappingParser;"+" pyLatteDBMappingParser=latteDB=DBMappingParser.pyLatteDBMappingParser(); latteDB=pyLatteDBMappingParser.makeToUseSimpleDB()");
                 
                 #if(content.find("\n")!=-1):
-                #    print(content[:content.find("\n")])
+                #    logging.debug(content[:content.find("\n")])
 
                 content="\n"+content  
                 content=content.replace("\n",space)
                 content+="\n"
-                ##print("@@@\n"+content+"\n@@@")
+                ##logging.debug("@@@\n"+content+"\n@@@")
         else:
-            print("this is not pylcode")
+            logging.debug("this is not pylcode")
         
         return content
         pass
@@ -246,7 +247,7 @@ class pylToPy:
         for i in range(self.blank):
             space+="\t"
         
-        print("notpyl : "+type+" : "+value)
+        logging.debug("notpyl : "+type+" : "+value)
         return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     

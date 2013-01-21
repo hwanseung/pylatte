@@ -5,6 +5,7 @@ Created on 2011. 10. 7.
 '''
 
 import shutil
+import logging
 
 class formFile:
     
@@ -24,10 +25,10 @@ class formFile:
         return -1 when failed
         
         """
-        print(name)
-        print(self.formFile)
-        print(self.formFile[name])
-        print("/tmp/pylatte_tmp/"+self.formFile[name]["tmpFileName"])
+        logging.debug(name)
+        logging.debug(self.formFile)
+        logging.debug(self.formFile[name])
+        logging.debug("/tmp/pylatte_tmp/"+self.formFile[name]["tmpFileName"])
         shutil.move("/tmp/pylatte_tmp/"+self.formFile[name]["tmpFileName"],dir+"/"+fileName)
         
         

@@ -5,6 +5,8 @@ Created on 2011. 6. 4.
 @modifier : HwanSeung Lee(rucifer1217@gmail.com)
 '''
 
+import logging
+
 class session:
     # After limit (default = 900 sec), the session becomes unvalid.
     def checkAvailableSession(self, key, limit=900):
@@ -56,7 +58,7 @@ class session:
             
         f = open('session/' + key, mode='r', encoding='utf-8')
         content=f.read();
-        print ("session content : "+content)
+        logging.debug ("session content : "+content)
         
         return content    
         
@@ -87,9 +89,9 @@ class session:
 if __name__ == '__main__':
     str1 = "key:value/key1:value1/key2:value2/"
     result = session.sessionDataTodict(session,str1)
-    print (result)
+    logging.debug (result)
     
     resultStr = session.dictToSessionData(session, result)
-    print (resultStr)
+    logging.debug (resultStr)
     
     

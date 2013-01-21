@@ -7,6 +7,7 @@ import re
 import imp
 import os
 import sys,os.path
+import logging
 from cgi import parse_qs, escape
 
 import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
@@ -23,12 +24,13 @@ def application(environ, start_response):
     headerInfo = requestHeaderInfo.requestHeaderInfo(environ).getHeaderInfo()
     param = parse_qs(environ.get('QUERY_STRING', ''))
     path = environ.get('PATH_INFO', '')
-    print("GET method Parameters "+str(param))
-    print("path : "+path)
     
-    print("urlMap : "+str(environ["urlMap"]))
-    print("filterMap : "+str(environ["filterMap"]))
-    print("Cookie : "+headerInfo["HTTP_COOKIE"])
+    logging.debug("GET method Parameters "+str(param))
+    logging.debug("path : "+path)
+    
+    logging.debug("urlMap : "+str(environ["urlMap"]))
+    logging.debug("filterMap : "+str(environ["filterMap"]))
+    logging.debug("Cookie : "+headerInfo["HTTP_COOKIE"])
     
     try:
         pylPath=environ["urlMap"][path]
@@ -48,9 +50,9 @@ def application(environ, start_response):
         pass
         
     moduleName=pylPath.split('.')[0]
-    print("moduleName : "+moduleName)
+    logging.debug("moduleName : "+moduleName)
     urlTest_pyl=moduleName+'_pyl'
-    print(urlTest_pyl)
+    logging.debug(urlTest_pyl)
     
     sessionutil =sessionUtil.session
     cookies=headerInfo["HTTP_COOKIE"].split(";");
@@ -59,7 +61,7 @@ def application(environ, start_response):
     for item in cookies:
         cookie = item.split("=")
         if cookie[0]=="PYLATTESESSIONID":
-            #print (cookie[1])
+            #logging.debug (cookie[1])
             latteSession=cookie[1]
     
     #if there is no cookie value, make a new cookie value.
@@ -68,7 +70,7 @@ def application(environ, start_response):
     #If there is a cookie value, get the value from head information and put into sessionKey variable.
     else: 
         sessionKey = latteSession
-    print("session ID : "+sessionKey);
+    logging.debug("session ID : "+sessionKey);
     
     try:
         sessionData = sessionutil.getSessionData(sessionutil,sessionKey)
@@ -79,23 +81,24 @@ def application(environ, start_response):
 
     #---------------------make pyl to py
     
-    print("make PYLtoPY-----------------------")
-    print("path : "+path)
+    logging.debug("make PYLtoPY-----------------------")
+    logging.debug("path : "+path)
     
     a = environ["urlMap"]
     item = None
     if a.get(path)!=None:
-        print(a.get(path))
+        logging.debug(a.get(path))
         item = a.get(path)
-    print(environ["urlMap"])
     
-    print("urlMap : "+str(environ["urlMap"]))
-    print("filterMap : "+str(environ["filterMap"]))
+    logging.debug(environ["urlMap"])
+    
+    logging.debug("urlMap : "+str(environ["urlMap"]))
+    logging.debug("filterMap : "+str(environ["filterMap"]))
     
 
-    print("make end PYLtoPY-----------------------")
-    print("start to pylToPy")
-
+    logging.debug("make end PYLtoPY-----------------------")
+    logging.debug("start to pylToPy")
+    
     #Looking for filter to execute before pyl files executed.
     filterMap=environ["filterMap"]
     filterStr = ""
@@ -104,22 +107,22 @@ def application(environ, start_response):
             filterStr += open('pyl/'+item1, encoding='utf-8').read()+"\n"
     p=pylToPy.pylToPy(item,filterStr)
     p.outPy()
-    print("end to pylToPy\n")
+    logging.debug("end to pylToPy\n")
 
     #---------------------
     sys.path.append(os.path.join(os.getcwd(), 'topy'))
-    print(sys.path)
+    logging.debug(sys.path)
     
     pyl = __import__(urlTest_pyl)
     imp.reload(pyl)
-    print("Got started to process dynamic Page")
+    logging.debug("Got started to process dynamic Page")
     pyFile=None;
     databaseInfo=tuple()
     
     module=getattr(pyl, moduleName)(param,pyFile,sessionDic,headerInfo,databaseInfo)
-    print("processing DynamicPage End")
+    logging.debug("processing DynamicPage End")
     htmlcode = module.getHtml()    # completely generaged HTML
-    print(htmlcode)
+    #logging.debug(htmlcode)
 
 
     start_response('200 OK', [('Content-Type', 'text/html')])

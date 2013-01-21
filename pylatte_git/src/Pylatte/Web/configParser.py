@@ -4,6 +4,7 @@ Created on 2011. 8. 4.
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
 from xml.dom.minidom import parse
+import logging
 import os
 
 class pyLatteConfigPaser():
@@ -20,7 +21,7 @@ class pyLatteConfigPaser():
     lastConfigFileModifyTime=None
     
     def __init__(self):
-        print("start to parser Config")
+        logging.debug("start to parser Config")
         self.lastConfigFileModifyTime = os.path.getmtime("pylatte_config.xml")
         self.doc=parse("pylatte_config.xml")
         
@@ -28,14 +29,14 @@ class pyLatteConfigPaser():
         self.parseUrlMapingExcute() #Bring the path to access(execute) pyl file actually from a xml file
         self.parseUrlMappingUrl() 	#Bring the virtual URL to link to one pyl file from a xml file
         self.makeUrlMap()			#Make dictionay data pairs
-        print(self.urlMap)
+        logging.debug(self.urlMap)
         
         #Filtering information
         self.parseFilterPyl()		#Bring the path to filter pyl file actually from a xml file
         self.parseFilterUrl()		#Bring the path to be filtered pyl files from a xml file
         self.makeFilterMap()		#Make dictionay data pairs
-        print(self.filterMap)
-        print("end to parser Config\n")
+        logging.debug(self.filterMap)
+        logging.debug("end to parser Config\n")
         pass
     
     def parseUrlMapingExcute(self):

@@ -3,6 +3,8 @@ Created on 2011. 7. 24.
 
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
+import logging
+
 class postMultipartForm:
     """
     This class is used to send multipart/form
@@ -26,10 +28,10 @@ class postMultipartForm:
         """
         Split received datas
         """
-        print(self.pyload)
+        logging.debug(self.pyload)
         self.delimiter=self.pyload.split(b'\r\n')
         
-        print(self.delimiter)
+        logging.debug(self.delimiter)
         
         self.splited= self.pyload.split(self.delimiter[0])
         self.splited.pop(0)# 스플릿하고 남는거 제거
@@ -40,11 +42,11 @@ class postMultipartForm:
         Analysis splited datas and the others become 'param'.
         """
         for item in self.splited:
-            print("------------------")
+            logging.debug("------------------")
             splited_item = item.split(b"\r\n");
             #for item1 in splited_item:
-                #print("######")
-                #print(item1)
+                #logging.debug("######")
+                #logging.debug(item1)
             
             if splited_item[0]==b'--':
                 #데이터의 종료를 의미한다.
@@ -54,41 +56,41 @@ class postMultipartForm:
                
                 if splited_item[1].find(b'filename=')==-1:
                     namePosition=splited_item[1].find(b'; name="')
-                    #print(namePosition)
+                    #logging.debug(namePosition)
                     nameValueStartP = splited_item[1].find(b'\"',namePosition)+1; #name attribute 값의 시작위치
                     nameValueEndP = splited_item[1].find(b'\"',namePosition+8); #name attribute 값의 종료위치
                     nameValue= splited_item[1][nameValueStartP:nameValueEndP] #name attribute Value
-                    #print(b'name='+nameValue)
-                    #print(splited_item[3])
+                    #logging.debug(b'name='+nameValue)
+                    #logging.debug(splited_item[3])
                     self.param[str(nameValue,'UTF-8')]=str(splited_item[3],'UTF-8')
-                    print(self.param)
-                    print("This is not a file")
+                    logging.debug(self.param)
+                    logging.debug("This is not a file")
                     pass
                 #form에 파일이 올라왔을 경우
                 else:
                     fileInfo=dict()
                     namePosition=splited_item[1].find(b'; name=')
-                    #print(namePosition)
+                    #logging.debug(namePosition)
                     nameValueStartP = splited_item[1].find(b'\"',namePosition)+1; #name attribute 값의 시작위치
                     nameValueEndP = splited_item[1].find(b'\"',namePosition+8); #name attribute 값의 종료위치
                     nameValue= splited_item[1][nameValueStartP:nameValueEndP] #name attribute Value
-                    print(b'name='+nameValue)
+                    logging.debug(b'name='+nameValue)
                     
                     filenamePosition=splited_item[1].find(b'; filename=')
-                    #print(filenamePosition)
+                    #logging.debug(filenamePosition)
                     filenameValueStartP = splited_item[1].find(b'\"',filenamePosition)+1; #name attribute 값의 시작위치
                     filenameValueEndP = splited_item[1].find(b'\"',filenamePosition+12); #name attribute 값의 종료위치
                     filenameValue= splited_item[1][filenameValueStartP:filenameValueEndP] #name attribute Value
                     
-                    print(b'filename='+filenameValue)
+                    logging.debug(b'filename='+filenameValue)
                    
-                    print(splited_item[4])
+                    logging.debug(splited_item[4])
                     
                     import os
                     if os.path.exists("/tmp/pylatte_tmp/"):
-                        print("Already exist")
+                        logging.debug("Already exist")
                     else:
-                        print("Not exist")
+                        logging.debug("Not exist")
                         os.mkdir("/tmp/pylatte_tmp/")
                     
                     #Temporary file name.
@@ -101,7 +103,7 @@ class postMultipartForm:
                     fileInfo["size"]= splited_item[4].__len__()
                     self.formFile[str(nameValue,'UTF-8')]=fileInfo
                     
-                    print(self.formFile)
+                    logging.debug(self.formFile)
                     pass
                 
                 pass
