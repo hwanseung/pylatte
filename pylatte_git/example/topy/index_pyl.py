@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-import Pylatte.WebServer.formFile as formFile
+import Pylatte.Web.formFile as formFile
 class index:
 	pylToHtmlResult=""
 	sessionDic=dict()
