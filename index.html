@@ -1,103 +1,161 @@
+
 <!DOCTYPE html>
 <html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pylatte - Web framework based on Python3</title>
+	
+	<!-- favicon -->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Pylatte : " />
+	<!-- Include required JS files -->
+	<script type="text/javascript" src="./syntaxhighlighter/js/xregexp.js"></script>
+	<script type="text/javascript" src="./syntaxhighlighter/js/shCore.js"></script>
+	 
+	<!--
+	    At least one brush, here we choose JS. You need to include a brush for every
+	    language you want to highlight
+	-->
+	<script type="text/javascript" src="./syntaxhighlighter/lang/shBrushXml.js"></script>
+	<script type="text/javascript" src="./syntaxhighlighter/lang/shBrushBash.js"></script>
+	 
+	<!-- Include *at least* the core style and default theme -->
+	<link href="./syntaxhighlighter/css/shCore.css" rel="stylesheet" type="text/css" />
+	<link href="./syntaxhighlighter/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+	
+	
+	
+	<link rel="stylesheet"  href="./css/jquery.mobile-1.0rc2.css"/>
+	<link rel="stylesheet"  href="./css/jqm-docs.css"/>
+	
+	<script src="./js/jquery-1.6.4.min.js"></script>
+	<script src="./js/jqm-docs.js"></script>
+	<script src="./js/jquery.mobile.themeswitcher.js"></script>
+	<script src="./js/jquery.mobile-1.0rc2.js"></script>
+	
+	<script type="text/javascript">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-26668199-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	
+	</head>
+<body>
+	<div data-role="page" class="type-interior">
 
-    <title>Pylatte</title>
-  </head>
+		<div data-role="header" data-theme="b">
+		<h1>Pylatte Official Webpage</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
 
-  <body>
+	<div data-role="content">
+			<div class="content-primary">
+			<h1>Welcome to Pylatte</h1>
+			<h2>Pylatte :  A Web Framework Based on Python 3</h2>
+			<p>Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3. just as they might for Python 2x-based frameworks such as Django, Flask, or Bottle.</p>
+			
+			<h2>Sample code</h2>
+			<p>The following code is a example <i>pyl</i> file.</p> 
+			<pre class="brush: xml">
+				<p>Pylatte</p>
+				<$
+				pyl = "HTML" + " + " + "python"
+				$>
+				<p>
+				<$=pyl$>
+				</p>
+			</pre>
+			<p>The pyl code is translated by Pylatte to HTML in the browser.</p>
+			<pre class="brush: xml">
+				<p>Pylatte</p>
+				<p>
+				HTML + python
+				</p>
+			</pre>
+			
+			<h2>Functions</h2>
+			<ul>
+				<li><h3>Translation Engine</h3></li>
+				<p>Pylatte uses pyl file format. pyl consists of HTML and Python. pyl is fully translated by the Pylatte engine into HTML. It is unique feature of Pylatte.</p>
+				<li><h3>Database</h3></li>
+				<p>To use the database, external library must be installed: the MySQLdb(<strong>for mysql</strong>) module or pymongo3(<strong>for MonogoDB</strong>) module for Python 3.</p>
+				<p>Simple and advanced SQL via specific functions that are similar to iBATIS are provided.</p>
+				<li><h3>URL Mapping</h3></li>
+				<p>For security purposes, URL mapping transfers virtual URLs accessed by clients to web pages.</p>
+				<li><h3>Session</h3></li>
+				<p>A session is needed to distinguish each client.</p>
+				<li><h3>Filter</h3></li>
+				<p>If a filter is set, select pages pass through the filter.</p>
+				<li><h3>Form File</h3></li>
+				<p>It is possible to upload a file to server via POST.</p>
+				
+			</ul>
+			
+			<h2>History</h2>
+			<ul>
+				<li><h3>2011. 05. 13</h3></li>
+				<p>The Pylatte project is created in Busan, South Korea.</p>
+				<li><h3>2011. 09. 02</h3></li>
+				<p>Initial design and development of the Pylatte project.</p>
+				<li><h3>2011. 10. 31</h3></li>
+				<p>Pylatte 0.9v released.</p>
+				<li><h3>2012. 03. 09</h3></li>
+				<p>Pylatte 0.95v released. PLY code translate engine is change. we adapt PYL(Python Lex-YACC) at PLY code translate engine</p>
+				<li><h3>2012. 06. 27</h3></li>
+				<p>Pylatte is supported MongoDB.</p>
+				<li><h3>2012. 08. 06</h3></li>
+				<p>Pylatte is released as pylatte module.</p>
+				<li><h3>2012. 08. 27</h3></li>
+				<p>Pylatte is registered in pypi. http://pypi.python.org/pypi/Pylatte/0.9.7</p>
+			</ul>
+			
+			</div><!--/content-primary -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/rucifer1217/pylatte">View on GitHub</a>
+			<div class="content-secondary">
 
-          <h1 id="project_title">Pylatte</h1>
-          <h2 id="project_tagline"></h2>
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/rucifer1217/pylatte/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/rucifer1217/pylatte/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+						<h3>More in this section</h3>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Welcome to Pylatte</h1>
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
-<p>Pylatte : A Web Framework Based on Python 3 Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3, just as they might for Python 2x-based frameworks such as Django, Flask, or Bottle.</p>
+							<li data-role="list-divider">Menu</li>
+							<li data-theme="b"><a target="_self"  href="../index.html">About</a></li>
+							<li><a target="_self" href="./subpage/download.html">Download</a></li>
+							<li><a href="./subpage/install.html">Install</a></li>
+							<li><a target="_self" href="./subpage/tutorial.html">Tutorial</a></li>
+							<li><a target="_self" href="./subpage/documentation.html">Documentation</a></li>
+							<li><a target="_self" href="../subpage/comment.html">Comment</a></li>
+							<li><a target="_self" href="./subpage/faq.html">F A Q</a></li>
+							<li><a target="_self" href="./subpage/contactus.html">Contact us</a></li>
+							<img src="./image/pylatte.png"></img>
+						</ul>
+				</div>
+			</div>
 
-<p>Visit to <a href="http://www.pylatte.org/">http://www.pylatte.org/</a>
-pypi : <a href="http://pypi.python.org/pypi/Pylatte">http://pypi.python.org/pypi/Pylatte</a>
-mail : <a href="mailto:pylatte@pylatte.org">pylatte@pylatte.org</a>
-Facebook Page : <a href="https://www.facebook.com/pylatte">https://www.facebook.com/pylatte</a></p>
+		</div><!-- /content -->
 
-<h2>Sample code</h2>
+		<div data-role="footer" class="footer-docs" data-theme="b">
+				<h4>&copy; 2011 The Pylatte Project</h4>
+		</div>
 
-<p>The following code is a example pyl file.</p>
+		</div><!-- /page -->
 
-<p>Pylatte</p>
-
-<p>&lt;$
-pyl = "HTML" + " + " + "python"
-$&gt;</p>
-
-<p>
-
-</p>
-
-<p>The pyl code is translated by Pylatte to HTML in the browser.</p>
-
-<p>Pylatte</p>
-
-<p>
-HTML + python
-</p>
-
-<h2>Functions</h2>
-
-<p>Translation Engine Pylatte uses pyl file format. pyl consists of HTML and Python. pyl is fully translated by the Pylatte engine into HTML. It is unique feature of Pylatte.</p>
-
-<h2>Database</h2>
-
-<p>To use the database, external library must be installed: the MySQLdb(for mysql) module or pymongo3(for MonogoDB) module for Python 3.
-Simple and advanced SQL via specific functions that are similar to iBATIS are provided.</p>
-
-<h2>Session</h2>
-
-<p>A session is needed to distinguish each client.</p>
-
-<h2>Filter</h2>
-
-<p>If a filter is set, select pages pass through the filter.</p>
-
-<h2>Form File</h2>
-
-<p>It is possible to upload a file to server via POST.</p>
-
-<h2>URL Mapping</h2>
-
-<p>For security purposes, URL mapping transfers virtual URLs accessed by clients to web pages.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Pylatte maintained by <a href="https://github.com/rucifer1217">rucifer1217</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+		</body>
+	<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all()
+     </script>
 </html>
+
+
