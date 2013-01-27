@@ -13,7 +13,7 @@ PORT = configParser.parseServerPort()
 
 def start():
     application = latteServer_wsgi.application
-    application = ExceptionMiddleware.ExceptionMiddleware(application)
+    #application = ExceptionMiddleware.ExceptionMiddleware(application)
     application = ConfigSetMiddleware.ConfigSetMiddleware(application)
     srv = make_server('localhost', PORT, application)
     srv.serve_forever()

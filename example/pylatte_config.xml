@@ -9,7 +9,7 @@
 	<latteUrl>
 		<pylatte>
 			<pylatte-name>default</pylatte-name>
-			<pylatte-pyl>index.pyl</pylatte-pyl>
+			<pylatte-pyl>index.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>default</pylatte-name>
@@ -18,7 +18,7 @@
 		
 		<pylatte>
 			<pylatte-name>index</pylatte-name>
-			<pylatte-pyl>index.pyl</pylatte-pyl>
+			<pylatte-pyl>index.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>index</pylatte-name>
@@ -27,7 +27,7 @@
 		
 		<pylatte>
 			<pylatte-name>download</pylatte-name>
-			<pylatte-pyl>download.pyl</pylatte-pyl>
+			<pylatte-pyl>download.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>download</pylatte-name>
@@ -36,7 +36,7 @@
 		
 		<pylatte>
 			<pylatte-name>install</pylatte-name>
-			<pylatte-pyl>install.pyl</pylatte-pyl>
+			<pylatte-pyl>install.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>install</pylatte-name>
@@ -45,7 +45,7 @@
 		
 		<pylatte>
 			<pylatte-name>tutorial</pylatte-name>
-			<pylatte-pyl>tutorial.pyl</pylatte-pyl>
+			<pylatte-pyl>tutorial.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>tutorial</pylatte-name>
@@ -54,7 +54,7 @@
 		
 		<pylatte>
 			<pylatte-name>documentation</pylatte-name>
-			<pylatte-pyl>documentation.pyl</pylatte-pyl>
+			<pylatte-pyl>documentation.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>documentation</pylatte-name>
@@ -65,7 +65,7 @@
 		
 		<pylatte>
 			<pylatte-name>faq</pylatte-name>
-			<pylatte-pyl>faq.pyl</pylatte-pyl>
+			<pylatte-pyl>faq.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>faq</pylatte-name>
@@ -74,7 +74,7 @@
 		
 		<pylatte>
 			<pylatte-name>contactus</pylatte-name>
-			<pylatte-pyl>contactus.pyl</pylatte-pyl>
+			<pylatte-pyl>contactus.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>contactus</pylatte-name>
@@ -83,7 +83,7 @@
 		<!--
 		<pylatte>
 			<pylatte-name>contactus_mongodb</pylatte-name>
-			<pylatte-pyl>contactus_mongo.pyl</pylatte-pyl>
+			<pylatte-pyl>contactus_mongo.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>contactus_mongodb</pylatte-name>
@@ -92,7 +92,7 @@
 		-->
 		<pylatte>
 			<pylatte-name>favicon</pylatte-name>
-			<pylatte-pyl>faviconUpload.pyl</pylatte-pyl>
+			<pylatte-pyl>faviconUpload.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>favicon</pylatte-name>
@@ -101,7 +101,7 @@
 		
 		<pylatte>
 			<pylatte-name>demo1</pylatte-name>
-			<pylatte-pyl>demo1.pyl</pylatte-pyl>
+			<pylatte-pyl>demo1.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>demo1</pylatte-name>
@@ -109,7 +109,7 @@
 		</pylatte-mapping>	
 		<pylatte>
 			<pylatte-name>demo2</pylatte-name>
-			<pylatte-pyl>demo2.pyl</pylatte-pyl>
+			<pylatte-pyl>demo2.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>demo2</pylatte-name>
@@ -117,7 +117,7 @@
 		</pylatte-mapping>	
 		<pylatte>
 			<pylatte-name>demo3</pylatte-name>
-			<pylatte-pyl>demo3.pyl</pylatte-pyl>
+			<pylatte-pyl>demo3.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>demo3</pylatte-name>
@@ -126,7 +126,7 @@
 		
 		<pylatte>
 			<pylatte-name>sql</pylatte-name>
-			<pylatte-pyl>sql.pyl</pylatte-pyl>
+			<pylatte-pyl>sql.html</pylatte-pyl>
 		</pylatte>
 		<pylatte-mapping>
 			<pylatte-name>sql</pylatte-name>
@@ -139,23 +139,22 @@
 	
 		<filter>
 			<filter-name>head</filter-name>
-			<filter-pyl>filter/head.pyl</filter-pyl>
+			<filter-pyl>filter/head.html</filter-pyl>
 		</filter>
 		<filter-mapping>
 			<filter-name>head</filter-name>
-			<filter-url>index.pyl</filter-url>
-			<filter-url>download.pyl</filter-url>
-			<filter-url>install.pyl</filter-url>
-			<filter-url>tutorial.pyl</filter-url>
-			<filter-url>documentation.pyl</filter-url>
-			<filter-url>comment.pyl</filter-url>
-			<filter-url>faq.pyl</filter-url>
-			<filter-url>contactus.pyl</filter-url>
-			<filter-url>demo1.pyl</filter-url>
-			<filter-url>demo2.pyl</filter-url>
-			<filter-url>demo3.pyl</filter-url>
+			<filter-url>index.html</filter-url>
+			<filter-url>download.html</filter-url>
+			<filter-url>install.html</filter-url>
+			<filter-url>tutorial.html</filter-url>
+			<filter-url>documentation.html</filter-url>
+			<filter-url>comment.html</filter-url>
+			<filter-url>faq.html</filter-url>
+			<filter-url>contactus.html</filter-url>
+			<filter-url>demo1.html</filter-url>
+			<filter-url>demo2.html</filter-url>
+			<filter-url>demo3.html</filter-url>
 		</filter-mapping>
-		
 	</latteFilter>
 	
 </config>

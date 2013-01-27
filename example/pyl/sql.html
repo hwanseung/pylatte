@@ -1,12 +1,12 @@
-<$
+{$
 latteDatabaseExt()
-$>
-<$
+$}
+{$
 test = pyLatteDBMappingParser.pyLatteDBMappingParser()
 
-$>
+$}
 
-<$
+{$
 if param=={} :
 	pass
 elif param['method']=="insert":
@@ -25,7 +25,7 @@ elif param['method']=="delete":
 	value["uid"]= param['uid'];
 	test.queryForList("demo.delete",value)
 	pass
-$>
+$}
 
 
 <script type="text/javascript">

@@ -116,9 +116,9 @@ def application(environ, start_response):
     pyl = __import__(urlTest_pyl)
     imp.reload(pyl)
     logging.debug("Got started to process dynamic Page")
-    pyFile=None;
+    pyFile=dict()
     databaseInfo=tuple()
-    
+    logging.info("param : "+str(param))
     module=getattr(pyl, moduleName)(param,pyFile,sessionDic,headerInfo,databaseInfo)
     logging.debug("processing DynamicPage End")
     htmlcode = module.getHtml()    # completely generaged HTML

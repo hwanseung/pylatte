@@ -1,3 +1,4 @@
+
 <body>
 	
 	<div data-role="page" class="type-interior">
@@ -9,42 +10,63 @@
 
 	<div data-role="content">
 			<div class="content-primary">
-			<h1>Demo3</h1>
-			<h2>SQL Test</h2>
-<$
-latteDatabaseExt()
-$>
-<$
-contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
-result = contact.queryForList("demo.select")
-$>
-<form id="fileForm" data-ajax="false" class="ui-body ui-body-a ui-corner-all" method="post" action="/sql">
-<fieldset data-role="controlgroup">
-	<legend>select * from test</legend>
-					
-<$
-for item in result:
-$>
-<input type='radio' name='uid' id='radio-choice-<$=item["uid"]$>' value='<$=item["uid"]$>' />
-<label for='radio-choice-<$=item["uid"]$>'><$=item["uid"]$> : <$=item["name"]$></label>
-<$
+			<h1>Demo1</h1>
+			<h2>GET/POST Test</h2>
+			<h3>GET request 테스트</h3>
+			<p>get 요청은 url뒤에 ?name=변수를 붙여서 확인하도록 함.</p>
+			<h3>POST request 테스트</h3>
+			<form name="form" method="post" action="../demo1">
+				<p>
+					<input type="text" name="name">
+					<input type="submit" value="CLICK">
+				</p>
+			</form>
+			<p>Get or Post :
+{$
+if param=={} :
 	pass
-$>
-</fieldset>
-
-<div data-role="fieldcontain">
-    <label for="name">name:</label>
-    <input type="text" name="name" id="name" value=""  />
-</div>
-<label for="select-choice-min" class="select">Shipping method:</label>
-<select name="method" id="select-choice-min" data-mini="true">
-   <option value="insert">insert</option>
-   <option value="update">update</option>
-   <option value="delete">delete</option>
-</select> 
-<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
-</from>
-			
+$}
+{$
+elif "name" in param:
+$}
+	{$=param['name']$}</p>
+{$
+	pass
+$}
+</p>
+			<h2>Session Test</h2>
+			<form name="form" method="post" action="../demo1">
+				<p>
+					<input type="text" name="sessionValue">
+					<input type="submit" value="CLICK">
+				</p>
+			</form>
+			<p>Sessio Value :
+{$
+if param=={} :
+	pass
+$}
+{$
+elif "sessionValue" in param:
+	session['sessionValue']=param['sessionValue']
+	pass
+$}
+{$
+if "sessionValue" in session:
+$}
+	{$=session['sessionValue']$}</p>
+{$
+	pass
+$}
+</p>
+			<h3>HeaderInfo['PATH_INFO']</h3>
+			<p>{$=headerInfo['PATH_INFO']$}</p>
+			<h3>HeaderInfo['HTTP_ACCEPT']</h3>
+			<p>{$=headerInfo['HTTP_ACCEPT']$}</p>
+			<h3>HeaderInfo['SERVER_NAME']</h3>
+			<p>{$=headerInfo['SERVER_NAME']$}</p>
+			<h3>HeaderInfo['HTTP_USER_AGENT']</h3>
+			<p>{$=headerInfo['HTTP_USER_AGENT']$}</p>
 			</div><!--/content-primary -->
 
 			<div class="content-secondary">
@@ -62,9 +84,9 @@ $>
 							<li><a target="_self" href="../documentation">Documentation</a></li>
 							<li><a target="_self" href="../faq">F A Q</a></li>
 							<li><a target="_self" href="../contactus">Contact us</a></li>
-							<li><a target="_self" href="../demo1">Demo1</a></li>
+							<li data-theme="b"><a target="_self" href="../demo1">Demo1</a></li>
 							<li><a target="_self" href="../demo2">Demo2</a></li>
-							<li data-theme="b"><a target="_self" href="../demo3">Demo3</a></li>
+							<li><a target="_self" href="../demo3">Demo3</a></li>
 							<img src="../pyl/image/pylatte.png"></img>
 						</ul>
 				</div>

@@ -1,10 +1,10 @@
-<$
+{$
 latteDatabaseExt()
-$>
-<$
+$}
+{$
 contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
 result = contact.queryForList("contact.founder")
-$>
+$}
 
 <body>
 
@@ -13,7 +13,7 @@ $>
 		<div data-role="header" data-theme="b">
 			<h1>Pylatte Official Webpage</h1>
 			<a href="../../" target="_self" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
-		</div><!-- /header -->
+		</dsiv><!-- /header -->
 
 		<div data-role="content">
 			<div class="content-primary">
@@ -33,20 +33,20 @@ $>
 				</ul>
 				<ul data-role="listview" data-inset="true">
 					<li data-role="list-divider">Founders</li>
-					<li><a href=<$=result[0]['website']$> target="_black">
-						<h3><$=result[0]['name']$></h3>
-						<p><strong><$=result[0]['position']$></strong></p>
-						<p><$=result[0]['description']$></p>
+					<li><a href={$=result[0]['website']$} target="_black">
+						<h3>{$=result[0]['name']$}</h3>
+						<p><strong>{$=result[0]['position']$}</strong></p>
+						<p>{$=result[0]['description']$}</p>
 					</a></li>
-					<li><a href=<$=result[1]['website']$> target="_black">
-						<h3><$=result[1]['name']$></h3>
-						<p><strong><$=result[1]['position']$></strong></p>
-						<p><$=result[1]['description']$></p>
+					<li><a href={$=result[1]['website']$} target="_black">
+						<h3>{$=result[1]['name']$}</h3>
+						<p><strong>{$=result[1]['position']$}</strong></p>
+						<p>{$=result[1]['description']$}</p>
 					</a></li>
-					<li><a href=<$=result[2]['website']$> target="_black">
-						<h3><$=result[2]['name']$></h3>
-						<p><strong><$=result[2]['position']$></strong></p>
-						<p><$=result[2]['description']$></p>
+					<li><a href={$=result[2]['website']$} target="_black">
+						<h3>{$=result[2]['name']$}</h3>
+						<p><strong>{$=result[2]['position']$}</strong></p>
+						<p>{$=result[2]['description']$}</p>
 					</a></li>
 				</ul>
 			</div><!--/content-primary -->

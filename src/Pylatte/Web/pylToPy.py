@@ -25,7 +25,7 @@ def t_PYL_OUTPUT(t):
     return t
 
 def t_PYL(t):
-    r'\s*\<\$[^<>]*?\$\>' 
+    r'\s*\{\$[^<>]*?\$\}' 
     t.value = (t.value)
     return t
 
