@@ -119,7 +119,7 @@ class pylToPy:
         self.pystring=pystring
         pass
         
-    def processPyl(self, type,value,lineno,expos):
+    def processPyl(self, type,value,lineno,lexpos):
         #remove whitespace front PYL CODE
         value=value[value.rfind("{$"):]
         #logging.debug("***\n"+value+"\n***")
@@ -199,7 +199,7 @@ class pylToPy:
         return content
         pass
     
-    def processPylOut(self, type,value,lineno,expos):
+    def processPylOut(self, type,value,lineno,lexpos):
         value=value.replace('{$=', "")
         value=value.replace('$}', "")
         space=""
@@ -209,7 +209,7 @@ class pylToPy:
         return space+'\t\tself.pylToHtmlResult+=str('+value+')\n'
         pass
     
-    def processHTML(self, type,value,lineno,expos):
+    def processHTML(self, type,value,lineno,lexpos):
         space=""
         for i in range(self.blank):
             space+="\t"
@@ -217,7 +217,7 @@ class pylToPy:
         return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     
-    def processNotPyl(self, type,value,lineno,expos):
+    def processNotPyl(self, type,value,lineno,lexpos):
         if not type=="NOHTML":
             value=value.replace('\"', "&quot;")
         space=""
