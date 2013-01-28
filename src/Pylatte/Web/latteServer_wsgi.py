@@ -3,12 +3,10 @@ Created on 2011. 7. 16.
 
 @author: Hwanseung Lee(rucifer1217@gmail.com)
 '''
-import re
 import imp
-import os
 import sys,os.path
 import logging
-from cgi import parse_qs, escape
+from cgi import parse_qs, FieldStorage
 
 import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
 import Pylatte.Web.sessionUtil as sessionUtil
@@ -22,17 +20,25 @@ def not_found(environ, start_response):
 def application(environ, start_response):
     
     headerInfo = requestHeaderInfo.requestHeaderInfo(environ).getHeaderInfo()
-    if headerInfo["REQUEST_METHOD"] == "GET":
+    pyFile=None
+    if headerInfo["REQUEST_METHOD"].upper() == "GET":
         param = dict( (k, v if len(v)>1 else v[0] ) for k, v in parse_qs(environ.get('QUERY_STRING', '')).items() )
-    elif headerInfo["REQUEST_METHOD"] == "POST":
-        try:
-            length= int(environ.get('CONTENT_LENGTH', '0'))
-        except ValueError:
-            length= 0
-        if length!=0:
-            param = dict( (k, v if len(v)>1 else v[0] ) for k, v in parse_qs(environ['wsgi.input'].read(length).decode(),True).items() )
+    elif headerInfo["REQUEST_METHOD"].upper() == "POST":
+        if headerInfo["CONTENT_TYPE"].startswith("application/x-www-form-urlencoded"):
+            try:
+                length= int(environ.get('CONTENT_LENGTH', '0'))
+            except ValueError:
+                length= 0
+            if length!=0:
+                param = dict( (k, v if len(v)>1 else v[0] ) for k, v in parse_qs(environ['wsgi.input'].read(length).decode(),True).items() )
+            else:
+                    param = dict()
+        elif headerInfo["CONTENT_TYPE"].startswith("multipart/form-data"):
+            pyFile = FieldStorage(fp=environ['wsgi.input'],environ=environ)
+            param = dict()
+            pass
         else:
-                param = dict()
+            param = dict()
     else:
         param = dict()
     path = environ.get('PATH_INFO', '')
@@ -57,7 +63,7 @@ def application(environ, start_response):
             in_file.close()
         except IOError:
             return not_found(environ, start_response)
-        start_response('200 OK', [])
+        start_response('200 OK', [("Content-length", str(len(staticFile)) ),])
         return [staticFile]
         pass
         
@@ -128,7 +134,6 @@ def application(environ, start_response):
     pyl = __import__(urlTest_pyl)
     imp.reload(pyl)
     logging.debug("Got started to process dynamic Page")
-    pyFile=dict()
     databaseInfo=tuple()
     logging.info("param : "+str(param))
     module=getattr(pyl, moduleName)(param,pyFile,sessionDic,headerInfo,databaseInfo)
@@ -137,7 +142,8 @@ def application(environ, start_response):
     #logging.debug(htmlcode)
 
 
-    start_response('200 OK', [('Content-Type', 'text/html')])
+    start_response('200 OK', [('Content-Type', 'text/html'),("Content-length", str(len(htmlcode)) ),])
+    
     return [bytes(htmlcode,'utf-8')]
     
     

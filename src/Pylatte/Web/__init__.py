@@ -5,11 +5,10 @@ Created on 2012. 8. 4.
 '''
 __all__ = ["configParser",
            "formFile",
+           "latteServer_wsgi",
            "latteServer",
            "latteServerStart",
            "latteSockeServer",
-           "methodGetGetParam",
-           "methodGetPostParam",
            "postMultipartForm",
            "pylToPy",
            "requestHeaderInfo",
