@@ -18,10 +18,10 @@
 				<p>Caution : If you use <b>print()</b> function, it will be printed on web server console.</p>
 			
 				<pre class="brush: xml">
-				&lt;$
+				&#123;&#36;
 				hi=&quot;hello pylatte&quot;
-				$&gt;
-				<h1>&lt;$=hi$&gt;</h1>
+				&#36;&#125;
+				<h1>&#123;&#36;=hi&#36;&#125;</h1>
 				</pre>
 				<p>In python language, indentation is absolutely important. So we strongly recommend to use python code under <b>&lt;$</b>, and type <b>$&gt;</b> on new line after python code. Refer to the following code.</p>
 				<p>Type the code in hellopy.pyl and save it again. After running pylatte web server, you can see <b>hello pylatte</b>.
@@ -81,11 +81,11 @@
 				<p>There are two kinds of method to deal with GET & POST parameter.</p>
 				<p>When you request some parameter values using GET method or POST method, you can get the parameter values as following.</p>
 				<pre class="brush: xml">
-					&lt;$=param$&gt;
+					&#123;&#36;=param&#36;&#125;
 				</pre>
 				<p>The variable <b>param</b> has all requested values as dictionary type like <i>{"id":pylatte, "password":python}</i>. Definately, you can get specific value such as following.</p> 
 				<pre class="brush: xml">
-					&lt;$=param[&quot;id&quot;]$&gt;
+					&#123;&#36;=param[&quot;id&quot;]&#36;&#125;
 				</pre>
 				<p>Pylatte does not support the other methods like PUT, DELETE.</p>
 				
@@ -109,10 +109,10 @@
 				</pre>
 				<p>Now you can upload a file as post parameters in pageToProcessPost(This is a mapped page name by mapping module at <i>pylatte_config.xml</i>) page. Refer to following code.</p>
 				<pre class="brush: xml">
-					&lt;$
+					&#123;&#36;
 					pyformFile=formFile.formFile(pyFile)
 					pyformFile.moveUploadFile(&quot;filepy&quot;,&quot;download&quot;,&quot;pylatte.jpg&quot;)
-					$&gt;
+					&#36;&#125;
 				</pre>
 				<p>you can receive the file information to variable with using <b>formFile.formFile(pyFile)</b>. And execute moveUploadFile mothod from the variable to complete upload file to server. Parameters of moveUploadFile are name, folder name, and file name in order.</p> 
 				<p>In addition, pyFile[<i>name</i>]</p> has a little information about the file as dictionary type.
@@ -130,16 +130,16 @@
 				<p>Only MySQL is an available database on Pylatte now. In &lt;sql&gt;, it is required to fill with host, user, password, database name.</p>
 				
 				<h3>Simple way to use database</h3>				
-				<p><b>&lt;@latteDatabase&gt;</b> has to be written on the code specifically before using database. After that, execute SQL what you need through <b>latteDB.query()</b> method. And then, use <b>latteDB.store_result()</b> method which return result of processing the SQL.</p>
+				<p><b>latteDatabase()</b> has to be written on the code specifically before using database. After that, execute SQL what you need through <b>latteDB.query()</b> method. And then, use <b>latteDB.store_result()</b> method which return result of processing the SQL.</p>
 				<p>The result include not only result of SQL but also some methods. To see how to use a database, check example code below.</p>
 				<pre class="brush: xml">
-					&lt;$
+					&#123;&#36;
 					latteDatabase()					
 					latteDB.query(&quot;select * from test&quot;)
 					result=latteDB.store_result()
-					$&gt;
+					&#36;&#125;
 					&lt;div id="dbdiv"&gt;
-					&lt;$=result.fetch_row()$&gt;
+					&#123;&#36;=result.fetch_row()&#36;&#125;
 					&lt;/div&gt;
 				</pre>
 				<p>This code returns tuple type result by fetch_row()</p>
@@ -148,7 +148,7 @@
 				<pt>The second parameter (how) tells it how the row should be represented. By default, it is zero which means, return as a tuple. how=1 means, return it as a dictionary, where the keys are the column names, or table.column if there are two columns with the same name (say, from a join). how=2 means the same as how=1 except that the keys are always table.column.</p>
 				
 				<h3>Advanced way to use database</h3>
-				<p><b>&lt;@latteDatabaseExt&gt;</b> has to be written on the code specifically before using database. 
+				<p><b>latteDatabaseExt()</b> has to be written on the code specifically before using database. 
 				<p>In this case, DBMappingParser class and db_mapping.xml file are required to use. Refer to following code.</p>
 				<pre class="brush: xml">
 					<sqlMap id="user">
@@ -161,14 +161,15 @@
 				</pre>
 				<p>This is xml code in <i>db_mapping.xml file</i>. &lt;sqlMap&gt; tag needs attribute 'id'. And its child nodes (e.g. select, insert, update, delete ...) also need attribute 'id'. These 'id' are used to call SQL which is values of the childe nodes. Let's see how to deal with database using these SQLs.</p>
 				<pre class="brush: xml">
-					<@latteDatabaseExt>
-					&lt;$
+					&#123;&#36;
+					latteDatabaseExt()
+				
 					db = DBMappingParser.pyLatteDBMappingParser()
 					parameter = {&quot;age&quot;:1, &quot;name&quot;:&quot;pylatte&quot;}
 					
 					result1 = db.queryForList(&quot;user.select1&quot;)	
 					result2 = db.queryForList(&quot;user.select2&quot;, parameter)
-					$&gt;
+					&#36;&#125;
 				</pre>
 				<p>First of all, declare on variable and call DBMappingParser.pyLatteDBMappingParser() to save database object to the variable.</p>
 				<p>Secondly, define dictionary type parameter. This will be replaced matched value in SQL.</p>
@@ -182,8 +183,8 @@
 			<h2>Server Information</h2>
 				<p>It is possible to get HTTP header information that you required to Pylatte web server. It is also saved as dictionary type. Refer to following code to see how to use it in pyl.</p>
 				<pre class="brush: xml">
-					&lt;$=headerInfo["User-Agent"]$&gt;
-					&lt;$=headerInfo["Accept-Encoding"]$&gt;
+					&#123;&#36;=headerInfo["User-Agent"]&#36;&#125;
+					&#123;&#36;=headerInfo["Accept-Encoding"]&#36;&#125;
 				</pre>
 				<p>There are planty of header information. Pylatte support most common header information.</p>
 			</div><!--/content-primary -->

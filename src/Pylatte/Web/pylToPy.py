@@ -19,16 +19,19 @@ tokens = (
 def t_PYL_OUTPUT(t):
     r'\{\$\=(.*?)\$\}' 
     t.value = (t.value)
+    logging.debug(t)
     return t
 
 def t_PYL(t):
     r'\{\$[^<>]*?\$\}' 
     t.value = (t.value)
+    logging.debug(t)
     return t
 
 def t_HTML(t):
     r'[^{$]+' 
-    t.value = (t.value)     
+    t.value = (t.value)   
+    logging.debug(t)  
     return t
 
 
