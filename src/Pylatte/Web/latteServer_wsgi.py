@@ -22,7 +22,19 @@ def not_found(environ, start_response):
 def application(environ, start_response):
     
     headerInfo = requestHeaderInfo.requestHeaderInfo(environ).getHeaderInfo()
-    param = parse_qs(environ.get('QUERY_STRING', ''))
+    if headerInfo["REQUEST_METHOD"] == "GET":
+        param = dict( (k, v if len(v)>1 else v[0] ) for k, v in parse_qs(environ.get('QUERY_STRING', '')).items() )
+    elif headerInfo["REQUEST_METHOD"] == "POST":
+        try:
+            length= int(environ.get('CONTENT_LENGTH', '0'))
+        except ValueError:
+            length= 0
+        if length!=0:
+            param = dict( (k, v if len(v)>1 else v[0] ) for k, v in parse_qs(environ['wsgi.input'].read(length).decode(),True).items() )
+        else:
+                param = dict()
+    else:
+        param = dict()
     path = environ.get('PATH_INFO', '')
     
     logging.debug("GET method Parameters "+str(param))
