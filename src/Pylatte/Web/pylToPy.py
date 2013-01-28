@@ -9,54 +9,31 @@ import re#정규표현식 모듈
 import math
 import logging
 
-# List of token names.   This is always required
+# List of token names. This is always required
 tokens = (
    'PYL_OUTPUT',
    'PYL',
    'HTML',
-   'HTML_L',
-   'HTML_R',
-   'NOHTML',
 ) 
 
 def t_PYL_OUTPUT(t):
-    r'\s*\<\$\=(.*?)\$\>' 
+    r'\{\$\=(.*?)\$\}' 
     t.value = (t.value)
     return t
 
 def t_PYL(t):
-    r'\s*\{\$[^<>]*?\$\}' 
+    r'\{\$[^<>]*?\$\}' 
     t.value = (t.value)
     return t
 
 def t_HTML(t):
-    r'\s*\<[\/\!]*?[^<>]*?\>' 
-    t.value = (t.value)  
-    return t
-
-def t_HTML_L(t):
-    r'\s*\<[\!]*[.|\w]*?[^<]' 
-    t.value = (t.value)  
-    return t
-
-def t_HTML_R(t):
-    r'\s*[\/\!]*[^<>]*\>' 
-    t.value = (t.value)  
-    return t
-
-def t_NOHTML(t):
-    r'\s*[^<>\s]+' 
+    r'[^{$]+' 
     t.value = (t.value)     
     return t
 
 
-# Define a rule so we can track line numbers
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
-
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = '\t'
+t_ignore = '\n'
 
 # Error handling rule
 def t_error(t):
@@ -96,7 +73,7 @@ class pylToPy:
         
         pypage.append('\t'+'def generate(self,param,pyFile,session,headerInfo,lattedb):\n')
         
-        # 파이썬 코드 처리
+         # 파이썬 코드 처리
         # Build the lexer
         lexer = lex.lex(debug=1)
         
@@ -107,7 +84,7 @@ class pylToPy:
             tok = lexer.token()
             processResult=""
             if not tok: 
-                break      # No more input
+                break # No more input
             else:
                 if tok.type=="PYL":
                     processResult=self.processPyl(tok.type, tok.value, tok.lineno, tok.lexpos)
@@ -142,15 +119,15 @@ class pylToPy:
         self.pystring=pystring
         pass
         
-    def processPyl(self, type,value,lineno,lexpos):
+    def processPyl(self, type,value,lineno,expos):
         #remove whitespace front PYL CODE
-        value=value[value.rfind("<"):]
+        value=value[value.rfind("{$"):]
         #logging.debug("***\n"+value+"\n***")
 
         content=value[3:-3];
         
         #logging.debug("+++"+t.value[-2:]+"##")
-        if value[0:3]=="<$\n" and value[-3:]=="\n$>":
+        if value[0:3]=="{$\n" and value[-3:]=="\n$}":
             try:
                 firstNPos=content.index("\n")
                 #logging.debug("Value", firstNPos, secondNPos)
@@ -210,7 +187,7 @@ class pylToPy:
                 content=content.replace("latteDatabase()","import Pylatte.Database.DBMappingParser as pyLatteDBMappingParser;"+" pyLatteDBMappingParser=latteDB=DBMappingParser.pyLatteDBMappingParser(); latteDB=pyLatteDBMappingParser.makeToUseSimpleDB()");
                 
                 #if(content.find("\n")!=-1):
-                #    logging.debug(content[:content.find("\n")])
+                # logging.debug(content[:content.find("\n")])
 
                 content="\n"+content  
                 content=content.replace("\n",space)
@@ -222,9 +199,9 @@ class pylToPy:
         return content
         pass
     
-    def processPylOut(self, type,value,lineno,lexpos):
-        value=value.replace('<$=', "")
-        value=value.replace('$>', "")
+    def processPylOut(self, type,value,lineno,expos):
+        value=value.replace('{$=', "")
+        value=value.replace('$}', "")
         space=""
         for i in range(self.blank):
             space+="\t"
@@ -232,7 +209,7 @@ class pylToPy:
         return space+'\t\tself.pylToHtmlResult+=str('+value+')\n'
         pass
     
-    def processHTML(self, type,value,lineno,lexpos):
+    def processHTML(self, type,value,lineno,expos):
         space=""
         for i in range(self.blank):
             space+="\t"
@@ -240,7 +217,7 @@ class pylToPy:
         return space+'\t\tself.pylToHtmlResult+=str("""'+value+'""")\n'
         pass
     
-    def processNotPyl(self, type,value,lineno,lexpos):
+    def processNotPyl(self, type,value,lineno,expos):
         if not type=="NOHTML":
             value=value.replace('\"', "&quot;")
         space=""
