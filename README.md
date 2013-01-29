@@ -17,11 +17,11 @@ Sample code
 The following code is a example pyl file.
 
 <p>Pylatte</p>
-<$
+{$
 pyl = "HTML" + " + " + "python"
-$>
+$}
 <p>
-<$=pyl$>
+{$=pyl$}
 </p>
 The pyl code is translated by Pylatte to HTML in the browser.
 
