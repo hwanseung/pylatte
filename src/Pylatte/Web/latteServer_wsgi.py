@@ -72,31 +72,7 @@ def application(environ, start_response):
     urlTest_pyl=moduleName+'_pyl'
     logging.debug(urlTest_pyl)
     
-    sessionutil =sessionUtil.session
-    cookies=headerInfo["HTTP_COOKIE"].split(";");
-
-    latteSession=""
-    for item in cookies:
-        cookie = item.split("=")
-        if cookie[0]=="PYLATTESESSIONID":
-            #logging.debug (cookie[1])
-            latteSession=cookie[1]
-    
-    #if there is no cookie value, make a new cookie value.
-    if latteSession=="":
-        sessionKey = sessionutil.genSessionKey(sessionutil)
-    #If there is a cookie value, get the value from head information and put into sessionKey variable.
-    else: 
-        sessionKey = latteSession
-    logging.debug("session ID : "+sessionKey);
-    
-    try:
-        sessionData = sessionutil.getSessionData(sessionutil,sessionKey)
-    except IOError:
-        sessionData =""
-        
-    sessionDic = sessionutil.sessionDataTodict(sessionutil,sessionData)
-
+   
     #---------------------make pyl to py
     
     logging.debug("make PYLtoPY-----------------------")
@@ -126,7 +102,32 @@ def application(environ, start_response):
     p=pylToPy.pylToPy(item,filterStr)
     p.outPy()
     logging.debug("end to pylToPy\n")
+    
+    #Checking a cookie value to know whether session exists or not.
+    latteSession=""
+    sessionutil = sessionUtil.session
+    cookies=headerInfo["HTTP_COOKIE"].split(";");
 
+    for item in cookies:
+        cookie = item.split("=")
+        if cookie[0]=="PYLATTESESSIONID":
+            latteSession=cookie[1]
+    
+    #if there is no cookie value, make a new cookie value.
+    if latteSession=="":
+        sessionKey = sessionutil.genSessionKey(sessionutil)
+        
+    #If there is a cookie value, get the value from head information and put into sessionKey variable.
+    else: 
+        sessionKey = latteSession
+    logging.info("session ID : "+str(sessionKey));
+    
+    try:
+        sessionData = sessionutil.getSessionData(sessionutil,sessionKey)
+    except IOError:
+        sessionData =""    
+    sessionDic = sessionutil.sessionDataTodict(sessionutil,sessionData)
+    
     #---------------------
     sys.path.append(os.path.join(os.getcwd(), 'topy'))
     logging.debug(sys.path)
@@ -140,10 +141,17 @@ def application(environ, start_response):
     logging.debug("processing DynamicPage End")
     htmlcode = module.getHtml()    # completely generaged HTML
     #logging.debug(htmlcode)
-
-
-    start_response('200 OK', [('Content-Type', 'text/html'),("Content-length", str(len(htmlcode)) ),])
     
+    finalSessionDic=module.getSession()
+    sessionData = sessionutil.dictToSessionData(sessionutil,finalSessionDic)
+    sessionutil.setSessionData(sessionutil,sessionKey, sessionData)
+    
+    if sessionData!=None:#if sessionKey exist, the key are used
+        start_response('200 OK', [('Content-Type', 'text/html'),("Content-length", str(len(htmlcode)) ),("Set-Cookie","PYLATTESESSIONID="+sessionKey+"; "+headerInfo["HTTP_COOKIE"])])
+        pass
+    else:
+        start_response('200 OK', [('Content-Type', 'text/html'),("Content-length", str(len(htmlcode)) )])
+        pass
     return [bytes(htmlcode,'utf-8')]
     
     
