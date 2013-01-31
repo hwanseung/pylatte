@@ -1,0 +1,19 @@
+Database Package
+================
+
+:mod:`Database` Package
+-----------------------
+
+.. automodule:: Pylatte.Database
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`DBMappingParser` Module
+-----------------------------
+
+.. automodule:: Pylatte.Database.DBMappingParser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

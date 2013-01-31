@@ -1,0 +1,7 @@
+pylatte
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   Pylatte

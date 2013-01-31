@@ -1,0 +1,20 @@
+Pylatte Package
+===============
+
+:mod:`Pylatte` Package
+----------------------
+
+.. automodule:: Pylatte.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    Pylatte.Database
+    Pylatte.Test
+    Pylatte.Web
+

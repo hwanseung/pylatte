@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pylatte.Web.postMultipartForm &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for Pylatte.Web.postMultipartForm</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 7. 24.</span>
+
+<span class="sd">@author: HwanSeung Lee(rucifer1217@gmail.com)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<div class="viewcode-block" id="postMultipartForm"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.postMultipartForm.postMultipartForm">[docs]</a><span class="k">class</span> <span class="nc">postMultipartForm</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is used to send multipart/form</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">pyload</span><span class="o">=</span><span class="n">b</span><span class="s">&#39;&#39;</span>
+    <span class="n">delimiter</span><span class="o">=</span> <span class="n">b</span><span class="s">&#39;&#39;</span>
+    <span class="n">splited</span><span class="o">=</span><span class="n">b</span><span class="s">&#39;&#39;</span>
+    <span class="n">param</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="n">formFile</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pyload</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save payload datas in the start</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pyload</span><span class="o">=</span><span class="n">pyload</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__splitPayload</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__analysisData</span><span class="p">()</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">__splitPayload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Split received datas</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pyload</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pyload</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\r\n</span><span class="s">&#39;</span><span class="p">)</span>
+        
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">splited</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pyload</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">splited</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="c"># 스플릿하고 남는거 제거</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">__analysisData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analysis splited datas and the others become &#39;param&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">splited</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;------------------&quot;</span><span class="p">)</span>
+            <span class="n">splited_item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">b</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+            <span class="c">#for item1 in splited_item:</span>
+                <span class="c">#logging.debug(&quot;######&quot;)</span>
+                <span class="c">#logging.debug(item1)</span>
+            
+            <span class="k">if</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">b</span><span class="s">&#39;--&#39;</span><span class="p">:</span>
+                <span class="c">#데이터의 종료를 의미한다.</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c">#파일이 아니라 일반적인 type=&quot;text&quot;이거나 type=&quot;hidden&quot; 일경우</span>
+               
+                <span class="k">if</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;filename=&#39;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">namePosition</span><span class="o">=</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;; name=&quot;&#39;</span><span class="p">)</span>
+                    <span class="c">#logging.debug(namePosition)</span>
+                    <span class="n">nameValueStartP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">namePosition</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="c">#name attribute 값의 시작위치</span>
+                    <span class="n">nameValueEndP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">namePosition</span><span class="o">+</span><span class="mi">8</span><span class="p">);</span> <span class="c">#name attribute 값의 종료위치</span>
+                    <span class="n">nameValue</span><span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">nameValueStartP</span><span class="p">:</span><span class="n">nameValueEndP</span><span class="p">]</span> <span class="c">#name attribute Value</span>
+                    <span class="c">#logging.debug(b&#39;name=&#39;+nameValue)</span>
+                    <span class="c">#logging.debug(splited_item[3])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nameValue</span><span class="p">,</span><span class="s">&#39;UTF-8&#39;</span><span class="p">)]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s">&#39;UTF-8&#39;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;This is not a file&quot;</span><span class="p">)</span>
+                    <span class="k">pass</span>
+                <span class="c">#form에 파일이 올라왔을 경우</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fileInfo</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+                    <span class="n">namePosition</span><span class="o">=</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;; name=&#39;</span><span class="p">)</span>
+                    <span class="c">#logging.debug(namePosition)</span>
+                    <span class="n">nameValueStartP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">namePosition</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="c">#name attribute 값의 시작위치</span>
+                    <span class="n">nameValueEndP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">namePosition</span><span class="o">+</span><span class="mi">8</span><span class="p">);</span> <span class="c">#name attribute 값의 종료위치</span>
+                    <span class="n">nameValue</span><span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">nameValueStartP</span><span class="p">:</span><span class="n">nameValueEndP</span><span class="p">]</span> <span class="c">#name attribute Value</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;name=&#39;</span><span class="o">+</span><span class="n">nameValue</span><span class="p">)</span>
+                    
+                    <span class="n">filenamePosition</span><span class="o">=</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;; filename=&#39;</span><span class="p">)</span>
+                    <span class="c">#logging.debug(filenamePosition)</span>
+                    <span class="n">filenameValueStartP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">filenamePosition</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="c">#name attribute 값의 시작위치</span>
+                    <span class="n">filenameValueEndP</span> <span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\&quot;</span><span class="s">&#39;</span><span class="p">,</span><span class="n">filenamePosition</span><span class="o">+</span><span class="mi">12</span><span class="p">);</span> <span class="c">#name attribute 값의 종료위치</span>
+                    <span class="n">filenameValue</span><span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">filenameValueStartP</span><span class="p">:</span><span class="n">filenameValueEndP</span><span class="p">]</span> <span class="c">#name attribute Value</span>
+                    
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;filename=&#39;</span><span class="o">+</span><span class="n">filenameValue</span><span class="p">)</span>
+                   
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                    
+                    <span class="kn">import</span> <span class="nn">os</span>
+                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;/tmp/pylatte_tmp/&quot;</span><span class="p">):</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Already exist&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Not exist&quot;</span><span class="p">)</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&quot;/tmp/pylatte_tmp/&quot;</span><span class="p">)</span>
+                    
+                    <span class="c">#Temporary file name.</span>
+                    <span class="n">tmpFileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__getTmpHashKey</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filenameValue</span><span class="p">))</span><span class="o">+</span><span class="s">&quot;.pylTemp&quot;</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/tmp/pylatte_tmp/&quot;</span><span class="o">+</span><span class="n">tmpFileName</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmp_file</span><span class="p">:</span>
+                        <span class="n">tmp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">splited_item</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+                    
+                    <span class="n">fileInfo</span><span class="p">[</span><span class="s">&quot;realFileName&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">filenameValue</span><span class="p">,</span><span class="s">&#39;UTF-8&#39;</span><span class="p">)</span>
+                    <span class="n">fileInfo</span><span class="p">[</span><span class="s">&quot;tmpFileName&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">tmpFileName</span>
+                    <span class="n">fileInfo</span><span class="p">[</span><span class="s">&quot;size&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">splited_item</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">formFile</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nameValue</span><span class="p">,</span><span class="s">&#39;UTF-8&#39;</span><span class="p">)]</span><span class="o">=</span><span class="n">fileInfo</span>
+                    
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formFile</span><span class="p">)</span>
+                    <span class="k">pass</span>
+                
+                <span class="k">pass</span>
+                    
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">__getTmpHashKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make a temporary file name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">hashlib</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="n">timestr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="s">&#39;pyltmp_&#39;</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;pyl&#39;</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">+</span> <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">timestr</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="postMultipartForm.getFileInfo"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.postMultipartForm.postMultipartForm.getFileInfo">[docs]</a>    <span class="k">def</span> <span class="nf">getFileInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return file information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formFile</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="postMultipartForm.getParam"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.postMultipartForm.postMultipartForm.getParam">[docs]</a>    <span class="k">def</span> <span class="nf">getParam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrun input data except for file information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span>
+        <span class="k">pass</span></div>
+    <span class="k">pass</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">input1</span> <span class="o">=</span> <span class="n">b</span><span class="s">&#39;-----------------------------765669583386782207550639134</span><span class="se">\r\n</span><span class="s">Content-Disposition: form-data; name=&quot;file1&quot;; filename=&quot;secmem.main.logo.gif&quot;</span><span class="se">\r\n</span><span class="s">Content-Type: image/gif</span><span class="se">\r\n\r\n</span><span class="s">GIF89a</span><span class="se">\xac\x00\x12\x00\xc4\x00\x00\xca\xca\xc9\xe4\xe4\xe2\xb1\xb1\xb1</span><span class="s">opq</span><span class="se">\x98\x99\x99\xd2\xd2\xd1</span><span class="s">wxyfgi</span><span class="se">\x90\x91\x91\xdb\xdb\xd9\xb9\xba\xb9\xa9\xa9\xa9\xe6\xe6\xe4\x88\x88\x89\xe7\xe7\xe5\xc2\xc2\xc1\xa1\xa1\xa1\x7f\x80\x81\xe5\xe5\xe3\x92\x94\x97\xbb\xbd\xbf\xed\x1c</span><span class="s">$^_a</span><span class="se">\xe3\xe3\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</span><span class="s">!</span><span class="se">\xf9\x04\x00\x00\x00\x00\x00</span><span class="s">,</span><span class="se">\x00\x00\x00\x00\xac\x00\x12\x00\x00\x05\xff\xe0</span><span class="s">%</span><span class="se">\x8e</span><span class="s">di</span><span class="se">\x9e</span><span class="s">h</span><span class="se">\xaa\xae</span><span class="s">l</span><span class="se">\xeb\xbe</span><span class="s">p,</span><span class="se">\x8b\x81</span><span class="s">d</span><span class="se">\xdf</span><span class="s">8</span><span class="se">\x1e\xd4</span><span class="s">yo</span><span class="se">\xef\xba\xe0</span><span class="s">-0+</span><span class="se">\x1a\x8f\xc8\x99</span><span class="s">d</span><span class="se">\xc2</span><span class="s">l:</span><span class="se">\x9d\xb6\x8a</span><span class="s">tJ</span><span class="se">\xa5\xda</span><span class="s">(X</span><span class="se">\n</span><span class="s">#</span><span class="se">\xab\xe5</span><span class="s">JR</span><span class="se">\x02</span><span class="s">HA$</span><span class="se">\x88\x00</span><span class="s">F</span><span class="se">\x05\xc8</span><span class="s">cD</span><span class="se">\x88\x94\x1e</span><span class="s">j</span><span class="se">\x13\xe0</span><span class="s">A</span><span class="se">\xaf</span><span class="s">?</span><span class="se">\x12\xa3\xb9\xfd</span><span class="s">1</span><span class="se">\x1e</span><span class="s">)</span><span class="se">\x04</span><span class="s">cp</span><span class="se">\n\x11\x02</span><span class="s">yg&quot;</span><span class="se">\x00\x84\t</span><span class="s">v</span><span class="se">\x00</span><span class="s">i</span><span class="se">\x0f</span><span class="s">m</span><span class="se">\x17\x05</span><span class="s">w</span><span class="se">\x91\x93\x90</span><span class="s">#</span><span class="se">\x10\x85</span><span class="s">df$KO</span><span class="se">\x9e</span><span class="s">LQU</span><span class="se">\xa2</span><span class="s">RWY</span><span class="se">\x0e\\\xa7</span><span class="s">Y_(</span><span class="se">\x11\x16</span><span class="s">k</span><span class="se">\x17\x10\xae</span><span class="s">#</span><span class="se">\x0f\x16\x10</span><span class="s">#</span><span class="se">\xad</span><span class="s">%</span><span class="se">\xb1\xb6</span><span class="s">%</span><span class="se">\xad\x16\xbe\xbf\xaf\x17\xbd\xbf\xb5</span><span class="s">&quot;</span><span class="se">\t\x06\xbe\x07</span><span class="s">p</span><span class="se">\xb5\xc5\x00\x03\xbe\x03</span><span class="s">g</span><span class="se">\xb4</span><span class="s">j</span><span class="se">\xc4\x11\xd3\xb8\xb1</span><span class="s">k</span><span class="se">\xd9\xc2\x16</span><span class="s">$</span><span class="se">\x16\x03\x97\xb2</span><span class="s">#</span><span class="se">\x9d\x9f</span><span class="s">O</span><span class="se">\xa1\xa3</span><span class="s">U</span><span class="se">\xa5</span><span class="s">X</span><span class="se">\xa9\xeb</span><span class="s">^)</span><span class="se">\xc8\xaf\xdb</span><span class="s">&quot;</span><span class="se">\x0b\x16\x08</span><span class="s">i</span><span class="se">\x10\xcf</span><span class="s">%</span><span class="se">\x04\x16\x06</span><span class="s">r</span><span class="se">\xf4\x08\x0f\xe0\xe1\x11\xd1</span><span class="s">jO</span><span class="se">\x9f</span><span class="s">}</span><span class="se">\x0b\x14\x1c\x18\xa0\xab\xd8</span><span class="s">3</span><span class="se">\x02\xfb\xc0</span><span class="s">M</span><span class="se">\xa3\x05\xd0\x82\xb5</span><span class="s">Z</span><span class="se">\xd8</span><span class="s">dm</span><span class="se">\xc3\x85\xc8</span><span class="s">W</span><span class="se">\xb8</span><span class="s">`</span><span class="se">\x17\xc8\x95</span><span class="s">kr</span><span class="se">\x0e\xdd\x14</span><span class="s">u</span><span class="se">\x14\xd8\xff\xa5</span><span class="s">tw</span><span class="se">\xa2\x80</span><span class="s">/</span><span class="se">\x04</span><span class="s">&quot;by</span><span class="se">\xbc\x80\xe0\x1b\xad</span><span class="s">_$</span><span class="se">\x00\x1c\xf0\x05</span><span class="s">R</span><span class="se">\xc4</span><span class="s">4n</span><span class="se">\xbc</span><span class="s">,F</span><span class="se">\x18\xba\t</span><span class="s">(</span><span class="se">\xb7\x86\xd4</span><span class="s">`^</span><span class="se">\xd8</span><span class="s">g</span><span class="se">\x00\x19</span><span class="s">5[</span><span class="se">\xc4</span><span class="s"> d</span><span class="se">\x8c\x8a\xaf</span><span class="s">[L_</span><span class="se">\n\xae\x82\x0c\xc0\xc0\x81\xd7\xaf</span><span class="s">`</span><span class="se">\xbd</span><span class="s">2</span><span class="se">\xd8\xd1</span><span class="s">5</span><span class="se">\xac\xd9\xb1\x12</span><span class="s">P</span><span class="se">\xa9</span><span class="s">U</span><span class="se">\xc5</span><span class="s">*</span><span class="se">\xd9\x99</span><span class="s">X</span><span class="se">\x08</span><span class="s">l</span><span class="se">\x01\xf8\xb5\x80\xa0\xd5\x0b\x02</span><span class="s">vB8p`</span><span class="se">\xc1</span><span class="s">@</span><span class="se">\x9f\xc5</span><span class="s">8</span><span class="se">\xde\x12</span><span class="s">J</span><span class="se">\xf4\x10\xbd\x06\xfb</span><span class="s">&quot; </span><span class="se">\xfd\t\x8b\x9f\xd3\x9f\xdf</span><span class="s">jJ</span><span class="se">\xed\x06</span><span class="s">w</span><span class="se">\xf2\xb0\x8e</span><span class="s">;</span><span class="se">\x0f\xbc\x15\&#39;</span><span class="s">B</span><span class="se">\xe4\xc8\t</span><span class="s">%MV@</span><span class="se">\xa9</span><span class="s">R</span><span class="se">\xe5</span><span class="s">*</span><span class="se">\x12\t</span><span class="s">Z!</span><span class="se">\xd0</span><span class="s">y </span><span class="se">\x8c</span><span class="s">,</span><span class="se">\x9d\x16\x14\x06\xb6\xda</span><span class="s">j@</span><span class="se">\xd6</span><span class="s">D</span><span class="se">\xdf\x06\x0e\x8b</span><span class="s">:8</span><span class="se">\xc5</span><span class="s">&gt;</span><span class="se">\x8b</span><span class="s">i</span><span class="se">\x98</span><span class="s">AH</span><span class="se">\xf0\xad</span><span class="s">@</span><span class="se">\x81</span><span class="s">g</span><span class="se">\x92</span><span class="s">j</span><span class="se">\xd1\x1a\xd0\xea\xe2\xe4\xc6\xda</span><span class="s">,</span><span class="se">\x08\x08\xd8\x8d\x9e</span><span class="s">f</span><span class="se">\x01\x16\x94\xc9\xeb\xfc\x19\x8a\x04\xd1</span><span class="s">V</span><span class="se">\xd2\x9a</span><span class="s">Z</span><span class="se">\x8b\xe5\xf4\x08\xec\x04\x10\xd9\xce\xe6\xf2</span><span class="s">@</span><span class="se">\xd6\x02</span><span class="s">MS[</span><span class="se">\x05</span><span class="s">P</span><span class="se">\xe8\xa7\x82\xac</span><span class="s">d </span><span class="se">\xe8\xdf\x1f\xc7</span><span class="s">.1</span><span class="se">\x8b\x17</span><span class="s">$2</span><span class="se">\x94\x01\x11\x10</span><span class="s">(</span><span class="se">\x1c</span><span class="s">^</span><span class="se">\xc4\xd4\xa7\\\xff</span><span class="s">5</span><span class="se">\xd7</span><span class="s">Pf</span><span class="se">\xc1\x02\x0f\xd4\xb4\x06</span><span class="s">.</span><span class="se">\x0b\x18</span><span class="s">p</span><span class="se">\x08\x00</span><span class="s">0m</span><span class="se">\x17</span><span class="s">Rw$}</span><span class="se">\x07\x1e</span><span class="s">)</span><span class="se">\xe2\xb5</span><span class="s">3</span><span class="se">\x1e</span><span class="s">[r</span><span class="se">\x98</span><span class="s">P</span><span class="se">\xc6\x19\n\xf4\x11\xe0\x02\xb8\xbd</span><span class="s">QL</span><span class="se">\x0c</span><span class="s">a</span><span class="se">\xf0\x87</span><span class="s">I</span><span class="se">\x80</span><span class="s">C</span><span class="se">\xed\x14\x01\x01\x92\xbd\x08</span><span class="s">G</span><span class="se">\x7f\x8c\xe5</span><span class="s">D</span><span class="se">\x08</span><span class="s">$2</span><span class="se">\x01</span><span class="s">c</span><span class="se">\x94</span><span class="s">O</span><span class="se">\x87\\\xa0\xc0</span><span class="s">p</span><span class="se">\x9c</span><span class="s">p</span><span class="se">\x08\x8a\x87\x1f\x92</span><span class="s">F</span><span class="se">\x1e\x05\xe6\xe9</span><span class="s">CTa%</span><span class="se">\xd4\xe4\x8b\x1b\xb0\xec</span><span class="s">W</span><span class="se">\x93</span><span class="s">b</span><span class="se">\xfb\r</span><span class="s">2</span><span class="se">\xe5\x97\x04\xc4</span><span class="s">(</span><span class="se">\xe3</span><span class="s">~</span><span class="se">\xaf\xb4</span><span class="s">R</span><span class="se">\xc6</span><span class="s">3</span><span class="se">\xba\xa0\xd0\xa3\x80</span><span class="s">S</span><span class="se">\xa6\&#39;\x89\x1d</span><span class="s">x</span><span class="se">\x08</span><span class="s">v</span><span class="se">\x01</span><span class="s">?u S</span><span class="se">\x02</span><span class="s">Wf</span><span class="se">\x9d</span><span class="s">EV</span><span class="se">\x9e</span><span class="s">a</span><span class="se">\xa1\xf5\xa4</span><span class="s">i)47</span><span class="se">\xd4</span><span class="s">3 a</span><span class="se">\x07</span><span class="s">PMu</span><span class="se">\xfd\xa7\xe8\x02</span><span class="s">_</span><span class="se">\x82\xb9\x9b\xa2\xbb\x14</span><span class="s">4Y</span><span class="se">\x9a\&#39;\xf4\xb8\x1c</span><span class="s">Q</span><span class="se">\x00\xb6\xe5\x8d\xa2</span><span class="si">%x</span><span class="s">6Rh&amp;99by</span><span class="se">\x81\xde\xa5\xe1</span><span class="s">&gt;k</span><span class="se">\xd0\xd2</span><span class="s">@</span><span class="se">\x12</span><span class="s">.X</span><span class="se">\x82\x94\x9a</span><span class="s">/^</span><span class="se">\xd0</span><span class="s">c</span><span class="se">\xa6\&#39;\xc8</span><span class="s">I</span><span class="se">\&#39;\x1d</span><span class="s">v&amp;</span><span class="se">\xa9</span><span class="s">$</span><span class="se">\xa8\xe8\x88</span><span class="s">*&quot;</span><span class="se">\xa9</span><span class="s">m</span><span class="se">\x11</span><span class="s">E(</span><span class="se">\t\xff\xd0\xf4</span><span class="s"> </span><span class="se">\xab</span><span class="s">3,</span><span class="se">\xa2</span><span class="s">b</span><span class="se">\t\xca\xce\xf2\r\xa6</span><span class="s">X</span><span class="se">\x9e</span><span class="s">0</span><span class="se">\x87</span><span class="s">7</span><span class="se">\x07\x10\xb5</span><span class="s">SN</span><span class="se">\xa7</span><span class="s">J</span><span class="se">\x82\xc6</span><span class="s">$x</span><span class="se">\xbe\xae</span><span class="s">D</span><span class="se">\xe2\t</span><span class="s">m|Y</span><span class="se">\xe4\x05\xc7\xfc</span><span class="s">b</span><span class="se">\xc0</span><span class="s">_</span><span class="se">\xc8\xa6</span><span class="s">[</span><span class="se">\x02\x9b</span><span class="s">D</span><span class="se">\xa5\xe7</span><span class="s">B</span><span class="se">\xa3\xd1</span><span class="s">r</span><span class="se">\xb7\xeb\xb6\xa2\xa1\xb4</span><span class="s">E</span><span class="se">\x16\xf7\x02</span><span class="s">k</span><span class="se">\xc4\x91\xf8\xa9\xeb\xef\xbf</span><span class="s">)</span><span class="se">\xf0\xe0</span><span class="s">C</span><span class="se">\x0e</span><span class="s">@</span><span class="se">\x0c</span><span class="s">L</span><span class="se">\xb0\xc0\x12</span><span class="s"> </span><span class="se">\xac</span><span class="s">0</span><span class="se">\xc0\x0c</span><span class="s">7</span><span class="se">\xec\xf0\xc3\x10</span><span class="s">G,</span><span class="se">\xf1\x0c</span><span class="s">!</span><span class="se">\x00\x00</span><span class="s">;</span><span class="se">\r\n</span><span class="s">-----------------------------765669583386782207550639134</span><span class="se">\r\n</span><span class="s">Content-Disposition: form-data; name=&quot;file2&quot;; filename=&quot;text 1.txt&quot;</span><span class="se">\r\n</span><span class="s">Content-Type: text/plain</span><span class="se">\r\n\r\n</span><span class="s">hello1</span><span class="se">\n\r\n</span><span class="s">-----------------------------765669583386782207550639134</span><span class="se">\r\n</span><span class="s">Content-Disposition: form-data; name=&quot;file3&quot;; filename=&quot;text 3.txt&quot;</span><span class="se">\r\n</span><span class="s">Content-Type: text/plain</span><span class="se">\r\n\r\n</span><span class="s">hello3</span><span class="se">\n\r\n</span><span class="s">-----------------------------765669583386782207550639134</span><span class="se">\r\n</span><span class="s">Content-Disposition: form-data; name=&quot;text1&quot;</span><span class="se">\r\n\r\n</span><span class="s">ttt</span><span class="se">\r\n</span><span class="s">-----------------------------765669583386782207550639134</span><span class="se">\r\n</span><span class="s">Content-Disposition: form-data; name=&quot;hidden1&quot;</span><span class="se">\r\n\r\n\r\n</span><span class="s">-----------------------------765669583386782207550639134--</span><span class="se">\r\n</span><span class="s">&#39;</span>
+                        
+    <span class="n">p</span><span class="o">=</span><span class="n">postMultipartForm</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
+   
+   
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

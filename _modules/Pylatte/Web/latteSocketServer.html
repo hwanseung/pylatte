@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pylatte.Web.latteSocketServer &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for Pylatte.Web.latteSocketServer</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 7. 19.</span>
+
+<span class="sd">@author: Hwanseung Lee(rucifer1217@gmail.com)</span>
+
+<span class="sd">this Class is not used any more.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">socketserver</span>
+<span class="kn">import</span> <span class="nn">Pylatte.Web.configParser</span> <span class="kn">as</span> <span class="nn">configParser</span>
+<span class="kn">import</span> <span class="nn">Pylatte.Web.pylToPy</span> <span class="kn">as</span> <span class="nn">pylToPy</span>
+<span class="kn">import</span> <span class="nn">Pylatte.Web.service</span> <span class="kn">as</span> <span class="nn">service</span>
+
+<span class="n">pylatte_AsciiArt</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">=============================================================                            </span>
+<span class="s">                     ,,                               </span>
+<span class="s">                   `7MM           mm     mm           </span>
+<span class="s">                     MM           MM     MM           </span>
+<span class="s">`7MMpdMAo.`7M&#39;   `MF&#39;MM   ,6&quot;Yb.mmMMmm mmMMmm .gP&quot;Ya  </span>
+<span class="s">  MM   `Wb  VA   ,V  MM  8)   MM  MM     MM  ,M&#39;   Yb </span>
+<span class="s">  MM    M8   VA ,V   MM   ,pm9MM  MM     MM  8M</span><span class="se">\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;</span><span class="s"> </span>
+<span class="s">  MM   ,AP    VVV    MM  8M   MM  MM     MM  YM.    , </span>
+<span class="s">  MMbmmd&#39;     ,V   .JMML.`Moo9^Yo.`Mbmo  `Mbmo`Mbmmd&#39; </span>
+<span class="s">  MM         ,V                                       </span>
+<span class="s">.JMML.    OOb&quot;                                        </span>
+<span class="s">=============================================================&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="latteSockeServer"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer">[docs]</a><span class="k">class</span> <span class="nc">latteSockeServer</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">,</span> <span class="n">bind_and_activate</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">,</span> <span class="n">bind_and_activate</span><span class="o">=</span><span class="n">bind_and_activate</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">restart_server</span><span class="p">()</span>
+        
+        <span class="n">th</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="p">()</span>
+        <span class="n">th</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">RequestHandlerClass</span><span class="o">.</span><span class="n">server_version</span><span class="p">)</span>
+        <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="latteSockeServer.restart_server"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer.restart_server">[docs]</a>    <span class="k">def</span> <span class="nf">restart_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sessionFileRemove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topyFileRemove</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;start to parser Config&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">=</span><span class="n">configParser</span><span class="o">.</span><span class="n">pyLatteConfigPaser</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">urlMap</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">getUrlMap</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">databaseInfo</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">getDataBaseInfo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">getFilterMap</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;end to parser Config</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;start to pylToPy&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">urlMap</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;processing pylTopy : &quot;</span><span class="o">+</span><span class="n">item</span><span class="p">)</span>
+        
+            
+            <span class="c">#Looking for filter to execute before pyl files executed.</span>
+            <span class="n">filterStr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span><span class="p">[</span><span class="n">item1</span><span class="p">]:</span>
+                    <span class="n">filterStr</span> <span class="o">+=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;pyl/&#39;</span><span class="o">+</span><span class="n">item1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+                    <span class="c">#print(str)</span>
+                    
+            <span class="c">#print(filterStr); </span>
+            <span class="c">#if item in self.filterMap</span>
+            
+            <span class="n">p</span><span class="o">=</span><span class="n">pylToPy</span><span class="o">.</span><span class="n">pylToPy</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">filterStr</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">outPy</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;end to pylToPy</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">pylatte_AsciiArt</span><span class="p">)</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="latteSockeServer.server_bind"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer.server_bind">[docs]</a>    <span class="k">def</span> <span class="nf">server_bind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="latteSockeServer.shutdown"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer.shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sessionFileRemove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topyFileRemove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span>        
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="latteSockeServer.sessionFileRemove"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer.sessionFileRemove">[docs]</a>    <span class="k">def</span> <span class="nf">sessionFileRemove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        
+        <span class="c"># Delete the files first.</span>
+        
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;/session&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">each_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">))</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;session File Remove</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="latteSockeServer.topyFileRemove"><a class="viewcode-back" href="../../../Pylatte.Web.html#Pylatte.Web.latteSocketServer.latteSockeServer.topyFileRemove">[docs]</a>    <span class="k">def</span> <span class="nf">topyFileRemove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        
+        <span class="c"># Delete the files first.</span>
+        
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;/topy&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">each_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">))</span>
+                    
+        <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;/topy/__pycache__&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">each_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">))</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;topy File Remove</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>
+    
+            </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+        
+    <span class="c"># Delete the files first.</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+    
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;/session&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">each_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">)):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&#39;- &#39;</span> <span class="o">+</span> <span class="n">dirpath</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">each_file</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">each_file</span><span class="p">))</span>
+
+                
+
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

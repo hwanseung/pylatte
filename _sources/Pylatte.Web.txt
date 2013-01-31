@@ -1,0 +1,106 @@
+Web Package
+===========
+
+:mod:`Web` Package
+------------------
+
+.. automodule:: Pylatte.Web
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`configParser` Module
+--------------------------
+
+.. automodule:: Pylatte.Web.configParser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`formFile` Module
+----------------------
+
+.. automodule:: Pylatte.Web.formFile
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`latteServer` Module
+-------------------------
+
+.. automodule:: Pylatte.Web.latteServer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`latteServerStart` Module
+------------------------------
+
+.. automodule:: Pylatte.Web.latteServerStart
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`latteServer_wsgi` Module
+------------------------------
+
+.. automodule:: Pylatte.Web.latteServer_wsgi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`latteSocketServer` Module
+-------------------------------
+
+.. automodule:: Pylatte.Web.latteSocketServer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`postMultipartForm` Module
+-------------------------------
+
+.. automodule:: Pylatte.Web.postMultipartForm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`pylToPy` Module
+---------------------
+
+.. automodule:: Pylatte.Web.pylToPy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`requestHeaderInfo` Module
+-------------------------------
+
+.. automodule:: Pylatte.Web.requestHeaderInfo
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`service` Module
+---------------------
+
+.. automodule:: Pylatte.Web.service
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`sessionUtil` Module
+-------------------------
+
+.. automodule:: Pylatte.Web.sessionUtil
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    Pylatte.Web.Middleware
+

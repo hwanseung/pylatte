@@ -1,0 +1,19 @@
+Middleware Package
+==================
+
+:mod:`ConfigSetMiddleware` Module
+---------------------------------
+
+.. automodule:: Pylatte.Web.Middleware.ConfigSetMiddleware
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`ExceptionMiddleware` Module
+---------------------------------
+
+.. automodule:: Pylatte.Web.Middleware.ExceptionMiddleware
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
