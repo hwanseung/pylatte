@@ -5,7 +5,7 @@ Created on 2012. 12. 27.
 '''
 # import the helper functions we need to get and render tracebacks
 
-import Pylatte.Web.configParser as configParser
+import pylatte.web.configParser as configParser
 
 pylatte_AsciiArt="""
 =============================================================                            
@@ -21,7 +21,7 @@ pylatte_AsciiArt="""
 .JMML.    OOb"                                        
 ============================================================="""
 
-class ConfigSetMiddleware(object):
+class configSetMiddleware(object):
     
     parser = None
     

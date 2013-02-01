@@ -3,9 +3,9 @@ Created on 2012. 8. 4.
 
 @author: HwanSeung Lee(rucifer1217@gmail.com)
 '''
-__all__ = ["configParser",
+__all__ = ["middleware"
+           "configParser",
            "formFile",
-           "latteServer_wsgi",
            "latteServer",
            "latteServerStart",
            "latteSockeServer",

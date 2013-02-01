@@ -8,9 +8,9 @@ import sys,os.path
 import logging
 from cgi import parse_qs, FieldStorage
 
-import Pylatte.Web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
-import Pylatte.Web.sessionUtil as sessionUtil
-import Pylatte.Web.pylToPy as pylToPy
+import pylatte.web.requestHeaderInfo as requestHeaderInfo   #To use request Header information in pyl files.
+import pylatte.web.sessionUtil as sessionUtil
+import pylatte.web.pylToPy as pylToPy
 
 def not_found(environ, start_response):
     """Called if no URL matches."""
