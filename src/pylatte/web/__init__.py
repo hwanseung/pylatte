@@ -9,7 +9,6 @@ __all__ = ["middleware"
            "latteServer",
            "latteServerStart",
            "latteSockeServer",
-           "postMultipartForm",
            "pylToPy",
            "requestHeaderInfo",
            "sessionUtil"]
