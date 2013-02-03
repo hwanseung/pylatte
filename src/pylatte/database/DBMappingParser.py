@@ -62,8 +62,9 @@ class pyLatteDBMappingParser:
                         if(item1.nodeName=="dbName"):
                             #logging.debug(item1.firstChild.nodeValue);
                             info["dbName"]=item1.firstChild.nodeValue
-                    import MySQLdb
-                    self.latteDB=MySQLdb.connect(host=info["host"],user=info["user"],passwd=info["password"],db=info["dbName"])
+                    import mysql.connector
+                    
+                    self.latteDB=mysql.connector.connect(user=info["user"], password=info["password"], host=info["host"], database=info["dbName"])
                 elif str.lower(item.getAttribute('db')) == 'mongodb':
                     info = dict()
                     for item1 in item.childNodes:
@@ -103,13 +104,12 @@ class pyLatteDBMappingParser:
                     logging.debug('Error - Some $value$ are not replaced. ')
                     raise Exception
                 logging.debug("completedSQL :"+completedSQL) 
-                self.latteDB.query(completedSQL)
+                self.latteDB.execute(completedSQL)
             else:        # if 'value' is None, execute the query node directly.
-                self.latteDB.query(node.firstChild.nodeValue)
+                self.latteDB.execute(node.firstChild.nodeValue)
             
             if (node.nodeName == 'select'):
-                result=self.latteDB.store_result()
-                self.database=result.fetch_row(maxrows=0, how=1)
+                self.database=self.latteDB
             return self.database
         except Exception as e:
             logging.debug('Error - Failed to execute Query. Check out specified SQL on XML or parameter for $value$')

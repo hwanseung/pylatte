@@ -5,26 +5,24 @@ Created on 2012. 8. 4.
 '''
 from distutils.core import setup, Extension
 
-classifierList=['Pylatte',
-                'Pylatte:Database:DBMappingParser',
-                'Pylatte:Web:configParser',
-                'Pylatte:Web:formFile',
-                'Pylatte:Web:latteServer',
-                'Pylatte:Web:latteServerStart',
-           'Pylatte:Web:latteSockeServer',
-           'Pylatte:Web:methodGetGetParam',
-           'Pylatte:Web:methodGetPostParam',
-           'Pylatte:Web:postMultipartForm',
-           'Pylatte:Web:pylToPy',
-           'Pylatte:Web:requestHeaderInfo',
-           'Pylatte:Web:sessionUtil']
+classifierList=['pylatte',
+                'pylatte:database:DBMappingParser',
+                'pylatte:web:middleware:configSetMiddleware',
+                'pylatte:web:configParser',
+                'pylatte:web:formFile',
+                'pylatte:web:latteServer',
+                'pylatte:web:latteServerStart',
+                'Pylatte:Web:pylToPy',
+                'Pylatte:Web:requestHeaderInfo',
+                'Pylatte:Web:sessionUtil']
 
 setup(name='Pylatte',
       author='HwanSeung lee',
-      author_email='rucifer1217@gmail.com',
-      url='pylatte.org',
-      version='0.9.8.1.5',
+      author_email='pylatte@pylatte.org',
+      url='http://pylatte.org',
+      version='1.0',
       classifiers = classifierList,
-      packages=['Pylatte','Pylatte.Database','Pylatte.Web'],
-      description='python Web Framework - pylatte'
+      packages=['pylatte','pylatte.database','pylatte.web','pylatte.web.middleware'],
+      install_requires=['ply','mysql-connector-python','pymongo3'],
+      description='pylatte(python Web Framework) '
 )
