@@ -66,7 +66,7 @@ class pylToPy:
         
     def translationPy(self):
         pypage = ["# -*- coding: utf-8 -*- \n"]
-        pypage.append('import Pylatte.Web.formFile as formFile\n')
+        pypage.append('import pylatte.web.formFile as formFile\n')
         
         pypage.append('class ' +self.pyl_path.split('.')[0]+':\n')
         pypage.append('\t'+'pylToHtmlResult=""\n')
