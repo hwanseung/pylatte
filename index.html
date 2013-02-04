@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to pylatte’s documentation! &mdash; pylatte 1.0 documentation</title>
+    <title>Welcome to pylatte &mdash; pylatte 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="pylatte 1.0 documentation" href="#" /> 
   </head>
   <body>
@@ -47,17 +49,91 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-pylatte-s-documentation">
-<h1>Welcome to pylatte&#8217;s documentation!<a class="headerlink" href="#welcome-to-pylatte-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+  <div class="section" id="welcome-to-pylatte">
+<h1>Welcome to pylatte<a class="headerlink" href="#welcome-to-pylatte" title="Permalink to this headline">¶</a></h1>
+<img alt="http://pylatte.org/image/pylatte.png" src="http://pylatte.org/image/pylatte.png" />
+<p>Pylatte : A Web Framework Based on Python 3 Pylatte is a web framework created specifically for Python 3. Pylatte is used pyl code to make web site. pyl code is compose to python and HTML. so pyl code seem like php code. easy to learn, easy to run.</p>
+<div class="section" id="sample-code">
+<h2>Sample code<a class="headerlink" href="#sample-code" title="Permalink to this headline">¶</a></h2>
+<p>The following code is a example pyl file.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span>Pylatte<span class="nt">&lt;/p&gt;</span>
+{$
+pyl = &quot;HTML&quot; + &quot; + &quot; + &quot;python&quot;
+$}
+<span class="nt">&lt;p&gt;</span>
+{$=pyl$}
+<span class="nt">&lt;/p&gt;</span>
+</pre></div>
 </div>
-<div class="section" id="menu1">
-<h1>menu1<a class="headerlink" href="#menu1" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
+<p>The pyl code is translated by Pylatte to HTML in the browser.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span>Pylatte<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+HTML + python
+<span class="nt">&lt;/p&gt;</span>
+</pre></div>
 </div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>Translation Engine Pylatte uses pyl file format. pyl consists of HTML and Python. pyl is fully translated by the Pylatte engine into HTML. It is unique feature of Pylatte.</p>
+</div>
+<div class="section" id="database">
+<h2>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h2>
+<p>To use the database, external library must be installed: the mysql(for mysql) module or pymongo3(for MonogoDB) module for Python 3.</p>
+<p>Simple and advanced SQL via specific functions that are similar to iBATIS are provided.</p>
+</div>
+<div class="section" id="session">
+<h2>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
+<p>A session is needed to distinguish each client.</p>
+</div>
+<div class="section" id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
+<p>If a filter is set, select pages pass through the filter.</p>
+</div>
+<div class="section" id="form-file">
+<h2>Form File<a class="headerlink" href="#form-file" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to upload a file to server via POST.</p>
+</div>
+<div class="section" id="url-mapping">
+<h2>URL Mapping<a class="headerlink" href="#url-mapping" title="Permalink to this headline">¶</a></h2>
+<p>For security purposes, URL mapping transfers virtual URLs accessed by clients to web pages.</p>
+</div>
+</div>
+<div class="section" id="download">
+<h1>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="install">
+<h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="f-a-q">
+<h1>F A Q<a class="headerlink" href="#f-a-q" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="contact-us">
+<h1>Contact us<a class="headerlink" href="#contact-us" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="history">
+<h1>history<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>2011. 05. 13</dt>
+<dd>The Pylatte project is created in Busan, South Korea.</dd>
+<dt><a href="#id3"><span class="problematic" id="id4">*</span></a>2011. 09. 02</dt>
+<dd>Initial design and development of the Pylatte project.</dd>
+<dt><a href="#id5"><span class="problematic" id="id6">*</span></a>2011. 10. 31</dt>
+<dd>Pylatte v0.9 released.</dd>
+<dt><a href="#id7"><span class="problematic" id="id8">*</span></a>2012. 03. 09</dt>
+<dd>Pylatte v0.95 released. PLY code translate engine is change. we adapt PYL(Python Lex-YACC) at PLY code translate engine</dd>
+<dt><a href="#id9"><span class="problematic" id="id10">*</span></a>2012. 06. 27</dt>
+<dd>Pylatte is supported MongoDB.</dd>
+<dt><a href="#id11"><span class="problematic" id="id12">*</span></a>2012. 08. 06</dt>
+<dd>Pylatte is released as pylatte module.</dd>
+<dt><a href="#id13"><span class="problematic" id="id14">*</span></a>2012. 08. 27</dt>
+<dd>Pylatte is registered in pypi. <a class="reference external" href="http://pypi.python.org/pypi/Pylatte/0.9.7">http://pypi.python.org/pypi/Pylatte/0.9.7</a></dd>
+<dt><a href="#id15"><span class="problematic" id="id16">*</span></a>2013. 02. 03</dt>
+<dd>Pylatte v1.0 released. pylatte is used wsgi.</dd>
+</dl>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -76,10 +152,22 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to pylatte&#8217;s documentation!</a></li>
-<li><a class="reference internal" href="#menu1">menu1</a><ul>
+<li><a class="reference internal" href="#">Welcome to pylatte</a><ul>
+<li><a class="reference internal" href="#sample-code">Sample code</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#database">Database</a></li>
+<li><a class="reference internal" href="#session">Session</a></li>
+<li><a class="reference internal" href="#filter">Filter</a></li>
+<li><a class="reference internal" href="#form-file">Form File</a></li>
+<li><a class="reference internal" href="#url-mapping">URL Mapping</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#download">Download</a></li>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a></li>
+<li><a class="reference internal" href="#f-a-q">F A Q</a></li>
+<li><a class="reference internal" href="#contact-us">Contact us</a></li>
+<li><a class="reference internal" href="#history">history</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
