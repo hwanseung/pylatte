@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pylatte 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Did you install pylatte module? If you don&#8217;t install pylatte moudle, you must go install page to progress step.</p>
+<p>we need least 3 files to execute pylatte. python code to execute pylatte server and xml file to setting pylatte server pyl(compose of HTML and Python) file to show webpage.</p>
+<div class="section" id="hello-pylatte">
+<h2>Hello Pylatte<a class="headerlink" href="#hello-pylatte" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s print Hello Pylatteon pylatte tutorial as a first step. First of all, open a text editor, and it will be saved as hellopy.pyl in pyl directory.</p>
+<p>You can use python code in pyl file format on pylatte. pyl consists of HTML and python.</p>
+<p>To make pyl page working on pylatte, wrap python code with &lt;$ and $&gt;. And if you put your variable between &lt;$= and $&gt; such as &lt;$=variable$&gt;, the variable will be automatically printed on the web page by pylatte translation module.</p>
+<p>Caution : If you use print() function, it will be printed on web server console.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span>Pylatte<span class="nt">&lt;/p&gt;</span>
+{$
+hi=&quot;hello pylatte&quot;
+$}
+<span class="nt">&lt;p&gt;</span>
+{$=hi$}
+<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>In python language, indentation is absolutely important. So we strongly recommend to use python code under {$, and type $} on new line after python code. Refer to the following code.</p>
+<p>Type the code in hellopy.pyl and save it again. After running pylatte web server, you can see hello pylatte.</p>
+</div>
+<div class="section" id="setting-pylatte-web-server">
+<h2>Setting pylatte web server<a class="headerlink" href="#setting-pylatte-web-server" title="Permalink to this headline">¶</a></h2>
+<p>Basically, default port number is 80 on HTTP. If you want, you can change port number in pylatte_config.xml</p>
+<p>?
+1
+2
+3
+4
+&lt;pylatte-server&gt;</p>
+<blockquote>
+<div>&lt;port&gt;80&lt;/port&gt;</div></blockquote>
+<p>&lt;/pylatte-server&gt;
+There are many options in pylatte_config.xml. To change port number, we need to focus on only &lt;pylatte-server&gt; tag. Modify the value of &lt;port&gt; tag from default port(80) to what you want(e.g. 8000).</p>
+<p>Caution : You have to check if the port number is being used by another program before you change.</p>
+<p>URL Mapping
+To make pylatte security safe, it is neccesary to fix &lt;pylatte&gt; and &lt;pylatte-mapping&gt; tag in pylatte_config.xml</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;pylatte&gt;</p>
+<blockquote>
+<div>&lt;pylatte-name&gt;hello_pylatte&lt;/pylatte-name&gt;
+&lt;pylatte-pyl&gt;hellopy.pyl&lt;/pylatte-pyl&gt;</div></blockquote>
+<p>&lt;/pylatte&gt;
+&lt;pylatte-mapping&gt;</p>
+<blockquote>
+<div>&lt;pylatte-name&gt;hello_pylatte&lt;/pylatte-name&gt;
+&lt;url-mapping&gt;/py&lt;/url-mapping&gt;</div></blockquote>
+<p>&lt;/pylatte-mapping&gt;
+&lt;pylatte-name&gt; value(e.g. hello_pylatte) in &lt;pylatte&gt; and &lt;pylatte-mapping&gt; is just name to identify each mapping information.</p>
+<p>&lt;pylatte-pyl&gt; value(e.g. hellopy.pyl) in &lt;pylatte&gt; is real pyl page we make. it will be accessed by &lt;url-mapping&gt; value in &lt;pylatte-mapping&gt;. Once more, you have to access <a class="reference external" href="http://localhost/py">http://localhost/py</a>, NOT to <a class="reference external" href="http://localhost/hellopy.pyl">http://localhost/hellopy.pyl</a>. This can hide original url, so we think it would make pylatte securtiy much higher.</p>
+<p>Congratulation, now you can access to <a class="reference external" href="http://localhost/py">http://localhost/py</a> instead of <a class="reference external" href="http://localhost/hellopy.pyl">http://localhost/hellopy.pyl</a> to see hello pylatte.</p>
+<p>Start Pylatte Server
+must be make python code to excute pylatte</p>
+<p>?
+1
+2
+3
+import Pylatte.WebServer.latteServerStart as latteServerStart
+latteServerStart.start()
+To start pylatte web server, move to appropriate path where pylatte is installed and run following command into terminal on ubuntu. if operating system is Windows, just execute the latteServerStart.py file.</p>
+<p>There are just one more step to see hello pylatte</p>
+<p>Filter
+Sometimes, we need to process one same function in many pages before the pages get started. Filter module on Pylatte perfectly supports this.</p>
+<p>It can be configured in pylatte_config.xml.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;filter&gt;</p>
+<blockquote>
+<div>&lt;filter-name&gt;testFilter&lt;/filter-name&gt;
+&lt;filter-pyl&gt;filter/filter.pyl&lt;/filter-pyl&gt;</div></blockquote>
+<p>&lt;/filter&gt;
+&lt;filter-mapping&gt;</p>
+<blockquote>
+<div>&lt;filter-name&gt;testFilter&lt;/filter-name&gt;
+&lt;filter-url&gt;hellopy.pyl&lt;/filter-url&gt;
+&lt;filter-url&gt;byepy.pyl&lt;/filter-url&gt;</div></blockquote>
+<p>&lt;/filter-mapping&gt;
+Look at this xml code. &lt;filter-name&gt; value(e.g. testFilter) in &lt;filter&gt; and &lt;filter-mapping&gt; is just name to identify each filter information.</p>
+<p>&lt;filter-pyl&gt; value will be executed at first when you access to &lt;filter-url&gt; values.</p>
+<p>For instance, filter/filter.pyl will be executed at first when you access to byepy.pyl or hellopy.pyl in the code.</p>
+<p>So you don&#8217;t need to add same code to many pages which require same function anymore.</p>
+<p>GET &amp; POST
+There are two kinds of method to deal with GET &amp; POST parameter.</p>
+<p>When you request some parameter values using GET method or POST method, you can get the parameter values as following.</p>
+<p>?
+1
+2
+&lt;$=param$&gt;
+The variable param has all requested values as dictionary type like {&#8220;id&#8221;:pylatte, &#8220;password&#8221;:python}. Definately, you can get specific value such as following.</p>
+<p>?
+1
+2
+&lt;$=param[&#8220;id&#8221;]$&gt;
+Pylatte does not support the other methods like PUT, DELETE.</p>
+<p>Session
+Pylatte supports sesson management allocating session datas for each accessor.</p>
+<p>This session data type is dictionary. The way to use is similar with GET &amp; POST above. Refer to following code.</p>
+<p>?
+1
+2
+3
+session[&#8220;name&#8221;] = &#8220;pylatte&#8221;
+session[&#8220;age&#8221;] = 1
+Pylatte manages session data through session module. Usually, it is required to use in membership page to deal with each member&#8217;s session data.</p>
+<p>File Upload
+You can implement file upload function with a file upload module on Pylatte. When you use &lt;form&gt; tag, it is compulsory to put attribute : enctype=&#8221;multipart/form-data&#8221; into the tag.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+&lt;form method=&#8221;post&#8221; enctype=&#8221;multipart/form-data&#8221; action=&#8221;<a class="reference external" href="http:/localhost/pageToProcessPost">http:/localhost/pageToProcessPost</a>&#8220;&gt;</p>
+<blockquote>
+<div>&lt;input type=&#8221;file&#8221; name=&#8221;filepy&#8221;&gt;
+&lt;input type=&#8221;sudmit&#8221; value=&#8221;click&#8221;&gt;</div></blockquote>
+<p>&lt;/form&gt;
+Now you can upload a file as post parameters in pageToProcessPost(This is a mapped page name by mapping module at pylatte_config.xml) page. Refer to following code.</p>
+<p>?
+1
+2
+3
+4
+5
+&lt;$
+pyformFile=formFile.formFile(pyFile)
+pyformFile.moveUploadFile(&#8220;filepy&#8221;,&#8221;download&#8221;,&#8221;pylatte.jpg&#8221;)
+$&gt;
+you can receive the file information to variable with using formFile.formFile(pyFile). And execute moveUploadFile mothod from the variable to complete upload file to server. Parameters of moveUploadFile are name, folder name, and file name in order.</p>
+<p>In addition, pyFile[name]</p>
+<p>has a little information about the file as dictionary type.
+Database
+First of all, to set your database, it is needed to fix &lt;sql&gt; values in db_mapping.xml about MySQL or MongoDB connection information.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+&lt;sql db=&#8221;mysql&#8221;&gt;</p>
+<blockquote>
+<div>&lt;host&gt;localhost&lt;/host&gt;
+&lt;user&gt;user&lt;/user&gt;
+&lt;password&gt;password&lt;/password&gt;
+&lt;dbname&gt;pylatte&lt;/dbname&gt;</div></blockquote>
+<p>&lt;/sql&gt;
+?
+1
+2
+3
+4
+5
+&lt;sql db=&#8221;mongodb&#8221;&gt;</p>
+<blockquote>
+<div>&lt;host&gt;localhost&lt;/host&gt;
+&lt;port&gt;27017&lt;/port&gt;</div></blockquote>
+<p>&lt;/sql&gt;
+In &lt;sql&gt;, it is required to fill with host, user, password, database name in My SQL Setting. but MongoDB need host, port information</p>
+<p>Simple way to use database</p>
+<p>latteDatabase() has to be written on the code specifically before using database. 간단한 방법으로 데이터베이스를 쓰는 방법으로는 Mysql과 MongoDB를 사용할 수 있다.</p>
+<p>mysql</p>
+<p>After that, execute SQL what you need through latteDB.query() method. And then, use latteDB.store_result() method which return result of processing the SQL.
+The result include not only result of SQL but also some methods. To see how to use a database, check example code below.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;$
+latteDatabase()
+latteDB.query(&#8220;&#8221;&#8220;select * from test&#8221;&#8220;&#8221;)
+result=latteDB.store_result()
+$&gt;
+&lt;div id=&#8221;dbdiv&#8221;&gt;
+&lt;$=result.fetch_row()$&gt;
+&lt;/div&gt;
+This code returns tuple type result by fetch_row()</p>
+<p>fetch_row() method takes some additional parameters.</p>
+<p>The first one is, how many rows (maxrows) should be returned. By default, it returns one row. It may return fewer rows than you asked for, but never more. If you set maxrows=0, it returns all rows of the result set. If you ever get an empty tuple back, you ran out of rows.</p>
+<p>The second parameter (how) tells it how the row should be represented. By default, it is zero which means, return as a tuple. how=1 means, return it as a dictionary, where the keys are the column names, or table.column if there are two columns with the same name (say, from a join). how=2 means the same as how=1 except that the keys are always table.column.
+MongoDB</p>
+<p>collec=latteDB.test If you write this context, you can use &#8220;test&#8221; collection of MongoDB. you can access &#8220;test&#8221; Collecation into &#8220;collec&#8221; variable.
+?
+1
+2
+3
+4
+5
+6
+&lt;$
+latteDatabase()
+collec = latteDB.test
+print(collec)
+$&gt;
+If you need more detail information, you can get more infomation in <a class="reference external" href="https://github.com/mongodb/mongo-python-driver">https://github.com/mongodb/mongo-python-driver</a>.</p>
+<p>Advanced way to use database</p>
+<p>caution : mongoDB is not support this way.</p>
+<p>&lt;&#64;latteDatabaseExt&gt; has to be written on the code specifically before using database.</p>
+<p>In this case, DBMappingParser class and db_mapping.xml file are required to use. Refer to following code.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+8
+&lt;sqlmap id=&#8221;user&#8221;&gt;</p>
+<blockquote>
+<div>&lt;div class=&#8221;ui-select&#8221;&gt;&lt;div data-theme=&#8221;c&#8221; class=&#8221;ui-btn ui-btn-up-c ui-btn-icon-right ui-btn-corner-all ui-shadow&#8221;&gt;&lt;span class=&#8221;ui-btn-inner ui-btn-corner-all&#8221; aria-hidden=&#8221;true&#8221;&gt;&lt;span class=&#8221;ui-btn-text&#8221;&gt;&lt;/span&gt;&lt;span class=&#8221;ui-icon ui-icon-arrow-d ui-icon-shadow&#8221;&gt;&lt;/span&gt;&lt;/span&gt;&lt;select id=&#8221;select1&#8221;&gt;SELECT * FROM table&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&#8221;ui-select&#8221;&gt;&lt;div data-theme=&#8221;c&#8221; class=&#8221;ui-btn ui-btn-up-c ui-btn-icon-right ui-btn-corner-all ui-shadow&#8221;&gt;&lt;span class=&#8221;ui-btn-inner ui-btn-corner-all&#8221; aria-hidden=&#8221;true&#8221;&gt;&lt;span class=&#8221;ui-btn-text&#8221;&gt;&lt;/span&gt;&lt;span class=&#8221;ui-icon ui-icon-arrow-d ui-icon-shadow&#8221;&gt;&lt;/span&gt;&lt;/span&gt;&lt;select id=&#8221;select2&#8221;&gt;SELECT * FROM table WHERE age = $age$&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;insert id=&#8221;insert1&#8221;&gt;INSERT INTO table VALUES ($name$, $age$)&lt;/insert&gt;
+&lt;update id=&#8221;update1&#8221;&gt;UPDATE table SET age = $age$ WHERE name = $name$&lt;/update&gt;
+&lt;delete id=&#8221;delete1&#8221;&gt;DELETE FROM table WHERE age = $age$&lt;/delete&gt;</div></blockquote>
+<p>&lt;/sqlmap&gt;
+This is xml code in db_mapping.xml file. &lt;sqlMap&gt; tag needs attribute &#8216;id&#8217;. And its child nodes (e.g. select, insert, update, delete ...) also need attribute &#8216;id&#8217;. These &#8216;id&#8217; are used to call SQL which is values of the childe nodes. Let&#8217;s see how to deal with database using these SQLs.</p>
+<p>?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;$
+latteDatabaseExt()
+db = DBMappingParser.pyLatteDBMappingParser()
+parameter = {&#8220;age&#8221;:1, &#8220;name&#8221;:&#8221;pylatte&#8221;}</p>
+<p>result1 = db.queryForList(&#8220;user.select1&#8221;)
+result2 = db.queryForList(&#8220;user.select2&#8221;, parameter)
+$&gt;
+First of all, declare on variable and call DBMappingParser.pyLatteDBMappingParser() to save database object to the variable.</p>
+<p>Secondly, define dictionary type parameter. This will be replaced matched value in SQL.</p>
+<p>At last, call queryForList() method via the variable declared on first step.</p>
+<p>queryForList() method takes two parameters.</p>
+<p>First one indicates specific SQL in db_mapping.xml by id. For example, &#8216;user.select1&#8217; indicates a value in specific tag which has id &#8216;select1&#8217; in &lt;sqlMap&gt; tag having id &#8216;user&#8217;. So &#8216;user.select1&#8217; get replaced to &#8220;SELECT * FROM test&#8221;</p>
+<p>Second parameter is optional. When SQL indicated by first parameter includes variable $keys$, this is mandatory. As you see above example code, second parameter is dictionary type. In the parameter, the each values automatically gets replaced with each matched $keys$ in SQL. So select2 will be traslated from SELECT * FROM test WHERE age = $age$ to SELECT * FROM test WHERE age = 1</p>
+<p>queryForList() method returns tuple type as a result.</p>
+<p>Server Information
+It is possible to get HTTP header information that you required to Pylatte web server. It is also saved as dictionary type. Refer to following code to see how to use it in pyl.</p>
+<p>?
+1
+2
+3
+&lt;$=headerInfo[&#8220;User-Agent&#8221;]$&gt;
+&lt;$=headerInfo[&#8220;Accept-Encoding&#8221;]$&gt;
+There are planty of header information. Pylatte support most common header information.</p>
+</div>
+<div class="section" id="pylatte-official-contact">
+<h2>Pylatte Official Contact<a class="headerlink" href="#pylatte-official-contact" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">E-mail : <a class="reference external" href="mailto:pylatte&#37;&#52;&#48;pylatte&#46;org">pylatte<span>&#64;</span>pylatte<span>&#46;</span>org</a></div>
+<div class="line">Twitter : &#64;pylatte</div>
+<div class="line">Facebook : <a class="reference external" href="https://www.facebook.com/pylatte">https://www.facebook.com/pylatte</a></div>
+<div class="line">Repository : <a class="reference external" href="https://github.com/rucifer1217/pylatte">https://github.com/rucifer1217/pylatte</a></div>
+</div>
+</div>
+<div class="section" id="maintainer">
+<h2>Maintainer<a class="headerlink" href="#maintainer" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Sangkeun Park - <a class="reference external" href="mailto:pskalyber&#37;&#52;&#48;gmail&#46;com">pskalyber<span>&#64;</span>gmail<span>&#46;</span>com</a></dt>
+<dd><div class="first last line-block">
+<div class="line">- Project Leader</div>
+<div class="line">- He has managed Pylatte project as a Project Leader</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Hwanseung Lee - <a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a></dt>
+<dd><div class="first last line-block">
+<div class="line">- Lead Developer</div>
+<div class="line">- He is rising, young developer in new generation</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Heegeun Park - sirini.&#64;gmail.com</dt>
+<dd><div class="first last line-block">
+<div class="line">- Technical Adviser</div>
+<div class="line">- He is the best technician about web and open source.</div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#hello-pylatte">Hello Pylatte</a></li>
+<li><a class="reference internal" href="#setting-pylatte-web-server">Setting pylatte web server</a></li>
+<li><a class="reference internal" href="#pylatte-official-contact">Pylatte Official Contact</a></li>
+<li><a class="reference internal" href="#maintainer">Maintainer</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/toturial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pylatte 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
