@@ -64,24 +64,41 @@ For security purposes, URL mapping transfers virtual URLs accessed by clients to
 Download
 ===================================
 
+.. toctree::
+   :maxdepth: 2
+
+   download
 
 Install
 ===================================
 
+.. toctree::
+   :maxdepth: 2
+
+   install
 
 Tutorial
 ===================================
+.. toctree::
+   :maxdepth: 2
 
+   tutorial
 
 F A Q
 ===================================
 
+.. toctree::
+   :maxdepth: 2
+
+   faq
 
 Contact us
 ===================================
 
+.. toctree::
+   :maxdepth: 2
 
-
+   contact
 
 history
 ===================================

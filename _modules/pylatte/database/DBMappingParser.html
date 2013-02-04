@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pylatte.database.DBMappingParser &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pylatte.database.DBMappingParser</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 9. 1.</span>
+
+<span class="sd">@author: Sangkeun Park(pskalyber@gmail.com)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">xml.dom.minidom</span> <span class="kn">import</span> <span class="n">parse</span>
+
+<div class="viewcode-block" id="pyLatteDBMappingParser"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser">[docs]</a><span class="k">class</span> <span class="nc">pyLatteDBMappingParser</span><span class="p">:</span>
+
+    <span class="n">sqlList</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">tagList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">parametersList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">database</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loadXmlFromFile</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parseDataBaseInfo</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;No such file or directory : &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_get_documentURI</span><span class="p">())</span>
+            
+<div class="viewcode-block" id="pyLatteDBMappingParser.loadXmlFromFile"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser.loadXmlFromFile">[docs]</a>    <span class="k">def</span> <span class="nf">loadXmlFromFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load XML document about database information and SQL Mapping information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">xmlFD</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;db_mapping.xml&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Error - invalid file name or path&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">xmlFD</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Error - loading fail&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;XML document loading complete&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+                </div>
+<div class="viewcode-block" id="pyLatteDBMappingParser.parseDataBaseInfo"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser.parseDataBaseInfo">[docs]</a>    <span class="k">def</span> <span class="nf">parseDataBaseInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get database information(host, user, password, database name) from XML document</span>
+<span class="sd">        And Connect to MySQL to use the database&quot;&quot;&quot;</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;sql&quot;</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;db&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="s">&#39;mysql&#39;</span><span class="p">:</span>
+                    <span class="n">info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;host&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue)</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;user&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue)</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;password&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue);</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;dbName&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue);</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;dbName&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                    <span class="kn">import</span> <span class="nn">mysql.connector</span>
+                    
+                    <span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span><span class="o">=</span><span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span> <span class="n">password</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">],</span> <span class="n">host</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">],</span> <span class="n">database</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;dbName&quot;</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;db&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="s">&#39;mongodb&#39;</span><span class="p">:</span>
+                    <span class="n">info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;host&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue)</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;port&quot;</span><span class="p">):</span>
+                            <span class="c">#logging.debug(item1.firstChild.nodeValue)</span>
+                            <span class="n">info</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                    <span class="kn">import</span> <span class="nn">pymongo</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span><span class="o">=</span><span class="n">pymongo</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]))</span>
+                    
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Error - XML Parsing failed&#39;</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="pyLatteDBMappingParser.queryProcessing"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser.queryProcessing">[docs]</a>    <span class="k">def</span> <span class="nf">queryProcessing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute SQL with replacing variables in SQL&quot;&quot;&quot;</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c">#logging.debug(node.firstChild.nodeValue)              </span>
+            <span class="k">if</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>    <span class="c"># if &#39;value&#39; is not None, &#39;$value$&#39; have to be replaced </span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;SQL :&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">))</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;param : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                <span class="n">splitedSQL</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&#39;$&#39;</span><span class="p">)</span>
+                <span class="n">completedSQL</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">valuesCount</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitedSQL</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;valuesCount &quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">valuesCount</span><span class="p">));</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">splitedSQL</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">v</span><span class="p">:</span>    <span class="c"># if one phrase is matched to one variable in dictionary data, that will be replaced each other.</span>
+                            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="nb">str</span><span class="p">:</span>    <span class="c"># if one value is str type, it will be transformed &#39;value&#39; to express str type</span>
+                                <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;&#39;&quot;</span>
+                            <span class="n">i</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="n">valuesCount</span> <span class="o">=</span> <span class="n">valuesCount</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="n">completedSQL</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">valuesCount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Error - Some $value$ are not replaced. &#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;completedSQL :&quot;</span><span class="o">+</span><span class="n">completedSQL</span><span class="p">)</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">completedSQL</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>        <span class="c"># if &#39;value&#39; is None, execute the query node directly.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s">&#39;select&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Error - Failed to execute Query. Check out specified SQL on XML or parameter for $value$&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            
+            
+               </div>
+<div class="viewcode-block" id="pyLatteDBMappingParser.queryForList"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser.queryForList">[docs]</a>    <span class="k">def</span> <span class="nf">queryForList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Looking for matched SQL with specified id from XML document&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">parametersList</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">tagList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;sqlMap&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagList</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span> <span class="n">item</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">parametersList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">):</span>
+                    <span class="k">for</span> <span class="n">childItem</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">childItem</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;select&quot;</span> <span class="ow">and</span> <span class="n">childItem</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">parametersList</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queryProcessing</span><span class="p">(</span><span class="n">childItem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                        <span class="k">elif</span><span class="p">(</span><span class="n">childItem</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;insert&quot;</span> <span class="ow">and</span> <span class="n">childItem</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">parametersList</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queryProcessing</span><span class="p">(</span><span class="n">childItem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                        <span class="k">elif</span><span class="p">(</span><span class="n">childItem</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;update&quot;</span> <span class="ow">and</span> <span class="n">childItem</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">parametersList</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queryProcessing</span><span class="p">(</span><span class="n">childItem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                        <span class="k">elif</span><span class="p">(</span><span class="n">childItem</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;delete&quot;</span> <span class="ow">and</span> <span class="n">childItem</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">parametersList</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queryProcessing</span><span class="p">(</span><span class="n">childItem</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;There is no matched node or ID on the XML document&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="pyLatteDBMappingParser.makeToUseSimpleDB"><a class="viewcode-back" href="../../../pylatte.database.html#pylatte.database.DBMappingParser.pyLatteDBMappingParser.makeToUseSimpleDB">[docs]</a>    <span class="k">def</span> <span class="nf">makeToUseSimpleDB</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">latteDB</span>
+        <span class="k">pass</span>
+        </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

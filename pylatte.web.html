@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>web Package &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pylatte 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="web-package">
+<h1>web Package<a class="headerlink" href="#web-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">web</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-pylatte.web"></span><p>Created on 2012. 8. 4.</p>
+<p>&#64;author: HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+</div>
+<div class="section" id="module-pylatte.web.configParser">
+<span id="configparser-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">configParser</span></tt> Module<a class="headerlink" href="#module-pylatte.web.configParser" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 8. 4.</p>
+<p>&#64;author: HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<dl class="function">
+<dt id="pylatte.web.configParser.parseServerPort">
+<tt class="descclassname">pylatte.web.configParser.</tt><tt class="descname">parseServerPort</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#parseServerPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.parseServerPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bring a server port number from pylatte_config.xml</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser">
+<em class="property">class </em><tt class="descclassname">pylatte.web.configParser.</tt><tt class="descname">pyLatteConfigPaser</tt><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.filterMap">
+<tt class="descname">filterMap</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.filterMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.filterPyl">
+<tt class="descname">filterPyl</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.filterPyl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.filterUrl">
+<tt class="descname">filterUrl</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.filterUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.getConfigFileModifyTime">
+<tt class="descname">getConfigFileModifyTime</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.getConfigFileModifyTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.getConfigFileModifyTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.getFilterMap">
+<tt class="descname">getFilterMap</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.getFilterMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.getFilterMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.getLastConfigFileModifyTime">
+<tt class="descname">getLastConfigFileModifyTime</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.getLastConfigFileModifyTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.getLastConfigFileModifyTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.getUrlMap">
+<tt class="descname">getUrlMap</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.getUrlMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.getUrlMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.lastConfigFileModifyTime">
+<tt class="descname">lastConfigFileModifyTime</tt><em class="property"> = None</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.lastConfigFileModifyTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.makeFilterMap">
+<tt class="descname">makeFilterMap</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.makeFilterMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.makeFilterMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.makeUrlMap">
+<tt class="descname">makeUrlMap</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.makeUrlMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.makeUrlMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.mappingExcute">
+<tt class="descname">mappingExcute</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.mappingExcute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.mappingUrl">
+<tt class="descname">mappingUrl</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.mappingUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.parseFilterPyl">
+<tt class="descname">parseFilterPyl</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.parseFilterPyl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.parseFilterPyl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.parseFilterUrl">
+<tt class="descname">parseFilterUrl</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.parseFilterUrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.parseFilterUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.parseUrlMapingExcute">
+<tt class="descname">parseUrlMapingExcute</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.parseUrlMapingExcute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.parseUrlMapingExcute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.parseUrlMappingUrl">
+<tt class="descname">parseUrlMappingUrl</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/configParser.html#pyLatteConfigPaser.parseUrlMappingUrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.parseUrlMappingUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.configParser.pyLatteConfigPaser.urlMap">
+<tt class="descname">urlMap</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.configParser.pyLatteConfigPaser.urlMap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylatte.web.formFile">
+<span id="formfile-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">formFile</span></tt> Module<a class="headerlink" href="#module-pylatte.web.formFile" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 10. 7.</p>
+<p>&#64;author: HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<dl class="class">
+<dt id="pylatte.web.formFile.formFile">
+<em class="property">class </em><tt class="descclassname">pylatte.web.formFile.</tt><tt class="descname">formFile</tt><a class="reference internal" href="_modules/pylatte/web/formFile.html#formFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.formFile.formFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="attribute">
+<dt id="pylatte.web.formFile.formFile.error">
+<tt class="descname">error</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.formFile.formFile.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.formFile.formFile.getError">
+<tt class="descname">getError</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/formFile.html#formFile.getError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.formFile.formFile.getError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.formFile.formFile.moveUploadFile">
+<tt class="descname">moveUploadFile</tt><big>(</big><em>fieldStorage</em>, <em>dir</em>, <em>fileName</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/formFile.html#formFile.moveUploadFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.formFile.formFile.moveUploadFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>fieldStorage : fieldStorage
+dir : path to save a file. it must exist. if not, an error occurs
+fileName : file name to save</p>
+<p>return 0 when sucessed
+return -1 when failed</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylatte.web.latteServer">
+<span id="latteserver-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">latteServer</span></tt> Module<a class="headerlink" href="#module-pylatte.web.latteServer" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 7. 16.</p>
+<p>&#64;author: Hwanseung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<dl class="function">
+<dt id="pylatte.web.latteServer.application">
+<tt class="descclassname">pylatte.web.latteServer.</tt><tt class="descname">application</tt><big>(</big><em>environ</em>, <em>start_response</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/latteServer.html#application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.latteServer.application" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pylatte.web.latteServer.not_found">
+<tt class="descclassname">pylatte.web.latteServer.</tt><tt class="descname">not_found</tt><big>(</big><em>environ</em>, <em>start_response</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/latteServer.html#not_found"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.latteServer.not_found" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called if no URL matches.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="latteserverstart-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">latteServerStart</span></tt> Module<a class="headerlink" href="#latteserverstart-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pylatte.web.pylToPy">
+<span id="pyltopy-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">pylToPy</span></tt> Module<a class="headerlink" href="#module-pylatte.web.pylToPy" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 12. 9.</p>
+<p>&#64;author: HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<dl class="class">
+<dt id="pylatte.web.pylToPy.pylToPy">
+<em class="property">class </em><tt class="descclassname">pylatte.web.pylToPy.</tt><tt class="descname">pylToPy</tt><big>(</big><em>pyl_path</em>, <em>filterStr</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="attribute">
+<dt id="pylatte.web.pylToPy.pylToPy.blank">
+<tt class="descname">blank</tt><em class="property"> = 0</em><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.blank" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.outPy">
+<tt class="descname">outPy</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.outPy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.outPy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.pylToPy.pylToPy.page">
+<tt class="descname">page</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.page" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.processHTML">
+<tt class="descname">processHTML</tt><big>(</big><em>type</em>, <em>value</em>, <em>lineno</em>, <em>lexpos</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.processHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.processHTML" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.processNotPyl">
+<tt class="descname">processNotPyl</tt><big>(</big><em>type</em>, <em>value</em>, <em>lineno</em>, <em>lexpos</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.processNotPyl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.processNotPyl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.processPyl">
+<tt class="descname">processPyl</tt><big>(</big><em>type</em>, <em>value</em>, <em>lineno</em>, <em>lexpos</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.processPyl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.processPyl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.processPylOut">
+<tt class="descname">processPylOut</tt><big>(</big><em>type</em>, <em>value</em>, <em>lineno</em>, <em>lexpos</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.processPylOut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.processPylOut" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.pylToPy.pylToPy.pyl_path">
+<tt class="descname">pyl_path</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.pyl_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.pylToPy.pylToPy.pystring">
+<tt class="descname">pystring</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.pystring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.pylToPy.pylToPy.translationPy">
+<tt class="descname">translationPy</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#pylToPy.translationPy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.pylToPy.translationPy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pylatte.web.pylToPy.t_HTML">
+<tt class="descclassname">pylatte.web.pylToPy.</tt><tt class="descname">t_HTML</tt><big>(</big><em>t</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#t_HTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.t_HTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>[^{$]+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pylatte.web.pylToPy.t_PYL">
+<tt class="descclassname">pylatte.web.pylToPy.</tt><tt class="descname">t_PYL</tt><big>(</big><em>t</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#t_PYL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.t_PYL" title="Permalink to this definition">¶</a></dt>
+<dd><p>{$[^&lt;&gt;]*?$}</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pylatte.web.pylToPy.t_PYL_OUTPUT">
+<tt class="descclassname">pylatte.web.pylToPy.</tt><tt class="descname">t_PYL_OUTPUT</tt><big>(</big><em>t</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#t_PYL_OUTPUT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.t_PYL_OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>{$=(.*?)$}</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pylatte.web.pylToPy.t_error">
+<tt class="descclassname">pylatte.web.pylToPy.</tt><tt class="descname">t_error</tt><big>(</big><em>t</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/pylToPy.html#t_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.pylToPy.t_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pylatte.web.requestHeaderInfo">
+<span id="requestheaderinfo-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">requestHeaderInfo</span></tt> Module<a class="headerlink" href="#module-pylatte.web.requestHeaderInfo" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 7. 29.</p>
+<p>&#64;author: HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<p>request Header information.
+this information is wsgi environ value.</p>
+<dl class="class">
+<dt id="pylatte.web.requestHeaderInfo.requestHeaderInfo">
+<em class="property">class </em><tt class="descclassname">pylatte.web.requestHeaderInfo.</tt><tt class="descname">requestHeaderInfo</tt><big>(</big><em>environ</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/requestHeaderInfo.html#requestHeaderInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.requestHeaderInfo.requestHeaderInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="pylatte.web.requestHeaderInfo.requestHeaderInfo.getHeaderInfo">
+<tt class="descname">getHeaderInfo</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/requestHeaderInfo.html#requestHeaderInfo.getHeaderInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.requestHeaderInfo.requestHeaderInfo.getHeaderInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.requestHeaderInfo.requestHeaderInfo.h_info">
+<tt class="descname">h_info</tt><em class="property"> = {}</em><a class="headerlink" href="#pylatte.web.requestHeaderInfo.requestHeaderInfo.h_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylatte.web.service">
+<span id="service-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">service</span></tt> Module<a class="headerlink" href="#module-pylatte.web.service" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2012. 10. 17.</p>
+<p>&#64;author: pylatte</p>
+<dl class="class">
+<dt id="pylatte.web.service.service">
+<em class="property">class </em><tt class="descclassname">pylatte.web.service.</tt><tt class="descname">service</tt><big>(</big><em>group=None</em>, <em>target=None</em>, <em>name=None</em>, <em>args=()</em>, <em>kwargs=None</em>, <em>verbose=None</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/service.html#service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.service.service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/threading.html#threading.Thread" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></tt></a></p>
+<dl class="attribute">
+<dt id="pylatte.web.service.service.httpd">
+<tt class="descname">httpd</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.service.service.httpd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.service.service.init">
+<tt class="descname">init</tt><big>(</big><em>httpd</em>, <em>version</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/service.html#service.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.service.service.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.service.service.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/service.html#service.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.service.service.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checking a command from interective prompt.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pylatte.web.service.service.version">
+<tt class="descname">version</tt><em class="property"> = ''</em><a class="headerlink" href="#pylatte.web.service.service.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylatte.web.sessionUtil">
+<span id="sessionutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sessionUtil</span></tt> Module<a class="headerlink" href="#module-pylatte.web.sessionUtil" title="Permalink to this headline">¶</a></h2>
+<p>Created on 2011. 6. 4.</p>
+<p>&#64;author: Heegeun Park(<a class="reference external" href="mailto:sirini&#37;&#52;&#48;gmail&#46;com">sirini<span>&#64;</span>gmail<span>&#46;</span>com</a>)
+&#64;modifier : HwanSeung Lee(<a class="reference external" href="mailto:rucifer1217&#37;&#52;&#48;gmail&#46;com">rucifer1217<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<dl class="class">
+<dt id="pylatte.web.sessionUtil.session">
+<em class="property">class </em><tt class="descclassname">pylatte.web.sessionUtil.</tt><tt class="descname">session</tt><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.checkAvailableSession">
+<tt class="descname">checkAvailableSession</tt><big>(</big><em>key</em>, <em>limit=900</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.checkAvailableSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.checkAvailableSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.dictToSessionData">
+<tt class="descname">dictToSessionData</tt><big>(</big><em>dicData</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.dictToSessionData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.dictToSessionData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.genSessionKey">
+<tt class="descname">genSessionKey</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.genSessionKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.genSessionKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.getSessionData">
+<tt class="descname">getSessionData</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.getSessionData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.getSessionData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.sessionDataTodict">
+<tt class="descname">sessionDataTodict</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.sessionDataTodict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.sessionDataTodict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pylatte.web.sessionUtil.session.setSessionData">
+<tt class="descname">setSessionData</tt><big>(</big><em>key</em>, <em>content=None</em><big>)</big><a class="reference internal" href="_modules/pylatte/web/sessionUtil.html#session.setSessionData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylatte.web.sessionUtil.session.setSessionData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pylatte.web.middleware.html">middleware Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pylatte.web.middleware.html#id1"><tt class="docutils literal"><span class="pre">middleware</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylatte.web.middleware.html#module-pylatte.web.middleware.configSetMiddleware"><tt class="docutils literal"><span class="pre">configSetMiddleware</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">web Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">web</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.configParser"><tt class="docutils literal"><span class="pre">configParser</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.formFile"><tt class="docutils literal"><span class="pre">formFile</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.latteServer"><tt class="docutils literal"><span class="pre">latteServer</span></tt> Module</a></li>
+<li><a class="reference internal" href="#latteserverstart-module"><tt class="docutils literal"><span class="pre">latteServerStart</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.pylToPy"><tt class="docutils literal"><span class="pre">pylToPy</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.requestHeaderInfo"><tt class="docutils literal"><span class="pre">requestHeaderInfo</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.service"><tt class="docutils literal"><span class="pre">service</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-pylatte.web.sessionUtil"><tt class="docutils literal"><span class="pre">sessionUtil</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/pylatte.web.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pylatte 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

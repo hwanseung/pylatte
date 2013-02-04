@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pylatte.web.configParser &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pylatte.web.configParser</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 8. 4.</span>
+
+<span class="sd">@author: HwanSeung Lee(rucifer1217@gmail.com)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">xml.dom.minidom</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="pyLatteConfigPaser"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser">[docs]</a><span class="k">class</span> <span class="nc">pyLatteConfigPaser</span><span class="p">():</span>
+    
+    <span class="n">mappingExcute</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    <span class="n">mappingUrl</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    <span class="n">urlMap</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    
+    <span class="n">filterPyl</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    <span class="n">filterUrl</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    <span class="n">filterMap</span><span class="o">=</span><span class="nb">dict</span><span class="p">();</span>
+    
+    <span class="c">#설정을 읽어올때의 설정파일의 수정시간을 저장한 변수</span>
+    <span class="n">lastConfigFileModifyTime</span><span class="o">=</span><span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;start to parser Config&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastConfigFileModifyTime</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="s">&quot;pylatte_config.xml&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">=</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;pylatte_config.xml&quot;</span><span class="p">)</span>
+        
+        <span class="c">#Mapping information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parseUrlMapingExcute</span><span class="p">()</span> <span class="c">#Bring the path to access(execute) pyl file actually from a xml file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parseUrlMappingUrl</span><span class="p">()</span> 	<span class="c">#Bring the virtual URL to link to one pyl file from a xml file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">makeUrlMap</span><span class="p">()</span>			<span class="c">#Make dictionay data pairs</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlMap</span><span class="p">)</span>
+        
+        <span class="c">#Filtering information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parseFilterPyl</span><span class="p">()</span>		<span class="c">#Bring the path to filter pyl file actually from a xml file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parseFilterUrl</span><span class="p">()</span>		<span class="c">#Bring the path to be filtered pyl files from a xml file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">makeFilterMap</span><span class="p">()</span>		<span class="c">#Make dictionay data pairs</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;end to parser Config</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="pyLatteConfigPaser.parseUrlMapingExcute"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.parseUrlMapingExcute">[docs]</a>    <span class="k">def</span> <span class="nf">parseUrlMapingExcute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mappingList</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;pylatte&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mappingList</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;pylatte-name&quot;</span><span class="p">):</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;pylatte-pyl&quot;</span><span class="p">):</span>
+                    <span class="n">pyName</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mappingExcute</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">pyName</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.parseUrlMappingUrl"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.parseUrlMappingUrl">[docs]</a>    <span class="k">def</span> <span class="nf">parseUrlMappingUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mappingList</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;pylatte-mapping&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mappingList</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;pylatte-name&quot;</span><span class="p">):</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;url-mapping&quot;</span><span class="p">):</span>
+                    <span class="n">urlName</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mappingUrl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">urlName</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.makeUrlMap"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.makeUrlMap">[docs]</a>    <span class="k">def</span> <span class="nf">makeUrlMap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mappingExcute</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">urlMap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mappingUrl</span><span class="p">[</span><span class="n">item</span><span class="p">]]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mappingExcute</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.parseFilterPyl"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.parseFilterPyl">[docs]</a>    <span class="k">def</span> <span class="nf">parseFilterPyl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mappingList</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;filter&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mappingList</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;filter-name&quot;</span><span class="p">):</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;filter-pyl&quot;</span><span class="p">):</span>
+                    <span class="n">pyName</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterPyl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">pyName</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.parseFilterUrl"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.parseFilterUrl">[docs]</a>    <span class="k">def</span> <span class="nf">parseFilterUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mappingList</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;filter-mapping&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mappingList</span><span class="p">:</span>
+            <span class="n">filterUrlList</span><span class="o">=</span><span class="p">[];</span>
+            <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;filter-name&quot;</span><span class="p">):</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;filter-url&quot;</span><span class="p">):</span>
+                    <span class="n">filterUrlList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterUrl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">filterUrlList</span>
+        <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.makeFilterMap"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.makeFilterMap">[docs]</a>    <span class="k">def</span> <span class="nf">makeFilterMap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filterUrl</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filterPyl</span><span class="p">[</span><span class="n">item</span><span class="p">]]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filterUrl</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">pass</span>
+
+    </div>
+<div class="viewcode-block" id="pyLatteConfigPaser.getUrlMap"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.getUrlMap">[docs]</a>    <span class="k">def</span> <span class="nf">getUrlMap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">urlMap</span></div>
+<div class="viewcode-block" id="pyLatteConfigPaser.getFilterMap"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.getFilterMap">[docs]</a>    <span class="k">def</span> <span class="nf">getFilterMap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filterMap</span></div>
+<div class="viewcode-block" id="pyLatteConfigPaser.getLastConfigFileModifyTime"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.getLastConfigFileModifyTime">[docs]</a>    <span class="k">def</span> <span class="nf">getLastConfigFileModifyTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastConfigFileModifyTime</span></div>
+<div class="viewcode-block" id="pyLatteConfigPaser.getConfigFileModifyTime"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.pyLatteConfigPaser.getConfigFileModifyTime">[docs]</a>    <span class="k">def</span> <span class="nf">getConfigFileModifyTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="s">&quot;pylatte_config.xml&quot;</span><span class="p">)</span></div>
+    <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="parseServerPort"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.configParser.parseServerPort">[docs]</a><span class="k">def</span> <span class="nf">parseServerPort</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bring a server port number from pylatte_config.xml</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">xml.dom.minidom</span> <span class="kn">import</span> <span class="n">parse</span>
+    <span class="n">doc</span><span class="o">=</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;pylatte_config.xml&quot;</span><span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;pylatte-server&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">childNodes</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">nodeName</span><span class="o">==</span><span class="s">&quot;port&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeValue</span><span class="p">)</span>
+    
+    <span class="k">pass</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c">#f = open(&quot;pylatte_config.xml&quot;,&quot;r&quot;,encoding=&quot;utf-8&quot;)</span>
+    
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pyLatteConfigPaser</span><span class="p">();</span>
+    <span class="c">#p.Parse(f.read())</span>
+    <span class="k">pass</span>
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

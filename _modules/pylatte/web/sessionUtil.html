@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pylatte.web.sessionUtil &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pylatte.web.sessionUtil</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 6. 4.</span>
+
+<span class="sd">@author: Heegeun Park(sirini@gmail.com)</span>
+<span class="sd">@modifier : HwanSeung Lee(rucifer1217@gmail.com)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<div class="viewcode-block" id="session"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session">[docs]</a><span class="k">class</span> <span class="nc">session</span><span class="p">:</span>
+    <span class="c"># After limit (default = 900 sec), the session becomes unvalid.</span>
+<div class="viewcode-block" id="session.checkAvailableSession"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.checkAvailableSession">[docs]</a>    <span class="k">def</span> <span class="nf">checkAvailableSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">900</span><span class="p">):</span>
+        
+        <span class="kn">import</span> <span class="nn">os.path</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s">&#39;session/&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="s">&#39;session/&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">))</span> <span class="o">+</span> <span class="n">limit</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;session/&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span> 
+    
+    
+    <span class="c"># Generate session file @Heegeun Park</span>
+    <span class="c"># To put cookie in client, set the value like Set-Cookie: PYLSESSION=pylsession_rjdidkoawe3il2q39njklszdfjoi ... in HTTP header</span></div>
+<div class="viewcode-block" id="session.genSessionKey"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.genSessionKey">[docs]</a>    <span class="k">def</span> <span class="nf">genSessionKey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="kn">import</span> <span class="nn">hashlib</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="n">timestr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="s">&#39;pylsession_&#39;</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;pylatte&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">timestr</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    
+    <span class="c"># Save file using generated key string @Heegeun Park</span>
+    <span class="c"># It is possible to write in a selected file.</span></div>
+<div class="viewcode-block" id="session.setSessionData"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.setSessionData">[docs]</a>    <span class="k">def</span> <span class="nf">setSessionData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s">&quot;session&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&quot;session&quot;</span><span class="p">)</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;session/&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">content</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">pass</span>
+    
+    <span class="c"># Get session data using the session key.  @Hwanseung Lee</span></div>
+<div class="viewcode-block" id="session.getSessionData"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.getSessionData">[docs]</a>    <span class="k">def</span> <span class="nf">getSessionData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s">&quot;session&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&quot;session&quot;</span><span class="p">)</span>
+            
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;session/&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">();</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span> <span class="p">(</span><span class="s">&quot;session content : &quot;</span><span class="o">+</span><span class="n">content</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">content</span>    
+        
+    <span class="c"># Change form from dictionary type to session data type @Hwanseung Lee</span></div>
+<div class="viewcode-block" id="session.dictToSessionData"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.dictToSessionData">[docs]</a>    <span class="k">def</span> <span class="nf">dictToSessionData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dicData</span><span class="p">):</span>
+        <span class="n">dataStr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dicData</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dataStr</span><span class="o">+=</span><span class="n">item</span><span class="o">+</span><span class="s">&quot;:&quot;</span><span class="o">+</span><span class="n">dicData</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">+</span><span class="s">&quot;/&quot;</span>
+        
+        <span class="k">return</span> <span class="n">dataStr</span>
+        <span class="k">pass</span>
+    
+        <span class="c"># Change form from session data type to dictionary type @Hwanseung Lee</span></div>
+<div class="viewcode-block" id="session.sessionDataTodict"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.sessionUtil.session.sessionDataTodict">[docs]</a>    <span class="k">def</span> <span class="nf">sessionDataTodict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">splitedData</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="n">resultDic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">();</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">splitedData</span><span class="p">:</span>
+                <span class="n">resultDic</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span><span class="c">#indexError를 받으면 그냥 넘기도록 설정</span>
+            <span class="k">pass</span>
+            
+        <span class="k">return</span> <span class="n">resultDic</span>
+        <span class="k">pass</span>
+            </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">str1</span> <span class="o">=</span> <span class="s">&quot;key:value/key1:value1/key2:value2/&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">sessionDataTodict</span><span class="p">(</span><span class="n">session</span><span class="p">,</span><span class="n">str1</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    
+    <span class="n">resultStr</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">dictToSessionData</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span> <span class="p">(</span><span class="n">resultStr</span><span class="p">)</span>
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

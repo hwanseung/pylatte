@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pylatte.web.latteServer &mdash; pylatte 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="pylatte 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pylatte.web.latteServer</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2011. 7. 16.</span>
+
+<span class="sd">@author: Hwanseung Lee(rucifer1217@gmail.com)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">imp</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">cgi</span> <span class="kn">import</span> <span class="n">parse_qs</span><span class="p">,</span> <span class="n">FieldStorage</span>
+
+<span class="kn">import</span> <span class="nn">pylatte.web.requestHeaderInfo</span> <span class="kn">as</span> <span class="nn">requestHeaderInfo</span>   <span class="c">#To use request Header information in pyl files.</span>
+<span class="kn">import</span> <span class="nn">pylatte.web.sessionUtil</span> <span class="kn">as</span> <span class="nn">sessionUtil</span>
+<span class="kn">import</span> <span class="nn">pylatte.web.pylToPy</span> <span class="kn">as</span> <span class="nn">pylToPy</span>
+
+<div class="viewcode-block" id="not_found"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.latteServer.not_found">[docs]</a><span class="k">def</span> <span class="nf">not_found</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Called if no URL matches.&quot;&quot;&quot;</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;404 NOT FOUND&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;text/plain&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s">&#39;Not Found&#39;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="application"><a class="viewcode-back" href="../../../pylatte.web.html#pylatte.web.latteServer.application">[docs]</a><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    
+    <span class="n">headerInfo</span> <span class="o">=</span> <span class="n">requestHeaderInfo</span><span class="o">.</span><span class="n">requestHeaderInfo</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span><span class="o">.</span><span class="n">getHeaderInfo</span><span class="p">()</span>
+    <span class="n">pyFile</span><span class="o">=</span><span class="bp">None</span>
+    <span class="k">if</span> <span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;REQUEST_METHOD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;GET&quot;</span><span class="p">:</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="k">else</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;REQUEST_METHOD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;CONTENT_TYPE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">length</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;CONTENT_LENGTH&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">length</span><span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">length</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="k">else</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;wsgi.input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                    <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;CONTENT_TYPE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;multipart/form-data&quot;</span><span class="p">):</span>
+            <span class="n">pyFile</span> <span class="o">=</span> <span class="n">FieldStorage</span><span class="p">(</span><span class="n">fp</span><span class="o">=</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;wsgi.input&#39;</span><span class="p">],</span><span class="n">environ</span><span class="o">=</span><span class="n">environ</span><span class="p">)</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;GET method Parameters &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;path : &quot;</span><span class="o">+</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;urlMap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;urlMap&quot;</span><span class="p">]))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;filterMap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;filterMap&quot;</span><span class="p">]))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Cookie : &quot;</span><span class="o">+</span><span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;HTTP_COOKIE&quot;</span><span class="p">])</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pylPath</span><span class="o">=</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;urlMap&quot;</span><span class="p">][</span><span class="n">path</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;미리 xml로 명시한 동적 요청이 아닐 경우 여기로 들어오기 되어 있음.</span>
+<span class="sd">        여기서 정적파일을 찾은 후 없으면  404 not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;..&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">in_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="n">path</span><span class="p">,</span><span class="s">&quot;rb&quot;</span><span class="p">)</span>
+            <span class="n">staticFile</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">in_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">not_found</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+        <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&quot;Content-length&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">staticFile</span><span class="p">))</span> <span class="p">),])</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">staticFile</span><span class="p">]</span>
+        <span class="k">pass</span>
+        
+    <span class="n">moduleName</span><span class="o">=</span><span class="n">pylPath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;moduleName : &quot;</span><span class="o">+</span><span class="n">moduleName</span><span class="p">)</span>
+    <span class="n">urlTest_pyl</span><span class="o">=</span><span class="n">moduleName</span><span class="o">+</span><span class="s">&#39;_pyl&#39;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">urlTest_pyl</span><span class="p">)</span>
+    
+   
+    <span class="c">#---------------------make pyl to py</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;make PYLtoPY-----------------------&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;path : &quot;</span><span class="o">+</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s">&quot;urlMap&quot;</span><span class="p">]</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;urlMap&quot;</span><span class="p">])</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;urlMap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;urlMap&quot;</span><span class="p">]))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;filterMap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;filterMap&quot;</span><span class="p">]))</span>
+    
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;make end PYLtoPY-----------------------&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;start to pylToPy&quot;</span><span class="p">)</span>
+    
+    <span class="c">#Looking for filter to execute before pyl files executed.</span>
+    <span class="n">filterMap</span><span class="o">=</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;filterMap&quot;</span><span class="p">]</span>
+    <span class="n">filterStr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">filterMap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">filterMap</span><span class="p">[</span><span class="n">item1</span><span class="p">]:</span>
+            <span class="n">filterStr</span> <span class="o">+=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;pyl/&#39;</span><span class="o">+</span><span class="n">item1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">pylToPy</span><span class="o">.</span><span class="n">pylToPy</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">filterStr</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">outPy</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;end to pylToPy</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    
+    <span class="c">#Checking a cookie value to know whether session exists or not.</span>
+    <span class="n">latteSession</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="n">sessionutil</span> <span class="o">=</span> <span class="n">sessionUtil</span><span class="o">.</span><span class="n">session</span>
+    <span class="n">cookies</span><span class="o">=</span><span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;HTTP_COOKIE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">:</span>
+        <span class="n">cookie</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cookie</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;PYLATTESESSIONID&quot;</span><span class="p">:</span>
+            <span class="n">latteSession</span><span class="o">=</span><span class="n">cookie</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c">#if there is no cookie value, make a new cookie value.</span>
+    <span class="k">if</span> <span class="n">latteSession</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">sessionKey</span> <span class="o">=</span> <span class="n">sessionutil</span><span class="o">.</span><span class="n">genSessionKey</span><span class="p">(</span><span class="n">sessionutil</span><span class="p">)</span>
+        
+    <span class="c">#If there is a cookie value, get the value from head information and put into sessionKey variable.</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">sessionKey</span> <span class="o">=</span> <span class="n">latteSession</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;session ID : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">sessionKey</span><span class="p">));</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sessionData</span> <span class="o">=</span> <span class="n">sessionutil</span><span class="o">.</span><span class="n">getSessionData</span><span class="p">(</span><span class="n">sessionutil</span><span class="p">,</span><span class="n">sessionKey</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">sessionData</span> <span class="o">=</span><span class="s">&quot;&quot;</span>    
+    <span class="n">sessionDic</span> <span class="o">=</span> <span class="n">sessionutil</span><span class="o">.</span><span class="n">sessionDataTodict</span><span class="p">(</span><span class="n">sessionutil</span><span class="p">,</span><span class="n">sessionData</span><span class="p">)</span>
+    
+    <span class="c">#---------------------</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s">&#39;topy&#39;</span><span class="p">))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="n">pyl</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">urlTest_pyl</span><span class="p">)</span>
+    <span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">pyl</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Got started to process dynamic Page&quot;</span><span class="p">)</span>
+    <span class="n">databaseInfo</span><span class="o">=</span><span class="nb">tuple</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;param : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+    <span class="n">module</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">pyl</span><span class="p">,</span> <span class="n">moduleName</span><span class="p">)(</span><span class="n">param</span><span class="p">,</span><span class="n">pyFile</span><span class="p">,</span><span class="n">sessionDic</span><span class="p">,</span><span class="n">headerInfo</span><span class="p">,</span><span class="n">databaseInfo</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;processing DynamicPage End&quot;</span><span class="p">)</span>
+    <span class="n">htmlcode</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">getHtml</span><span class="p">()</span>    <span class="c"># completely generaged HTML</span>
+    <span class="c">#logging.debug(htmlcode)</span>
+    
+    <span class="n">finalSessionDic</span><span class="o">=</span><span class="n">module</span><span class="o">.</span><span class="n">getSession</span><span class="p">()</span>
+    <span class="n">sessionData</span> <span class="o">=</span> <span class="n">sessionutil</span><span class="o">.</span><span class="n">dictToSessionData</span><span class="p">(</span><span class="n">sessionutil</span><span class="p">,</span><span class="n">finalSessionDic</span><span class="p">)</span>
+    <span class="n">sessionutil</span><span class="o">.</span><span class="n">setSessionData</span><span class="p">(</span><span class="n">sessionutil</span><span class="p">,</span><span class="n">sessionKey</span><span class="p">,</span> <span class="n">sessionData</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">sessionData</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span><span class="c">#if sessionKey exist, the key are used</span>
+        <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;text/html&#39;</span><span class="p">),(</span><span class="s">&quot;Content-length&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">htmlcode</span><span class="p">))</span> <span class="p">),(</span><span class="s">&quot;Set-Cookie&quot;</span><span class="p">,</span><span class="s">&quot;PYLATTESESSIONID=&quot;</span><span class="o">+</span><span class="n">sessionKey</span><span class="o">+</span><span class="s">&quot;; &quot;</span><span class="o">+</span><span class="n">headerInfo</span><span class="p">[</span><span class="s">&quot;HTTP_COOKIE&quot;</span><span class="p">])])</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;text/html&#39;</span><span class="p">),(</span><span class="s">&quot;Content-length&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">htmlcode</span><span class="p">))</span> <span class="p">)])</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">htmlcode</span><span class="p">,</span><span class="s">&#39;utf-8&#39;</span><span class="p">)]</span>
+    
+    </div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+        
+    <span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
+    <span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
+    <span class="n">srv</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">8080</span><span class="p">,</span> <span class="n">application</span><span class="p">)</span>
+    <span class="n">srv</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">pylatte 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, pylatte.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
