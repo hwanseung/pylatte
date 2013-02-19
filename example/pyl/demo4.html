@@ -1,0 +1,39 @@
+<h1>Demo4</h1>
+<h2>SQL Test</h2>
+{$
+latteDatabaseExt()
+$}
+{$
+contact = pyLatteDBMappingParser.pyLatteDBMappingParser()
+result = contact.queryForList("demo.select")
+$}
+<form id="fileForm" method="post" action="/sql">
+<fieldset>
+	<legend>select * from test</legend>
+					
+{$
+for item in result:
+$}
+<input type='radio' name='uid' id='{$=item["uid"]$}' value='{$=item["uid"]$}' />
+<label >{$=item["uid"]$} : {$=item["name"]$}</label>
+{$
+	pass
+$}
+</fieldset>
+
+<div>
+    <label for="name">name:</label>
+    <input type="text" name="name" id="name" value=""  />
+</div>
+<label >Shipping method:</label>
+<select name="method" id="select-choice-min" data-mini="true">
+   <option value="insert">insert</option>
+   <option value="update">update</option>
+   <option value="delete">delete</option>
+</select> 
+<button type="submit" name="submit" value="submit-value">Submit</button>
+</from>
+	</body>
+</html>
+
+

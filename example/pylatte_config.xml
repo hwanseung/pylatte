@@ -15,7 +15,6 @@
 			<pylatte-name>default</pylatte-name>
 			<url-mapping>/</url-mapping>
 		</pylatte-mapping>	
-		
 		<pylatte>
 			<pylatte-name>index</pylatte-name>
 			<pylatte-pyl>index.html</pylatte-pyl>
@@ -24,72 +23,6 @@
 			<pylatte-name>index</pylatte-name>
 			<url-mapping>/index</url-mapping>
 		</pylatte-mapping>	
-		
-		<pylatte>
-			<pylatte-name>download</pylatte-name>
-			<pylatte-pyl>download.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>download</pylatte-name>
-			<url-mapping>/download</url-mapping>
-		</pylatte-mapping>	
-		
-		<pylatte>
-			<pylatte-name>install</pylatte-name>
-			<pylatte-pyl>install.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>install</pylatte-name>
-			<url-mapping>/install</url-mapping>
-		</pylatte-mapping>	
-		
-		<pylatte>
-			<pylatte-name>tutorial</pylatte-name>
-			<pylatte-pyl>tutorial.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>tutorial</pylatte-name>
-			<url-mapping>/tutorial</url-mapping>
-		</pylatte-mapping>
-		
-		<pylatte>
-			<pylatte-name>documentation</pylatte-name>
-			<pylatte-pyl>documentation.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>documentation</pylatte-name>
-			<url-mapping>/documentation</url-mapping>
-		</pylatte-mapping>
-		
-		
-		
-		<pylatte>
-			<pylatte-name>faq</pylatte-name>
-			<pylatte-pyl>faq.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>faq</pylatte-name>
-			<url-mapping>/faq</url-mapping>
-		</pylatte-mapping>	
-		
-		<pylatte>
-			<pylatte-name>contactus</pylatte-name>
-			<pylatte-pyl>contactus.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>contactus</pylatte-name>
-			<url-mapping>/contactus</url-mapping>
-		</pylatte-mapping>
-		<!--
-		<pylatte>
-			<pylatte-name>contactus_mongodb</pylatte-name>
-			<pylatte-pyl>contactus_mongo.html</pylatte-pyl>
-		</pylatte>
-		<pylatte-mapping>
-			<pylatte-name>contactus_mongodb</pylatte-name>
-			<url-mapping>/contactus_mongodb</url-mapping>
-		</pylatte-mapping>
-		-->
 		<pylatte>
 			<pylatte-name>favicon</pylatte-name>
 			<pylatte-pyl>faviconUpload.html</pylatte-pyl>
@@ -123,6 +56,15 @@
 			<pylatte-name>demo3</pylatte-name>
 			<url-mapping>/demo3</url-mapping>
 		</pylatte-mapping>	
+		<pylatte>
+			<pylatte-name>demo4</pylatte-name>
+			<pylatte-pyl>demo4.html</pylatte-pyl>
+		</pylatte>
+		<pylatte-mapping>
+			<pylatte-name>demo4</pylatte-name>
+			<url-mapping>/demo4</url-mapping>
+		</pylatte-mapping>	
+		
 		
 		<pylatte>
 			<pylatte-name>sql</pylatte-name>
@@ -144,16 +86,10 @@
 		<filter-mapping>
 			<filter-name>head</filter-name>
 			<filter-url>index.html</filter-url>
-			<filter-url>download.html</filter-url>
-			<filter-url>install.html</filter-url>
-			<filter-url>tutorial.html</filter-url>
-			<filter-url>documentation.html</filter-url>
-			<filter-url>comment.html</filter-url>
-			<filter-url>faq.html</filter-url>
-			<filter-url>contactus.html</filter-url>
 			<filter-url>demo1.html</filter-url>
 			<filter-url>demo2.html</filter-url>
 			<filter-url>demo3.html</filter-url>
+			<filter-url>demo4.html</filter-url>
 		</filter-mapping>
 	</latteFilter>
 	

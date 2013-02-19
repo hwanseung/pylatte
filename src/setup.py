@@ -10,11 +10,12 @@ setup(name='Pylatte',
       author_email='pylatte@pylatte.org',
       url='http://pylatte.org',
       version='1.0',
-      description='Web Framework - Insert Python code in HTML(called PYL)',
+      description='pylatte is Python embedded in HTML. so pylatte seem like php or jsp.',
       classifiers=['Development Status :: 4 - Beta',
                 'Intended Audience :: Developers',
                 'License :: OSI Approved :: MIT License',
                 'Operating System :: OS Independent',
+                'Programming Language :: Python :: 3',
                 'Programming Language :: Python :: 3.2',
                 'Topic :: Internet :: WWW/HTTP :: WSGI'],
       license='MIT License',
@@ -65,7 +66,7 @@ setup(name='Pylatte',
         
         Database
         --------
-        To use the database, external library must be installed: the MySQLdb(for mysql) module or pymongo3(for MonogoDB) module for Python 3.
+        To use the database, external library must be installed: the mysql(for mysql) module or pymongo3(for MonogoDB) module for Python 3.
         
         Simple and advanced SQL via specific functions that are similar to iBATIS are provided.
         
