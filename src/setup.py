@@ -22,7 +22,6 @@ setup(name='Pylatte',
       keywords='Web Framework',
       packages=['pylatte','pylatte.database','pylatte.web','pylatte.web.middleware'],
       install_requires=['ply','mysql-connector-python','pymongo3'],
-      homepage='http://pylatte.org',
       download_url='https://github.com/rucifer1217/pylatte',
       long_description="""
       .. image:: http://pylatte.org/image/pylatte.png
