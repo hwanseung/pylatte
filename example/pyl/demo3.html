@@ -7,31 +7,18 @@ result = contact.queryForList("contact.founder")
 $}
 <div>
 <h1>demo3</h1>
-	<ul>
+{$
+for (website,name,position,description) in result:
+$}		
+		<a href={$=website$} target="_black"><h3>{$=name$}</h3></a>
+		<p>
+			<strong>{$=position$}</strong>
+		</p>
+		<p>{$=description$}</p>
 		
-		<li><a href={$=result[0][ 'website']$} target="_black">
-				<h3>{$=result[0]['name']$}</h3>
-				<p>
-					<strong>{$=result[0]['position']$}</strong>
-				</p>
-				<p>{$=result[0]['description']$}</p>
-		</a></li>
-		<li><a href={$=result[1][ 'website']$} target="_black">
-				<h3>{$=result[1]['name']$}</h3>
-				<p>
-					<strong>{$=result[1]['position']$}</strong>
-				</p>
-				<p>{$=result[1]['description']$}</p>
-		</a></li>
-		<li><a href={$=result[2][ 'website']$} target="_black">
-				<h3>{$=result[2]['name']$}</h3>
-				<p>
-					<strong>{$=result[2]['position']$}</strong>
-				</p>
-				<p>{$=result[2]['description']$}</p>
-		</a></li>
-	</ul>
-
+{$
+	pass
+$}
 </div>
 </body>
 </html>

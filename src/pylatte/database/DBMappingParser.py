@@ -85,6 +85,7 @@ class pyLatteDBMappingParser:
         
         try:
             #logging.debug(node.firstChild.nodeValue)              
+            cursor = self.latteDB.cursor()
             if(value):    # if 'value' is not None, '$value$' have to be replaced 
                 logging.debug("SQL :"+str(node.firstChild.nodeValue))
                 logging.debug("param : "+str(value))
@@ -104,12 +105,16 @@ class pyLatteDBMappingParser:
                     logging.debug('Error - Some $value$ are not replaced. ')
                     raise Exception
                 logging.debug("completedSQL :"+completedSQL) 
-                self.latteDB.execute(completedSQL)
+                
+                cursor.execute(completedSQL)
             else:        # if 'value' is None, execute the query node directly.
-                self.latteDB.execute(node.firstChild.nodeValue)
+                logging.debug("completedSQL : "+node.firstChild.nodeValue) 
+                cursor.execute(node.firstChild.nodeValue)
             
             if (node.nodeName == 'select'):
-                self.database=self.latteDB
+                self.database=cursor
+                logging.debug(cursor)
+                
             return self.database
         except Exception as e:
             logging.debug('Error - Failed to execute Query. Check out specified SQL on XML or parameter for $value$')

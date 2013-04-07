@@ -7,7 +7,7 @@ import logging
 import pylatte.web.latteServerStart as latteServerStart
 
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
 latteServerStart.start()
 
 

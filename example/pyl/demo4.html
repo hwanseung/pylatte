@@ -9,13 +9,13 @@ result = contact.queryForList("demo.select")
 $}
 <form id="fileForm" method="post" action="/sql">
 <fieldset>
-	<legend>select * from test</legend>
+	<legend>select uid,name from test</legend>
 					
 {$
-for item in result:
+for (uid,name) in result:
 $}
-<input type='radio' name='uid' id='{$=item["uid"]$}' value='{$=item["uid"]$}' />
-<label >{$=item["uid"]$} : {$=item["name"]$}</label>
+<input type='radio' name='uid' id='{$=uid$}' value='{$=uid$}' />
+<label >{$=uid$} : {$=name$}</label>
 {$
 	pass
 $}

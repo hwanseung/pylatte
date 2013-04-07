@@ -17,12 +17,12 @@
 	-->
 	
 	<sqlMap id="contact">
-		<select id="founder">select * from founder</select>
-		<select id="founder1">select * from founder1</select>
+		<select id="founder">select website,name,position,description from founder</select>
+		<select id="founder1">select website,name,position,description from founder1</select>
 	</sqlMap>
 	
 	<sqlMap id="demo">
-		<select id="select">SELECT * FROM demo</select>
+		<select id="select">SELECT uid,name FROM demo</select>
 		<insert id="insert">insert into demo (name) values ($name$);</insert>
 		<update id="update">UPDATE demo SET name = $name$ WHERE uid = $uid$</update>
 		<delete id="delete">DELETE FROM demo WHERE uid = $uid$</delete>
