@@ -2,7 +2,7 @@ pylatte
 =======
 
 Welcome to Pylatte
-Pylatte : A Web Framework Based on Python 3 Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3, just as they might for Python 2x-based frameworks such as Django, Flask, or Bottle.
+Pylatte : A Web Framework Based on Python 3 Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3
 
 Visit to http://www.pylatte.org/
 
