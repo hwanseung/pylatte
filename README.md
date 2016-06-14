@@ -4,13 +4,11 @@ pylatte
 Welcome to Pylatte
 Pylatte : A Web Framework Based on Python 3 Pylatte is a web framework created specifically for Python 3. Developers can now generate websites with Pylatte in Python 3
 
-Visit to http://www.pylatte.org/
+Visit to http://rucifer1217.github.io/pylatte/
 
 pypi : http://pypi.python.org/pypi/Pylatte
 
 mail : pylatte@pylatte.org
-
-Facebook Page : https://www.facebook.com/pylatte
 
 Sample code
 -----------
