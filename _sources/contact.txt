@@ -11,8 +11,6 @@ Maintainer
 ============
 * Sangkeun Park - pskalyber@gmail.com
 	| - Project Leader
-	| - He has managed Pylatte project as a Project Leader
 
 * Hwanseung Lee - rucifer1217@gmail.com
 	| - Lead Developer
-	| - He is rising, young developer in new generation
