@@ -8,8 +8,6 @@ Visit to http://rucifer1217.github.io/pylatte/
 
 pypi : http://pypi.python.org/pypi/Pylatte
 
-mail : pylatte@pylatte.org
-
 Sample code
 -----------
 The following code is a example pyl file.
